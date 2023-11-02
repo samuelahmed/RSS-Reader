@@ -1,44 +1,31 @@
-import Parser from "rss-parser";
 import { useEffect, useState } from "react";
-import { error } from "console";
 
-export default function Feeds(feedURL: any) {
-  const [feedItems, setFeedItems] = useState<FeedItem[]>([]);
+interface FeedItem {
+  title: string;
+  link: string;
+  description: string;
+  url: string;
+  pubDate: string;
+  items: any;
+  content: string;
+}
+interface ServerData {
+  items: FeedItem[];
+}
 
-  interface FeedItem {
-    title: string;
-    link: string;
-    description: string;
-    url: string;
-    date: string;
 
-    // add any other properties you need here
-  }
+export default function Feeds( {feedURL}: any) {
+  const [serverData, setServerData] =  useState<ServerData | null>(null);
 
   useEffect(() => {
-    const parser = new Parser();
-
     const fetchData = async () => {
-      try {
-        const feed = await parser.parseURL(feedURL.url);
-        const items = feed.items.map((item) => ({
-          title: item.title || "",
-          link: item.link || "",
-          description: item.description || "",
-          url: item.url || "",
-          date: item.pubDate || "",
-        }));
-        items.sort(
-          (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-        );
-
-        setFeedItems(items);
-      } catch (error) {
-        console.error("Error fetching RSS feed:", error);
-      }
+      const response = await fetch('/api/getXML');
+      const data = await response.json();
+      console.log(data, 'data');
+      setServerData(data);
     };
     fetchData();
-  }, [feedURL]);
+  }, []);
 
   function formatDate(pubDate: any) {
     const date = new Date(pubDate);
@@ -53,14 +40,14 @@ export default function Feeds(feedURL: any) {
         style={{ maxHeight: "calc(100vh - 3rem)" }}
       >
         {/* demo feed style */}
-        {feedItems.map((item, counter) => (
+        {serverData?.items.map((item: FeedItem, counter: number) => (
           <p
             onClick={() => window.open(item.link, "_blank")}
             key={item.title}
             className="h-6 overflow-hidden hover:bg-blue-600 cursor-pointer"
           >
             <span className="text-white mr-2">{counter + 1}.</span>
-            {formatDate(item.date)} - {item.title} - {item.description}
+            <span className="text-xs">{formatDate(item.pubDate)}</span> - {item.title} - {item.description} - {item.content}
           </p>
         ))}
 

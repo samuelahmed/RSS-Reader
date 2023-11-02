@@ -1,7 +1,3 @@
-
-"use client";
-
-
 import feedData from "../Feeds/feedData";
 
 export default function MyFeeds( {setFeedURL}: any ) {
@@ -17,7 +13,10 @@ export default function MyFeeds( {setFeedURL}: any ) {
           <div
             className="h-6 w-full px-1 overflow-x-auto cursor-pointer hover:bg-blue-600"
             key={feed.slug}
-            onClick={() => setFeedURL(feed.url)}
+            onClick={() => {
+              // console.log(feed.url, 'feed.url')
+              setFeedURL(feed.url);
+            }}
           >
             {feed.title}
           </div>

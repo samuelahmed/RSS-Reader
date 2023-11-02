@@ -1,13 +1,12 @@
 "use client";
 
-
 import Sidebar from "@/layouts/Sidebar";
 import Footer from "@/layouts/Footer";
 import Header from "@/layouts/Header";
 import Feeds from "@/components/Feed";
 import { useState } from "react";
 
-export default function Home() {
+export default function MainPageLayout() {
   //state for the feed
   const [feedURL, setFeedURL] = useState("");
   // console.log(feedURL)
@@ -20,7 +19,7 @@ export default function Home() {
       <div className="flex flex-col w-full">
         <Header />
         {/* <div className="flex-grow"> */}
-        <Feeds url={feedURL} />
+        <Feeds feedURL={feedURL} />
         {/* </div> */}
         <Footer />
       </div>
