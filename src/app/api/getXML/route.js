@@ -1,10 +1,10 @@
 import xml2js from "xml2js";
 
-// const url = `https://rss.nytimes.com/services/xml/rss/nyt/Business.xml?nocache=${Date.now()}`;
+const url = `https://rss.nytimes.com/services/xml/rss/nyt/Business.xml?nocache=${Date.now()}`;
 // const url = `https://hnrss.org/frontpage?nocache=${Date.now()}`;
 // const url = `https://hn.invades.space/hn_gems_rss.xml?nocache=${Date.now()}`; 
 // const url =  `https://hnrss.org/classic?nocache=${Date.now()}`; // HN Classic - only votes from acc from pre 2008
-const url =  `https://hnrss.org/best?nocache=${Date.now()}`; // HN Best - 
+// const url =  `https://hnrss.org/best?nocache=${Date.now()}`; // HN Best - 
 // https://news.ycombinator.com/item?id=36617799 - good source of rss feeds
 
 export async function GET() {

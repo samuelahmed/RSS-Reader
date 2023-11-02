@@ -42,6 +42,7 @@ export default function Feeds() {
   const [serverData, setServerData] = useState<ServerData | null>(null);
   const [showModal, setShowModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState<FeedItem | null>(null);
+  const [hoveredItem, setHoveredItem] = useState<FeedItem | null>(null);
 
   //get feed data from server
   useEffect(() => {
@@ -95,6 +96,19 @@ export default function Feeds() {
     };
   }, [showModal]);
 
+  //Keyboard nav - press enter to open modal
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Enter" && hoveredItem) {
+        setSelectedItem(hoveredItem);
+        setShowModal(true);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [hoveredItem]);
+
   //format date
   function formatDate(item: FeedItem) {
     const dateStr = item.published || item.pubDate;
@@ -147,6 +161,8 @@ export default function Feeds() {
           ? serverData.feed.entry.map((item: FeedItem, counter: number) => (
               <div
                 key={item.title}
+                onMouseEnter={() => setHoveredItem(item)}
+                onMouseLeave={() => setHoveredItem(null)}
                 onClick={() => {
                   setSelectedItem(item);
                   setShowModal(true);
@@ -154,9 +170,6 @@ export default function Feeds() {
               >
                 <p className="h-6 overflow-hidden hover:bg-blue-600 cursor-pointer">
                   <span className="text-white mr-2">{counter + 1}.</span>
-                  <span className="text-white mr-2">
-                    {item.readStatus ? "✓" : "x"}
-                  </span>
                   {formatDate(item)} &nbsp;&nbsp;&nbsp;&nbsp;
                   {item.title}
                 </p>
@@ -170,6 +183,8 @@ export default function Feeds() {
                 (item: FeedItem, counter: number) => (
                   <div
                     key={item.title}
+                    onMouseEnter={() => setHoveredItem(item)}
+                    onMouseLeave={() => setHoveredItem(null)}
                     onClick={() => {
                       setSelectedItem(item);
                       setShowModal(true);
@@ -177,9 +192,6 @@ export default function Feeds() {
                   >
                     <p className="h-6 overflow-hidden hover:bg-blue-600 cursor-pointer">
                       <span className="text-white mr-2">{counter + 1}.</span>
-                      <span className="text-white mr-2">
-                        {item.readStatus ? "✓" : "x"}
-                      </span>
                       {formatDate(item)} &nbsp;&nbsp;&nbsp;&nbsp;
                       {item.title}
                     </p>
@@ -191,6 +203,8 @@ export default function Feeds() {
                 (item: FeedItem, counter: number) => (
                   <div
                     key={item.title}
+                    onMouseEnter={() => setHoveredItem(item)}
+                    onMouseLeave={() => setHoveredItem(null)}
                     onClick={() => {
                       setSelectedItem(item);
                       setShowModal(true);
@@ -198,9 +212,6 @@ export default function Feeds() {
                   >
                     <p className="h-6 overflow-hidden hover:bg-blue-600 cursor-pointer">
                       <span className="text-white mr-2">{counter + 1}.</span>
-                      <span className="text-white mr-2">
-                        {item.readStatus ? "✓" : "x"}
-                      </span>
                       {formatDate(item)} &nbsp;&nbsp;&nbsp;&nbsp;
                       {item.title}
                     </p>
