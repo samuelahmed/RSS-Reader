@@ -1,3 +1,4 @@
+import { read } from "fs";
 import { useEffect, useState } from "react";
 
 interface FeedItem {
@@ -8,20 +9,20 @@ interface FeedItem {
   pubDate: string;
   items: any;
   content: string;
+  readStatus: boolean;
 }
 interface ServerData {
   items: FeedItem[];
 }
 
-
-export default function Feeds( {feedURL}: any) {
-  const [serverData, setServerData] =  useState<ServerData | null>(null);
+export default function Feeds({ feedURL }: any) {
+  const [serverData, setServerData] = useState<ServerData | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch('/api/getXML');
+      const response = await fetch("/api/getXML");
       const data = await response.json();
-      console.log(data, 'data');
+      console.log(data, "data");
       setServerData(data);
     };
     fetchData();
@@ -47,7 +48,10 @@ export default function Feeds( {feedURL}: any) {
             className="h-6 overflow-hidden hover:bg-blue-600 cursor-pointer"
           >
             <span className="text-white mr-2">{counter + 1}.</span>
-            <span className="text-xs">{formatDate(item.pubDate)}</span> - {item.title} - {item.description} - {item.content}
+            <span className="text-white mr-2">
+              {item.readStatus ? "✓" : "x"}
+            </span>
+            {formatDate(item.pubDate)} &nbsp;&nbsp;&nbsp;&nbsp; {item.title}
           </p>
         ))}
 
