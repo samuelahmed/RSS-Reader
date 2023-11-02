@@ -1,5 +1,6 @@
 import { read } from "fs";
 import { useEffect, useState } from "react";
+import Link from "next/link"
 
 interface FeedItem {
   title: string;
@@ -42,9 +43,10 @@ export default function Feeds({ feedURL }: any) {
       >
         {/* demo feed style */}
         {serverData?.items.map((item: FeedItem, counter: number) => (
+          <Link 
+          key={item.title}
+          href={`/reader/${item.link}`}>
           <p
-            onClick={() => window.open(item.link, "_blank")}
-            key={item.title}
             className="h-6 overflow-hidden hover:bg-blue-600 cursor-pointer"
           >
             <span className="text-white mr-2">{counter + 1}.</span>
@@ -53,6 +55,7 @@ export default function Feeds({ feedURL }: any) {
             </span>
             {formatDate(item.pubDate)} &nbsp;&nbsp;&nbsp;&nbsp; {item.title}
           </p>
+          </Link>
         ))}
 
         <p className="h-6 overflow-hidden hover:bg-blue-600 cursor-pointer"></p>
