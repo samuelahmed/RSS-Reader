@@ -7,20 +7,18 @@ import Feeds from "@/components/Feed";
 import { useState } from "react";
 
 export default function MainPageLayout() {
-  //state for the feed
   const [feedURL, setFeedURL] = useState("");
-  // console.log(feedURL)
 
   return (
     <main className="min-h-screen flex overscroll-none overflow-hidden">
       {/* Chore: create a way to hide / show the sidebar on mobile */}
       <Sidebar setFeedURL={setFeedURL} />
-
       <div className="flex flex-col w-full">
         <Header />
-        {/* <div className="flex-grow"> */}
-        <Feeds feedURL={feedURL} />
-        {/* </div> */}
+        <Feeds 
+        // will I need to pass the feedURL to the Feeds component?
+        // feedURL={feedURL}
+        />
         <Footer />
       </div>
     </main>
