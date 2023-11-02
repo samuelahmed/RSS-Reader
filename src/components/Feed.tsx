@@ -222,10 +222,13 @@ export default function Feeds() {
             >
               {/* modal content */}
               <div className="space-y-2">
+                {/* Date & Title */}
                 <p>
                   {formatDate(selectedItem)} - {timeAgo(selectedItem)}
                 </p>
                 <p className="text-center">{selectedItem.title}</p>
+
+                {/* Read more */}
                 {selectedItem?.link?.href ? (
                   <Link
                     className="text-blue-500"
@@ -246,6 +249,7 @@ export default function Feeds() {
                   )
                 )}
 
+                {/* Description */}
                 <p className="text-sm text-gray-400">
                   {selectedItem?.["media:group"]?.["media:description"]}
                 </p>
@@ -257,6 +261,8 @@ export default function Feeds() {
                 <p className="text-sm text-gray-400">
                   {selectedItem?.description}
                 </p>
+
+                {/* Media */}
                 {selectedItem?.link?.href && (
                   <ReactPlayer controls={true} url={selectedItem?.link?.href} />
                 )}
@@ -273,6 +279,8 @@ export default function Feeds() {
                     url={selectedItem?.enclosure?.url}
                   />
                 )}
+
+                {/* Images */}
                 {selectedItem?.["media:content"]?.url && (
                   <img
                     src={selectedItem["media:content"].url}
@@ -280,12 +288,26 @@ export default function Feeds() {
                     className="w-full h-auto"
                   />
                 )}
-                <img
-                  key={imgUrl}
-                  src={imgUrl}
-                  alt="no img"
-                  style={{ width: "100%", height: "auto" }}
-                />
+                {selectedItem?.image?.url && (
+                  <img
+                    key={imgUrl}
+                    src={imgUrl}
+                    alt="no img"
+                    style={{ width: "100%", height: "auto" }}
+                  />
+                )}
+
+                {/* Comments  */}
+                {selectedItem?.comments && (
+                  <a
+                    className="text-blue-500"
+                    href={selectedItem.comments}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    View comments
+                  </a>
+                )}
               </div>
             </div>
           </div>
