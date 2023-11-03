@@ -163,7 +163,7 @@ export default function Feeds({ feedURL, setCurrentFeedInformation }: any) {
 
   return (
     <>
-      <div className="h-screen flex-grow text-white px-1 overflow-auto">
+      <div className="h-screen flex-grow text-gray-200 px-1 overflow-auto">
         {/* Entry as feed */}
         {serverData?.feed?.entry
           ? serverData.feed.entry.map((item: FeedItem, counter: number) => (
@@ -177,7 +177,7 @@ export default function Feeds({ feedURL, setCurrentFeedInformation }: any) {
                 }}
               >
                 <p className="h-6 overflow-hidden hover:bg-blue-600 cursor-pointer">
-                  <span className="text-white mr-2">{counter + 1}.</span>
+                  <span className="text-gray-200 mr-2">{counter + 1}.</span>
                   {formatDate(item)} &nbsp;&nbsp;&nbsp;&nbsp;
                   {item.title}
                 </p>
@@ -200,7 +200,7 @@ export default function Feeds({ feedURL, setCurrentFeedInformation }: any) {
                     }}
                   >
                     <p className="h-6 overflow-hidden hover:bg-blue-600 cursor-pointer">
-                      <span className="text-white mr-2">{counter + 1}.</span>
+                      <span className="text-gray-200 mr-2">{counter + 1}.</span>
                       {formatDate(item)} &nbsp;&nbsp;&nbsp;&nbsp;
                       {item.title}
                     </p>
@@ -220,7 +220,7 @@ export default function Feeds({ feedURL, setCurrentFeedInformation }: any) {
                     }}
                   >
                     <p className="h-6 overflow-hidden hover:bg-blue-600 cursor-pointer">
-                      <span className="text-white mr-2">{counter + 1}.</span>
+                      <span className="text-gray-200 mr-2">{counter + 1}.</span>
                       {formatDate(item)} &nbsp;&nbsp;&nbsp;&nbsp;
                       {item.title}
                     </p>
@@ -238,16 +238,19 @@ export default function Feeds({ feedURL, setCurrentFeedInformation }: any) {
           >
             <div
               onClick={(e) => e.stopPropagation()}
-              className="shadow-lg relative flex flex-col w-11/12 h-5/6 bg-[rgb(26,26,26)] border-white border-2 text-white outline-none focus:outline-none overflow-auto p-2"
+              className="shadow-lg relative flex flex-col w-full h-full bg-[rgb(26,26,26)] border-white border-2 text-gray-200 outline-none focus:outline-none overflow-auto p-2"
             >
               {/* modal content */}
               <div className="space-y-2">
+              <button 
+              onClick={() => setShowModal(false)}
+              className="absolute right-0 px-2">close [esc]</button>
+
                 {/* Date & Title */}
                 <p>
                   {formatDate(selectedItem)} - {timeAgo(selectedItem)}
                 </p>
                 <p className="text-center">{selectedItem.title}</p>
-
                 {/* Read more */}
                 {selectedItem?.link?.href ? (
                   <Link
@@ -270,17 +273,13 @@ export default function Feeds({ feedURL, setCurrentFeedInformation }: any) {
                 )}
 
                 {/* Description */}
-                <p className="text-sm text-gray-400">
+                <p className=" text-gray-200">
                   {selectedItem?.["media:group"]?.["media:description"]}
                 </p>
 
-                <p className="text-sm text-gray-400">
-                  {selectedItem?.origcaption}
-                </p>
+                <p className=" text-gray-200">{selectedItem?.origcaption}</p>
 
-                <p className="text-sm text-gray-400">
-                  {selectedItem?.description}
-                </p>
+                <p className=" text-gray-200">{selectedItem?.description}</p>
 
                 {/* Image */}
                 {selectedItem?.enclosure?.url && (
@@ -326,7 +325,7 @@ export default function Feeds({ feedURL, setCurrentFeedInformation }: any) {
 
                 {selectedItem?.["content:encoded"] && (
                   <div
-                    className="text-sm text-gray-400"
+                    className=" text-gray-200"
                     dangerouslySetInnerHTML={{
                       __html: selectedItem["content:encoded"],
                     }}
