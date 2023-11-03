@@ -8,6 +8,8 @@ import { useState } from "react";
 
 export default function MainPageLayout() {
   const [feedURL, setFeedURL] = useState("");
+  // const [currentFeedInformation, setCurrentFeedInformation] = useState([]);
+  //use this later to store the current feed information for the header
 
   return (
     <main className="min-h-screen flex overscroll-none overflow-hidden">
@@ -15,10 +17,9 @@ export default function MainPageLayout() {
       <Sidebar setFeedURL={setFeedURL} />
       <div className="flex flex-col w-full">
         <Header />
-        <Feeds 
-        feedURL={feedURL} 
-        // will I need to pass the feedURL to the Feeds component?
-        // feedURL={feedURL}
+        <Feeds
+          // setCurrentFeedInformation={setCurrentFeedInformation}
+          feedURL={feedURL}
         />
         <Footer />
       </div>
