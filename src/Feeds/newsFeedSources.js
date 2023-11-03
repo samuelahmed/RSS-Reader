@@ -1,4 +1,9 @@
 const newsFeedData = [
+  {
+    slug: "politico",
+    title: "Politico",
+    url: "https://www.politico.com/rss/politicopicks.xml",
+  },
     {
       slug: "new-york-times-homepage",
       title: "NYT Home Page",
@@ -10,29 +15,24 @@ const newsFeedData = [
       url: "https://rss.nytimes.com/services/xml/rss/nyt/World.xml",
     },
     {
-      slug: "New York Times",
-      title: "New York Times",
+      slug: "NYT-Business",
+      title: "NYT Business",
       url: "https://rss.nytimes.com/services/xml/rss/nyt/Business.xml",
     },
     {
       slug: "bbc-news",
-      title: "bbc-news",
-      url: "https://feeds.bbci.co.uk/news/video_and_audio/world/rss.xml#",
-    },
-    {
-      slug: "politico",
-      title: "Politico",
-      url: "https://www.politico.com/rss/politicopicks.xml",
+      title: "BBC News",
+      url: "https://feeds.bbci.co.uk/news/rss.xml",
     },
     {
       slug: "react-tricks",
       title: "React Tricks",
-      url: "https://reacttricks.com/feed.xml",
+      url: "https://feeds.npr.org/1001/rss.xml",
     },
     {
-      slug: "james-quick",
-      title: "James Quick",
-      url: "https://www.jamesqquick.com/feed.xml",
+      slug: "nature",
+      title: "NATURE",
+      url: "https://www.nasa.gov/feeds/iotd-feed",
     },
     // {
     //   slug: "simple-cast",

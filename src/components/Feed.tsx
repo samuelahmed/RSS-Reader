@@ -270,6 +270,30 @@ export default function Feeds(feedURL: any) {
                   {selectedItem?.description}
                 </p>
 
+                {/* Image */}
+                {selectedItem?.enclosure?.url && (
+                  <img
+                    src={selectedItem.enclosure.url}
+                    alt={selectedItem.title}
+                    className="w-full h-auto"
+                  />
+                )}
+                {selectedItem?.["media:content"]?.url && (
+                  <img
+                    src={selectedItem["media:content"].url}
+                    alt={selectedItem.title}
+                    className="w-full h-auto"
+                  />
+                )}
+                {selectedItem?.image?.url && (
+                  <img
+                    key={imgUrl}
+                    src={imgUrl}
+                    alt="no img"
+                    style={{ width: "100%", height: "auto" }}
+                  />
+                )}
+
                 {/* Media */}
                 {selectedItem?.link?.href && (
                   <ReactPlayer controls={true} url={selectedItem?.link?.href} />
@@ -288,27 +312,12 @@ export default function Feeds(feedURL: any) {
                   />
                 )}
 
-                <div
-                  className="text-sm text-gray-400"
-                  dangerouslySetInnerHTML={{
-                    __html: selectedItem["content:encoded"],
-                  }}
-                />
-
-                {/* Images */}
-                {selectedItem?.["media:content"]?.url && (
-                  <img
-                    src={selectedItem["media:content"].url}
-                    alt={selectedItem.title}
-                    className="w-full h-auto"
-                  />
-                )}
-                {selectedItem?.image?.url && (
-                  <img
-                    key={imgUrl}
-                    src={imgUrl}
-                    alt="no img"
-                    style={{ width: "100%", height: "auto" }}
+                {selectedItem?.["content:encoded"] && (
+                  <div
+                    className="text-sm text-gray-400"
+                    dangerouslySetInnerHTML={{
+                      __html: selectedItem["content:encoded"],
+                    }}
                   />
                 )}
 

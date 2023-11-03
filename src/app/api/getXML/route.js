@@ -1,3 +1,5 @@
+
+
 import xml2js from "xml2js";
 
 let urlStorage = {
@@ -7,6 +9,7 @@ let urlStorage = {
 export async function PUT(request) {
   try {
     const data = await request.json();
+
     if (data && typeof data.url === "string") {
       urlStorage.url = `${data.url}?nocache=${Date.now()}`;
       return new Response("URL updated successfully", { status: 200 });
@@ -19,6 +22,7 @@ export async function PUT(request) {
 }
 
 export async function GET() {
+  // let url = hardCodedURL;
   const url = urlStorage.url;
   const response = await fetch(url);
   const xmlData = await response.text();
@@ -29,3 +33,4 @@ export async function GET() {
 
   return new Response(JSON.stringify(jsonData));
 }
+
