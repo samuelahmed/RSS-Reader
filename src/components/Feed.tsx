@@ -178,7 +178,7 @@ export default function Feeds({ feedURL, setCurrentFeedInformation }: any) {
               >
                 <p className="h-6 overflow-hidden hover:bg-blue-600 cursor-pointer">
                   <span className="text-gray-200 mr-2">{counter + 1}.</span>
-                  <span className="hidden md:block">{formatDate(item)} &nbsp;&nbsp;&nbsp;&nbsp;</span>
+                  <span className="hidden md:visible">{formatDate(item)} &nbsp;&nbsp;&nbsp;&nbsp;</span>
                   {item.title}
                 </p>
               </div>
@@ -201,7 +201,7 @@ export default function Feeds({ feedURL, setCurrentFeedInformation }: any) {
                   >
                     <p className="h-6 overflow-hidden hover:bg-blue-600 cursor-pointer">
                       <span className="text-gray-200 mr-2">{counter + 1}.</span>
-                      <span className="hidden md:block">{formatDate(item)} &nbsp;&nbsp;&nbsp;&nbsp;</span>
+                      <span className="hidden md:visible">{formatDate(item)} &nbsp;&nbsp;&nbsp;&nbsp;</span>
                       {item.title}
                     </p>
                   </div>
@@ -221,7 +221,7 @@ export default function Feeds({ feedURL, setCurrentFeedInformation }: any) {
                   >
                     <p className="h-6 overflow-hidden hover:bg-blue-600 cursor-pointer">
                       <span className="text-gray-200 mr-2">{counter + 1}.</span>
-                      <span className="hidden md:block">{formatDate(item)} &nbsp;&nbsp;&nbsp;&nbsp;</span>
+                      <span className="hidden md:visible">{formatDate(item)} &nbsp;&nbsp;&nbsp;&nbsp;</span>
                       {item.title}
                     </p>
                   </div>
