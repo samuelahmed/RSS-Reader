@@ -104,7 +104,6 @@ export default function Feeds(feedURL: any) {
         setShowModal(true);
       }
     };
-
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [hoveredItem]);
@@ -124,7 +123,6 @@ export default function Feeds(feedURL: any) {
     const diffInSeconds = Math.abs(
       (now.getTime() - publishedDate.getTime()) / 1000
     );
-
     const units = [
       { name: "year", seconds: 60 * 60 * 24 * 365 },
       { name: "month", seconds: 60 * 60 * 24 * 30 },
@@ -133,14 +131,12 @@ export default function Feeds(feedURL: any) {
       { name: "minute", seconds: 60 },
       { name: "second", seconds: 1 },
     ];
-
     for (let unit of units) {
       if (diffInSeconds >= unit.seconds) {
         const amount = Math.floor(diffInSeconds / unit.seconds);
         return `${amount} ${unit.name}${amount > 1 ? "s" : ""} ago`;
       }
     }
-
     return "just now";
   }
 
@@ -156,6 +152,7 @@ export default function Feeds(feedURL: any) {
         className="flex-grow text-white px-1 overflow-auto"
         style={{ maxHeight: "calc(100vh - 3rem)" }}
       >
+        
         {/* Entry as feed */}
         {serverData?.feed?.entry
           ? serverData.feed.entry.map((item: FeedItem, counter: number) => (
@@ -176,6 +173,7 @@ export default function Feeds(feedURL: any) {
               </div>
             ))
           : null}
+
         {/* Entry as rss array */}
         {serverData?.rss?.channel?.item
           ? Array.isArray(serverData.rss.channel.item)
@@ -198,6 +196,7 @@ export default function Feeds(feedURL: any) {
                   </div>
                 )
               )
+
             : /* Entry as rss object */
               [serverData.rss.channel.item].map(
                 (item: FeedItem, counter: number) => (
@@ -231,8 +230,10 @@ export default function Feeds(feedURL: any) {
               onClick={(e) => e.stopPropagation()}
               className="shadow-lg relative flex flex-col w-11/12 h-5/6 bg-[rgb(26,26,26)] border-white border-2 text-white outline-none focus:outline-none overflow-auto p-2"
             >
+
               {/* modal content */}
               <div className="space-y-2">
+
                 {/* Date & Title */}
                 <p>
                   {formatDate(selectedItem)} - {timeAgo(selectedItem)}
