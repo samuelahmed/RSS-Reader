@@ -8,17 +8,26 @@ import { useState } from "react";
 
 export default function MainPageLayout() {
   const [feedURL, setFeedURL] = useState("");
-  // const [currentFeedInformation, setCurrentFeedInformation] = useState([]);
+  const [currentFeedInformation, setCurrentFeedInformation] = useState({
+    title: "No feed selected",
+    numberOfItems: "",
+  });
   //use this later to store the current feed information for the header
 
   return (
     <main className="min-h-screen flex overscroll-none overflow-hidden">
       {/* Chore: create a way to hide / show the sidebar on mobile */}
-      <Sidebar setFeedURL={setFeedURL} />
+      <Sidebar 
+                setCurrentFeedInformation={setCurrentFeedInformation}
+
+      setFeedURL={setFeedURL} />
       <div className="flex flex-col w-full">
-        <Header />
+        <Header 
+          currentFeedInformation={currentFeedInformation}
+        
+        />
         <Feeds
-          // setCurrentFeedInformation={setCurrentFeedInformation}
+          setCurrentFeedInformation={setCurrentFeedInformation}
           feedURL={feedURL}
         />
         <Footer />

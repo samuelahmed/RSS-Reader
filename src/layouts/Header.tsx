@@ -1,7 +1,11 @@
-export default function Header() {
+export default function Header({ currentFeedInformation }: any) {
+  console.log(currentFeedInformation, "currentFeedInformation IN HEADER");
   return (
     <header className="w-full px-1 text-center text-white border-b-2 border-white">
-      Current Feed Name - 394 unread / 394 total
+
+
+{currentFeedInformation && currentFeedInformation.title ? currentFeedInformation.title : 'No feed selected'}
+
     </header>
   );
 }

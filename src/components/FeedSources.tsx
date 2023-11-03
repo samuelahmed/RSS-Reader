@@ -3,7 +3,10 @@ import newsFeedData from "../Feeds/newsFeedSources";
 import youtubeFeedData from "../Feeds/youtubeFeedSources";
 import podcastFeedData from "../Feeds/podcastFeedSources";
 
-export default function MyFeeds({ setFeedURL }: any) {
+export default function MyFeeds({
+  setFeedURL,
+  setCurrentFeedInformation,
+}: any) {
   const [selectedItem, setSelectedItem] = useState("");
 
   //Update the URL used to fetch the feed
@@ -42,6 +45,8 @@ export default function MyFeeds({ setFeedURL }: any) {
             key={feed.slug}
             onClick={() => {
               handleFeedClick(feed.url, feed.slug);
+              console.log(feed.title, "feed.title");
+              setCurrentFeedInformation({ title: feed.title });
             }}
           >
             {feed.title}
@@ -62,6 +67,7 @@ export default function MyFeeds({ setFeedURL }: any) {
             key={feed.slug}
             onClick={() => {
               handleFeedClick(feed.url, feed.slug);
+              setCurrentFeedInformation({ title: feed.title });
             }}
           >
             {feed.title}
@@ -82,6 +88,7 @@ export default function MyFeeds({ setFeedURL }: any) {
             key={feed.slug}
             onClick={() => {
               handleFeedClick(feed.url, feed.slug);
+              setCurrentFeedInformation({ title: feed.title });
             }}
           >
             {feed.title}

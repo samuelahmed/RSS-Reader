@@ -150,6 +150,12 @@ export default function Feeds(feedURL: any) {
   );
   const imgUrl = imgTag ? imgTag[2] : "";
 
+  //whichever is lognest will be number of items 
+  // console.log(serverData?.rss?.channel.item.length, 'serverData')
+  // console.log(serverData?.feed?.entry.length, 'FEED')
+
+  //now i need to et the channel name
+
   return (
     <>
       <div
