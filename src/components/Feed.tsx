@@ -38,7 +38,7 @@ import { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
 import Link from "next/link";
 
-export default function Feeds() {
+export default function Feeds(feedURL: any) {
   const [serverData, setServerData] = useState<ServerData | null>(null);
   const [showModal, setShowModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState<FeedItem | null>(null);
@@ -74,7 +74,7 @@ export default function Feeds() {
       }
     };
     fetchData();
-  }, []);
+  }, [feedURL]);
 
   //manage modal
   useEffect(() => {

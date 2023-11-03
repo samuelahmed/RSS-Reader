@@ -16,6 +16,7 @@ export default function MainPageLayout() {
       <div className="flex flex-col w-full">
         <Header />
         <Feeds 
+        feedURL={feedURL} 
         // will I need to pass the feedURL to the Feeds component?
         // feedURL={feedURL}
         />
