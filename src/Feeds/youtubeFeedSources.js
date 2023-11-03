@@ -1,13 +1,13 @@
 const feedData = [
     {
-      slug: "nextjs-blog",
-      title: "Next.js Blog",
-      url: "https://nextjs.org/feed.xml",
+      slug: "Primeagen",
+      title: "Primeagen",
+      url: "https://www.youtube.com/feeds/videos.xml?channel_id=UCz8QaiQxApLq8sLNcszYyJw",
     },
     {
       slug: "netlify",
       title: "Netlify Blog",
-      url: "https://www.netlify.com/blog/index.xml",
+      url: "https://www.youtube.com/feeds/videos.xml?channel_id=UCz8QaiQxApLq8sLNcszYyJw",
     },
     {
       slug: "New York Times",

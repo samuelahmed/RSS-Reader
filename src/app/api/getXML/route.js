@@ -1,6 +1,8 @@
-
-
 import xml2js from "xml2js";
+
+function isYouTubeChannelURL(url) {
+  return url.includes("youtube.com");
+}
 
 let urlStorage = {
   url: "https://www.politico.com/rss/politicopicks.xml",
@@ -11,7 +13,13 @@ export async function PUT(request) {
     const data = await request.json();
 
     if (data && typeof data.url === "string") {
-      urlStorage.url = `${data.url}?nocache=${Date.now()}`;
+      if (isYouTubeChannelURL(data.url)) {
+        // console.log(data.url)
+        urlStorage.url = data.url;
+      } else {
+        urlStorage.url = `${data.url}?nocache=${Date.now()}`;
+      }
+
       return new Response("URL updated successfully", { status: 200 });
     } else {
       return new Response("Invalid input data", { status: 400 });
@@ -22,7 +30,6 @@ export async function PUT(request) {
 }
 
 export async function GET() {
-  // let url = hardCodedURL;
   const url = urlStorage.url;
   const response = await fetch(url);
   const xmlData = await response.text();
@@ -33,4 +40,3 @@ export async function GET() {
 
   return new Response(JSON.stringify(jsonData));
 }
-
