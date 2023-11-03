@@ -48,6 +48,10 @@ export default function Feeds(feedURL: any) {
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch("/api/getXML");
+      if (!response.ok) {
+        console.error('Failed to fetch XML data');
+        return {};
+      }
       const data = await response.json();
       if (data.feed) {
         data.feed.entry.sort(
