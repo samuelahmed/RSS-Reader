@@ -38,7 +38,7 @@ import { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
 import Link from "next/link";
 
-export default function Feeds(feedURL: any) {
+export default function Feeds({ feedURL, setCurrentFeedInformation }: any) {
   const [serverData, setServerData] = useState<ServerData | null>(null);
   const [showModal, setShowModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState<FeedItem | null>(null);
@@ -49,7 +49,7 @@ export default function Feeds(feedURL: any) {
     const fetchData = async () => {
       const response = await fetch("/api/getXML");
       if (!response.ok) {
-        console.error('Failed to fetch XML data');
+        console.error("Failed to fetch XML data");
         return {};
       }
       const data = await response.json();
@@ -99,6 +99,17 @@ export default function Feeds(feedURL: any) {
       document.removeEventListener("keydown", closeOnEscape);
     };
   }, [showModal]);
+
+  //pass number of items in feed to header
+  useEffect(() => {
+    setCurrentFeedInformation((current: any) => ({
+      ...current,
+      numberOfItems: Math.max(
+        serverData?.rss?.channel.item.length || 0,
+        serverData?.feed?.entry.length || 0
+      ),
+    }));
+  }, [serverData]);
 
   //Keyboard nav - press enter to open modal
   useEffect(() => {
@@ -150,18 +161,9 @@ export default function Feeds(feedURL: any) {
   );
   const imgUrl = imgTag ? imgTag[2] : "";
 
-  //whichever is lognest will be number of items 
-  // console.log(serverData?.rss?.channel.item.length, 'serverData')
-  // console.log(serverData?.feed?.entry.length, 'FEED')
-
-  //now i need to et the channel name
-
   return (
     <>
-      <div
-        className="flex-grow text-white px-1 overflow-auto"
-        style={{ maxHeight: "calc(100vh - 3rem)" }}
-      >
+      <div className="h-screen flex-grow text-white px-1 overflow-auto">
         {/* Entry as feed */}
         {serverData?.feed?.entry
           ? serverData.feed.entry.map((item: FeedItem, counter: number) => (

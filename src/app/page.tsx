@@ -17,20 +17,17 @@ export default function MainPageLayout() {
   return (
     <main className="min-h-screen flex overscroll-none overflow-hidden">
       {/* Chore: create a way to hide / show the sidebar on mobile */}
-      <Sidebar 
-                setCurrentFeedInformation={setCurrentFeedInformation}
-
-      setFeedURL={setFeedURL} />
+      <Sidebar
+        setCurrentFeedInformation={setCurrentFeedInformation}
+        setFeedURL={setFeedURL}
+      />
       <div className="flex flex-col w-full">
-        <Header 
-          currentFeedInformation={currentFeedInformation}
-        
-        />
+        <Header currentFeedInformation={currentFeedInformation} />
         <Feeds
           setCurrentFeedInformation={setCurrentFeedInformation}
           feedURL={feedURL}
         />
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </main>
   );
