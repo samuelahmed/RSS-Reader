@@ -5,7 +5,7 @@ function isYouTubeChannelURL(url) {
 }
 
 let urlStorage = {
-  url: "https://www.politico.com/rss/politicopicks.xml",
+  url: "",
 };
 
 export async function PUT(request) {
@@ -14,7 +14,6 @@ export async function PUT(request) {
 
     if (data && typeof data.url === "string") {
       if (isYouTubeChannelURL(data.url)) {
-        // console.log(data.url)
         urlStorage.url = data.url;
       } else {
         urlStorage.url = `${data.url}?nocache=${Date.now()}`;
