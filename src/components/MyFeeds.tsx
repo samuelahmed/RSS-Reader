@@ -1,9 +1,11 @@
+import { useState } from "react";
 import feedData from "../Feeds/feedData";
 
 export default function MyFeeds({ setFeedURL }: any) {
+  const [selectedItem, setSelectedItem] = useState("");
 
   //Update the URL used to fetch the feed
-  const handleFeedClick = async (newUrl: any) => {
+  const handleFeedClick = async (newUrl: any, slug: string) => {
     try {
       const response = await fetch("/api/getXML", {
         method: "PUT",
@@ -14,6 +16,7 @@ export default function MyFeeds({ setFeedURL }: any) {
       });
       if (response.ok) {
         setFeedURL(newUrl);
+        setSelectedItem(slug);
       } else {
         throw new Error("Failed to update URL");
       }
@@ -21,7 +24,7 @@ export default function MyFeeds({ setFeedURL }: any) {
       console.error("Error:", error);
     }
   };
-  
+
   return (
     <>
       <div className="border-b-2 border-b-white border-r-white text-center">
@@ -29,13 +32,15 @@ export default function MyFeeds({ setFeedURL }: any) {
       </div>
 
       {/* My Feeds Container */}
-      <div className="h-1/2 overflow-y-auto">
+      <div className="h-full overflow-y-auto">
         {feedData.map((feed) => (
           <div
-            className="h-6 w-full px-1 overflow-x-auto cursor-pointer hover:bg-blue-600"
+            className={`h-6 w-full px-1 overflow-x-auto cursor-pointer ${
+              feed.slug === selectedItem ? "bg-blue-600" : "hover:bg-blue-600"
+            }`}
             key={feed.slug}
             onClick={() => {
-              handleFeedClick(feed.url);
+              handleFeedClick(feed.url, feed.slug);
             }}
           >
             {feed.title}
