@@ -178,7 +178,7 @@ export default function Feeds({ feedURL, setCurrentFeedInformation }: any) {
               >
                 <p className="h-6 overflow-hidden hover:bg-blue-600 cursor-pointer">
                   <span className="text-gray-200 mr-2">{counter + 1}.</span>
-                  {formatDate(item)} &nbsp;&nbsp;&nbsp;&nbsp;
+                  <span className="hidden md:block">{formatDate(item)} &nbsp;&nbsp;&nbsp;&nbsp;</span>
                   {item.title}
                 </p>
               </div>
@@ -201,7 +201,7 @@ export default function Feeds({ feedURL, setCurrentFeedInformation }: any) {
                   >
                     <p className="h-6 overflow-hidden hover:bg-blue-600 cursor-pointer">
                       <span className="text-gray-200 mr-2">{counter + 1}.</span>
-                      {formatDate(item)} &nbsp;&nbsp;&nbsp;&nbsp;
+                      <span className="hidden md:block">{formatDate(item)} &nbsp;&nbsp;&nbsp;&nbsp;</span>
                       {item.title}
                     </p>
                   </div>
@@ -221,7 +221,7 @@ export default function Feeds({ feedURL, setCurrentFeedInformation }: any) {
                   >
                     <p className="h-6 overflow-hidden hover:bg-blue-600 cursor-pointer">
                       <span className="text-gray-200 mr-2">{counter + 1}.</span>
-                      {formatDate(item)} &nbsp;&nbsp;&nbsp;&nbsp;
+                      <span className="hidden md:block">{formatDate(item)} &nbsp;&nbsp;&nbsp;&nbsp;</span>
                       {item.title}
                     </p>
                   </div>
@@ -242,15 +242,19 @@ export default function Feeds({ feedURL, setCurrentFeedInformation }: any) {
             >
               {/* modal content */}
               <div className="space-y-2">
-              <button 
-              onClick={() => setShowModal(false)}
-              className="absolute right-0 px-2">close [esc]</button>
+                <button
+                  onClick={() => setShowModal(false)}
+                  className="absolute right-0 px-2"
+                >
+                  close [esc]
+                </button>
 
                 {/* Date & Title */}
                 <p>
                   {formatDate(selectedItem)} - {timeAgo(selectedItem)}
                 </p>
                 <p className="text-center">{selectedItem.title}</p>
+
                 {/* Read more */}
                 {selectedItem?.link?.href ? (
                   <Link
@@ -276,9 +280,7 @@ export default function Feeds({ feedURL, setCurrentFeedInformation }: any) {
                 <p className=" text-gray-200">
                   {selectedItem?.["media:group"]?.["media:description"]}
                 </p>
-
                 <p className=" text-gray-200">{selectedItem?.origcaption}</p>
-
                 <p className=" text-gray-200">{selectedItem?.description}</p>
 
                 {/* Image */}
