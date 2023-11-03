@@ -10,30 +10,20 @@ const feedData = [
       url: "https://www.netlify.com/blog/index.xml",
     },
     {
-      slug: "New York Times",
-      title: "New York Times",
-      url: "https://rss.nytimes.com/services/xml/rss/nyt/Business.xml",
+      slug: "npr-up-first",
+      title: "NPR's Up First",
+      url: "https://feeds.npr.org/510318/podcast.xml",
     },
     {
-      slug: "bbc-news",
-      title: "bbc-news",
-      url: "https://feeds.bbci.co.uk/news/video_and_audio/world/rss.xml#",
+      slug: "NYT-The-Daily",
+      title: "NYT The Daily",
+      url: "https://feeds.simplecast.com/54nAGcIl",
     },
     {
-      slug: "colby-fayock",
-      title: "Colby Fayock",
-      url: "https://www.colbyfayock.com/rss.xml",
-    },
-    {
-      slug: "react-tricks",
-      title: "React Tricks",
-      url: "https://reacttricks.com/feed.xml",
-    },
-    {
-      slug: "james-quick",
-      title: "James Quick",
-      url: "https://www.jamesqquick.com/feed.xml",
-    },
+      slug: "99%-Invisible",
+      title: "99% Invisible",
+      url: "https://feeds.simplecast.com/BqbsxVfO",
+    }
   ];
 
     export default feedData; 

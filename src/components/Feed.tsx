@@ -152,7 +152,6 @@ export default function Feeds(feedURL: any) {
         className="flex-grow text-white px-1 overflow-auto"
         style={{ maxHeight: "calc(100vh - 3rem)" }}
       >
-        
         {/* Entry as feed */}
         {serverData?.feed?.entry
           ? serverData.feed.entry.map((item: FeedItem, counter: number) => (
@@ -196,7 +195,6 @@ export default function Feeds(feedURL: any) {
                   </div>
                 )
               )
-
             : /* Entry as rss object */
               [serverData.rss.channel.item].map(
                 (item: FeedItem, counter: number) => (
@@ -230,10 +228,8 @@ export default function Feeds(feedURL: any) {
               onClick={(e) => e.stopPropagation()}
               className="shadow-lg relative flex flex-col w-11/12 h-5/6 bg-[rgb(26,26,26)] border-white border-2 text-white outline-none focus:outline-none overflow-auto p-2"
             >
-
               {/* modal content */}
               <div className="space-y-2">
-
                 {/* Date & Title */}
                 <p>
                   {formatDate(selectedItem)} - {timeAgo(selectedItem)}
@@ -291,6 +287,13 @@ export default function Feeds(feedURL: any) {
                     url={selectedItem?.enclosure?.url}
                   />
                 )}
+
+                <div
+                  className="text-sm text-gray-400"
+                  dangerouslySetInnerHTML={{
+                    __html: selectedItem["content:encoded"],
+                  }}
+                />
 
                 {/* Images */}
                 {selectedItem?.["media:content"]?.url && (
