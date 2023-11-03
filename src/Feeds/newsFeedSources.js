@@ -25,13 +25,23 @@ const newsFeedData = [
       url: "https://feeds.bbci.co.uk/news/rss.xml",
     },
     {
-      slug: "react-tricks",
-      title: "React Tricks",
-      url: "https://feeds.npr.org/1001/rss.xml",
+      slug: "hc-firehose",
+      title: "Hacker News Firehose",
+      url: "https://hnrss.org/newest",
     },
     {
-      slug: "nature",
-      title: "NATURE",
+      slug: "hc-frontpage",
+      title: "Hacker News Frontpage",
+      url: "https://hnrss.org/frontpage",
+    },
+    {
+      slug: "hc-best",
+      title: "Hacker News Best",
+      url: "https://hnrss.org/best",
+    },
+    {
+      slug: "nasa",
+      title: "NASA Image of Day",
       url: "https://www.nasa.gov/feeds/iotd-feed",
     },
     // {

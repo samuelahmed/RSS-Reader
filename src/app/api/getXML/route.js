@@ -3,7 +3,7 @@
 import xml2js from "xml2js";
 
 let urlStorage = {
-  url: "https://rss.nytimes.com/services/xml/rss/nyt/Business.xml",
+  url: "https://www.politico.com/rss/politicopicks.xml",
 };
 
 export async function PUT(request) {
