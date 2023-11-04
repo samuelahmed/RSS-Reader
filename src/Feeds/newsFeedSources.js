@@ -10,6 +10,11 @@ const newsFeedData = [
     url: "https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml",
   },
   {
+    slug: "al-jazeera",
+    title: "Al Jazeera",
+    url: "https://www.aljazeera.com/xml/rss/all.xml",
+  },
+  {
     slug: "new-york-times-world",
     title: "NYT World",
     url: "https://rss.nytimes.com/services/xml/rss/nyt/World.xml",
