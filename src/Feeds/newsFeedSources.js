@@ -5,14 +5,14 @@ const newsFeedData = [
     url: "https://www.politico.com/rss/politicopicks.xml",
   },
   {
-    slug: "new-york-times-homepage",
-    title: "NYT Home Page",
-    url: "https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml",
-  },
-  {
     slug: "al-jazeera",
     title: "Al Jazeera",
     url: "https://www.aljazeera.com/xml/rss/all.xml",
+  },
+  {
+    slug: "new-york-times-homepage",
+    title: "NYT Home Page",
+    url: "https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml",
   },
   {
     slug: "new-york-times-world",
