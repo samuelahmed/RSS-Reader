@@ -5,9 +5,9 @@ const newsFeedData = [
     url: "https://www.politico.com/rss/politicopicks.xml",
   },
   {
-    slug: "al-jazeera",
-    title: "Al Jazeera",
-    url: "https://www.aljazeera.com/xml/rss/all.xml",
+    slug: "infoworld",
+    title: "Info World",
+    url: "https://www.infoworld.com/index.rss",
   },
   {
     slug: "new-york-times-homepage",
@@ -48,6 +48,11 @@ const newsFeedData = [
     slug: "hn-gems",
     title: "Hacker News Gems",
     url: "https://hn.invades.space/hn_gems_rss.xml",
+  },
+  {
+    slug: "al-jazeera",
+    title: "Al Jazeera",
+    url: "https://www.aljazeera.com/xml/rss/all.xml",
   },
   {
     slug: "nasa",
