@@ -105,8 +105,8 @@ export default function Feeds({ feedURL, setCurrentFeedInformation }: any) {
     setCurrentFeedInformation((current: any) => ({
       ...current,
       numberOfItems: Math.max(
-        serverData?.rss?.channel.item.length || 0,
-        serverData?.feed?.entry.length || 0
+        serverData?.rss?.channel?.item?.length || 0,
+        serverData?.feed?.entry?.length || 0
       ),
     }));
   }, [serverData]);

@@ -15,6 +15,7 @@ export default function MainPageLayout() {
   //use this later to store the current feed information for the header
 
   return (
+    
     <main className="min-h-screen flex overscroll-none overflow-hidden text-gray-200">
       {/* Chore: create a way to hide / show the sidebar on mobile */}
       <Sidebar

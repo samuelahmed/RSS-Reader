@@ -37,5 +37,12 @@ export async function GET() {
     mergeAttrs: true,
   });
 
+  // Limit the number of items to 100
+  if (jsonData.feed?.entry && jsonData.feed.entry.length > 100) {
+    jsonData.feed.entry = jsonData.feed.entry.slice(0, 100);
+  } else if (jsonData.rss?.channel?.item && jsonData.rss.channel.item.length > 100) {
+    jsonData.rss.channel.item = jsonData.rss.channel.item.slice(0, 100);
+  }
+  
   return new Response(JSON.stringify(jsonData));
 }
