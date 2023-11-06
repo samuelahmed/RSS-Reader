@@ -11,14 +11,12 @@ let urlStorage = {
 export async function PUT(request) {
   try {
     const data = await request.json();
-
     if (data && typeof data.url === "string") {
       if (isYouTubeChannelURL(data.url)) {
         urlStorage.url = data.url;
       } else {
         urlStorage.url = `${data.url}?nocache=${Date.now()}`;
       }
-
       return new Response("URL updated successfully", { status: 200 });
     } else {
       return new Response("Invalid input data", { status: 400 });
