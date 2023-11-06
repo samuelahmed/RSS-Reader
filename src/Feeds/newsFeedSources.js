@@ -59,10 +59,11 @@ const newsFeedData = [
     title: "NASA Image of Day",
     url: "https://www.nasa.gov/feeds/iotd-feed",
   },
-
-
-
-  
+  {
+    slug: "dave-winer",
+    title: "Scripting News",
+    url: "http://scripting.com/rss.xml",
+  }
 ];
 
 export default newsFeedData;
