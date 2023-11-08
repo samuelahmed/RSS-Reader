@@ -1,39 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 
-interface FeedItem {
-  title: string;
-  link: {
-    href: string;
-  };
-  description: string;
-  url: string;
-  pubDate: string;
-  pubished: string;
-  items: any;
-  content: string;
-  readStatus: boolean;
-  origcaption: string;
-  image: Image;
-  enclosure: any;
-  [key: string]: any; //this is used to allow some strange properties like "media:group" and "media:description"
-}
-interface ServerData {
-  feed?: {
-    entry: FeedItem[];
-  };
-  rss?: {
-    channel: {
-      item: FeedItem[];
-    };
-  };
-}
-
-interface Image {
-  title: string;
-  url: string;
-  link: string;
-}
-
+import { FeedItem, ServerData } from "../utils/types";
 import { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
 import Link from "next/link";
@@ -178,7 +145,9 @@ export default function Feeds({ feedURL, setCurrentFeedInformation }: any) {
               >
                 <p className="h-6 overflow-hidden hover:bg-blue-600 cursor-pointer">
                   <span className="text-gray-200 mr-2">{counter + 1}.</span>
-                  <span className="hidden md:inline">{formatDate(item)} &nbsp;&nbsp;&nbsp;&nbsp;</span>
+                  <span className="hidden md:inline">
+                    {formatDate(item)} &nbsp;&nbsp;&nbsp;&nbsp;
+                  </span>
                   {item.title}
                 </p>
               </div>
@@ -201,7 +170,9 @@ export default function Feeds({ feedURL, setCurrentFeedInformation }: any) {
                   >
                     <p className="h-6 overflow-hidden hover:bg-blue-600 cursor-pointer">
                       <span className="text-gray-200 mr-2">{counter + 1}.</span>
-                      <span className="hidden md:inline">{formatDate(item)} &nbsp;&nbsp;&nbsp;&nbsp;</span>
+                      <span className="hidden md:inline">
+                        {formatDate(item)} &nbsp;&nbsp;&nbsp;&nbsp;
+                      </span>
                       {item.title}
                     </p>
                   </div>
@@ -221,7 +192,9 @@ export default function Feeds({ feedURL, setCurrentFeedInformation }: any) {
                   >
                     <p className="h-6 overflow-hidden hover:bg-blue-600 cursor-pointer">
                       <span className="text-gray-200 mr-2">{counter + 1}.</span>
-                      <span className="hidden md:inline">{formatDate(item)} &nbsp;&nbsp;&nbsp;&nbsp;</span>
+                      <span className="hidden md:inline">
+                        {formatDate(item)} &nbsp;&nbsp;&nbsp;&nbsp;
+                      </span>
                       {item.title}
                     </p>
                   </div>
