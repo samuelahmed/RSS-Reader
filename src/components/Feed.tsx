@@ -129,6 +129,18 @@ export default function Feeds({ feedURL, setCurrentFeedInformation }: any) {
   );
   const imgUrl = imgTag ? imgTag[2] : "";
 
+  //create set of possible image urls so the image is not rendered twice by image loader
+  const imgLoaderSet = new Set([
+    selectedItem?.enclosure?.url,
+    selectedItem?.["media:content"]?.url,
+    selectedItem?.image?.url,
+  ]);
+
+  //check if html content contains any of the image urls already in the image loader set to avoid duplicates with image loader and content loader
+  function containsImage(htmlContent: string, imageUrls: string[]): boolean {
+    return imageUrls.some((url) => htmlContent.includes(url));
+  }
+
   return (
     <>
       <div className="h-screen flex-grow text-gray-200 px-1 overflow-auto">
@@ -275,28 +287,21 @@ export default function Feeds({ feedURL, setCurrentFeedInformation }: any) {
                 ></p>
 
                 {/* Image */}
-                {selectedItem?.enclosure?.url && (
-                  <img
-                    src={selectedItem.enclosure.url}
-                    alt={selectedItem.title}
-                    className="w-full h-auto"
-                  />
-                )}
-                {selectedItem?.["media:content"]?.url && (
-                  <img
-                    src={selectedItem["media:content"].url}
-                    alt={selectedItem.title}
-                    className="w-full h-auto"
-                  />
-                )}
-                {selectedItem?.image?.url && (
-                  <img
-                    key={imgUrl}
-                    src={imgUrl}
-                    alt="no img"
-                    style={{ width: "100%", height: "auto" }}
-                  />
-                )}
+                {!containsImage(
+                  selectedItem?.["content:encoded"] || "",
+                  Array.from(imgLoaderSet)
+                ) &&
+                  Array.from(imgLoaderSet).map(
+                    (url) =>
+                      url && (
+                        <img
+                          key={url}
+                          src={url}
+                          alt={selectedItem.title}
+                          className="w-full h-auto"
+                        />
+                      )
+                  )}
 
                 {/* Media */}
                 {selectedItem?.link?.href && (
