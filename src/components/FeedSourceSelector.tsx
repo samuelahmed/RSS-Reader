@@ -1,9 +1,9 @@
 import { useState } from "react";
-import newsFeedData from "../Feeds/newsFeedSources";
-import youtubeFeedData from "../Feeds/youtubeFeedSources";
-import podcastFeedData from "../Feeds/podcastFeedSources";
+import newsFeedData from "../feedSources/newsFeedSources";
+import youtubeFeedData from "../feedSources/youtubeFeedSources";
+import podcastFeedData from "../feedSources/podcastFeedSources";
 
-export default function MyFeeds({
+export default function FeedSourceSelector({
   setFeedURL,
   setCurrentFeedInformation,
 }: any) {
