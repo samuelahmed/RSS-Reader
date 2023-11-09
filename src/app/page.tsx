@@ -1,7 +1,6 @@
 "use client";
 
 import Sidebar from "@/layouts/Sidebar";
-import Footer from "@/layouts/Footer";
 import Header from "@/layouts/Header";
 import Feeds from "@/components/Feed";
 import { useState } from "react";
@@ -12,10 +11,8 @@ export default function MainPageLayout() {
     title: "No feed selected",
     numberOfItems: "",
   });
-  //use this later to store the current feed information for the header
 
   return (
-    
     <main className="min-h-screen flex overscroll-none overflow-hidden text-gray-200">
       {/* Chore: create a way to hide / show the sidebar on mobile */}
       <Sidebar
@@ -28,7 +25,6 @@ export default function MainPageLayout() {
           setCurrentFeedInformation={setCurrentFeedInformation}
           feedURL={feedURL}
         />
-        {/* <Footer /> */}
       </div>
     </main>
   );

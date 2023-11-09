@@ -1,5 +1,4 @@
 import FeedSourceSelector from "@/components/FeedSourceSelector";
-import CommunityFeeds from "@/components/CommunityFeeds";
 
 export default function Sidebar({
   setCurrentFeedInformation,
