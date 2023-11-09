@@ -250,11 +250,28 @@ export default function Feeds({ feedURL, setCurrentFeedInformation }: any) {
                 )}
 
                 {/* Description */}
-                <p className=" text-gray-200">
-                  {selectedItem?.["media:group"]?.["media:description"]}
-                </p>
-                <p className=" text-gray-200">{selectedItem?.origcaption}</p>
-                <p className=" text-gray-200">{selectedItem?.description}</p>
+                <p
+                  className="text-gray-200"
+                  dangerouslySetInnerHTML={{
+                    __html: (
+                      selectedItem?.["media:group"]?.["media:description"] || ""
+                    )
+                      //regEx to manage formatting for youtube vid descriptions
+                      .replace(/\n/g, "<br>"),
+                  }}
+                ></p>
+                <p
+                  className="text-gray-200"
+                  dangerouslySetInnerHTML={{
+                    __html: selectedItem?.origcaption || "",
+                  }}
+                ></p>
+                <p
+                  className="text-gray-200"
+                  dangerouslySetInnerHTML={{
+                    __html: selectedItem?.description || "",
+                  }}
+                ></p>
 
                 {/* Image */}
                 {selectedItem?.enclosure?.url && (
@@ -284,7 +301,6 @@ export default function Feeds({ feedURL, setCurrentFeedInformation }: any) {
                 {selectedItem?.link?.href && (
                   <ReactPlayer controls={true} url={selectedItem?.link?.href} />
                 )}
-
                 {selectedItem?.["media:group"]?.link?.href && (
                   <ReactPlayer
                     controls={true}
@@ -298,6 +314,7 @@ export default function Feeds({ feedURL, setCurrentFeedInformation }: any) {
                   />
                 )}
 
+                {/* Content */}
                 {selectedItem?.["content:encoded"] && (
                   <div
                     className=" text-gray-200"
