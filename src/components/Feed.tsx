@@ -4,6 +4,7 @@ import { FeedItem, ServerData } from "../utils/types";
 import { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
 import Link from "next/link";
+import DOMPurify from 'dompurify';
 
 export default function Feeds({ feedURL, setCurrentFeedInformation }: any) {
   const [serverData, setServerData] = useState<ServerData | null>(null);
@@ -254,8 +255,8 @@ export default function Feeds({ feedURL, setCurrentFeedInformation }: any) {
                   className="text-gray-200"
                   dangerouslySetInnerHTML={{
                     __html: (
-                      selectedItem?.["media:group"]?.["media:description"] || ""
-                    )
+                      DOMPurify.sanitize(selectedItem?.["media:group"]?.["media:description"] || ""
+                    ))
                       //regEx to manage formatting for youtube vid descriptions
                       .replace(/\n/g, "<br>"),
                   }}
