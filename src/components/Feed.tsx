@@ -257,7 +257,7 @@ export default function Feeds({ feedURL, setCurrentFeedInformation }: any) {
                     __html: (
                       DOMPurify.sanitize(selectedItem?.["media:group"]?.["media:description"] || ""
                     ))
-                      //regEx to manage formatting for youtube vid descriptions
+                      //regEx to format youtube vid descriptions
                       .replace(/\n/g, "<br>"),
                   }}
                 ></p>
