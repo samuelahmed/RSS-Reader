@@ -4,7 +4,7 @@ import { FeedItem, ServerData } from "../utils/types";
 import { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
 import Link from "next/link";
-import DOMPurify from 'dompurify';
+import DOMPurify from "dompurify";
 
 export default function Feeds({ feedURL, setCurrentFeedInformation }: any) {
   const [serverData, setServerData] = useState<ServerData | null>(null);
@@ -254,9 +254,9 @@ export default function Feeds({ feedURL, setCurrentFeedInformation }: any) {
                 <p
                   className="text-gray-200"
                   dangerouslySetInnerHTML={{
-                    __html: (
-                      DOMPurify.sanitize(selectedItem?.["media:group"]?.["media:description"] || ""
-                    ))
+                    __html: DOMPurify.sanitize(
+                      selectedItem?.["media:group"]?.["media:description"] || ""
+                    )
                       //regEx to format youtube vid descriptions
                       .replace(/\n/g, "<br>"),
                   }}
@@ -264,13 +264,13 @@ export default function Feeds({ feedURL, setCurrentFeedInformation }: any) {
                 <p
                   className="text-gray-200"
                   dangerouslySetInnerHTML={{
-                    __html: selectedItem?.origcaption || "",
+                    __html: DOMPurify.sanitize(selectedItem?.origcaption || ""),
                   }}
                 ></p>
                 <p
                   className="text-gray-200"
                   dangerouslySetInnerHTML={{
-                    __html: selectedItem?.description || "",
+                    __html: DOMPurify.sanitize(selectedItem?.description || ""),
                   }}
                 ></p>
 
@@ -320,7 +320,9 @@ export default function Feeds({ feedURL, setCurrentFeedInformation }: any) {
                   <div
                     className=" text-gray-200"
                     dangerouslySetInnerHTML={{
-                      __html: selectedItem["content:encoded"],
+                      __html: DOMPurify.sanitize(
+                        selectedItem["content:encoded"]
+                      ),
                     }}
                   />
                 )}
