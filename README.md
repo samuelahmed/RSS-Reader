@@ -1,5 +1,5 @@
 Basic RSS reader to keep up with the latest news without going to multiple websites.
-- loosely styled like a terminal
+- Loosely styled like a terminal
 - Avoid ads and trackers
 - Focus on the content
 - No algorithms or recommendations
