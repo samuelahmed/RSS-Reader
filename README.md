@@ -10,7 +10,7 @@ Basic RSS reader to keep up with the latest news without going to multiple websi
 Controls: 
 - Select feed with mouse click 
 - Open articles with enter or click
-- close open article with escape (or click in the top right corner)
+- Close articles with escape (or click in the top right corner)
 
 
 
