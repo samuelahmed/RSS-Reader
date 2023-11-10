@@ -49,7 +49,7 @@ export default function FeedSourceSelector({
       {error && <div className="error">{error}</div>}
       {feedDataArray.map((feed) => (
         <div key={feed.title}>
-          <div className="border-b-2 border-b-white border-r-white text-center">
+          <div className="border-y-2 border-b-white border-r-white text-center">
             {feed.title}
           </div>
           <FeedList
