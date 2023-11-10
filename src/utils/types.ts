@@ -1,5 +1,6 @@
 export type { FeedItem, ServerData, FeedListProps, FeedSourceSelectorProps };
 
+//for components/Feed.tsx
 interface FeedItem {
   title: string;
   link: {
@@ -17,6 +18,7 @@ interface FeedItem {
   enclosure: any;
   [key: string]: any; //this is used to allow some strange properties like "media:group" and "media:description"
 }
+//for components/Feed.tsx
 interface ServerData {
   feed?: {
     entry: FeedItem[];
@@ -28,6 +30,7 @@ interface ServerData {
   };
 }
 
+//for components/FeedList.tsx
 interface FeedListProps {
   feedData: Feed[];
   handleFeedClick: (newUrl: string, slug: string) => Promise<void>;
@@ -35,10 +38,13 @@ interface FeedListProps {
   setCurrentFeedInformation: (info: { title: string }) => void;
 }
 
+//for components/FeedSourceSelector.tsx
 interface FeedSourceSelectorProps {
   setFeedURL: (newUrl: string) => void;
   setCurrentFeedInformation: (info: { title: string }) => void;
 }
+
+
 
 //not exported
 interface Image {
