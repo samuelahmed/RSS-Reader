@@ -15,7 +15,9 @@ export default function Feed({ feedURL, setCurrentFeedInformation }: any) {
   //get feed data from server
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch("/api/getXML");
+      const response = await fetch(
+        `/api/getXML?feedUrl=${encodeURIComponent(feedURL)}`
+      );
       if (!response.ok) {
         console.error("Failed to fetch XML data");
         return {};

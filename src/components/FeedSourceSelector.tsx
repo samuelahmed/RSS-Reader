@@ -9,33 +9,11 @@ export default function FeedSourceSelector({
   setFeedURL,
   setCurrentFeedInformation,
 }: FeedSourceSelectorProps) {
-
   const [selectedItem, setSelectedItem] = useState("");
-  const [error, setError] = useState<string | null>(null);
 
   const handleFeedClick = async (newUrl: string, slug: string) => {
-    try {
-      const response = await fetch("/api/getXML", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ url: newUrl }),
-      });
-      if (response.ok) {
-        setFeedURL(newUrl);
-        setSelectedItem(slug);
-      } else {
-        throw new Error("Failed to update URL");
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      if (error instanceof Error) {
-        setError(error.message);
-      } else {
-        setError("An unknown error occurred");
-      }
-    }
+    setFeedURL(newUrl);
+    setSelectedItem(slug);
   };
 
   const feedDataArray = [
@@ -46,7 +24,6 @@ export default function FeedSourceSelector({
 
   return (
     <>
-      {error && <div className="error">{error}</div>}
       {feedDataArray.map((feed) => (
         <div key={feed.title}>
           <div className="border-y-2 border-b-white border-r-white text-center">

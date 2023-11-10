@@ -7,7 +7,7 @@ export default function FeedList({
   selectedItem,
   setCurrentFeedInformation,
 }: FeedListProps): ReactNode {
-    
+  
   return (
     <div className="h-1/3 overflow-y-auto">
       {feedData.map((feed) => (

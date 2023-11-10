@@ -6,6 +6,7 @@ import Feed from "@/components/Feed";
 import { useState } from "react";
 
 export default function MainPageLayout() {
+  
   const [feedURL, setFeedURL] = useState("");
   const [currentFeedInformation, setCurrentFeedInformation] = useState({
     title: "No feed selected",
@@ -14,7 +15,6 @@ export default function MainPageLayout() {
 
   return (
     <main className="min-h-screen flex overscroll-none overflow-hidden text-gray-200">
-      {/* Chore: create a way to hide / show the sidebar on mobile */}
       <Sidebar
         setCurrentFeedInformation={setCurrentFeedInformation}
         setFeedURL={setFeedURL}
