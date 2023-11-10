@@ -6,7 +6,7 @@ import ReactPlayer from "react-player";
 import Link from "next/link";
 import DOMPurify from "dompurify";
 
-export default function Feeds({ feedURL, setCurrentFeedInformation }: any) {
+export default function Feed({ feedURL, setCurrentFeedInformation }: any) {
   const [serverData, setServerData] = useState<ServerData | null>(null);
   const [showModal, setShowModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState<FeedItem | null>(null);

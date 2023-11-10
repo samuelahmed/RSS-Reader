@@ -2,7 +2,7 @@
 
 import Sidebar from "@/layouts/Sidebar";
 import Header from "@/layouts/Header";
-import Feeds from "@/components/Feed";
+import Feed from "@/components/Feed";
 import { useState } from "react";
 
 export default function MainPageLayout() {
@@ -21,7 +21,7 @@ export default function MainPageLayout() {
       />
       <div className="flex flex-col w-full">
         <Header currentFeedInformation={currentFeedInformation} />
-        <Feeds
+        <Feed
           setCurrentFeedInformation={setCurrentFeedInformation}
           feedURL={feedURL}
         />
