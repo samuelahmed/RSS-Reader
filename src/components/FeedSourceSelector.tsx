@@ -2,15 +2,18 @@ import { useState } from "react";
 import newsFeedData from "../feedSources/newsFeedSources";
 import youtubeFeedData from "../feedSources/youtubeFeedSources";
 import podcastFeedData from "../feedSources/podcastFeedSources";
+import FeedList from "../components/Feedlist";
+import { FeedSourceSelectorProps } from "../utils/types";
 
 export default function FeedSourceSelector({
   setFeedURL,
   setCurrentFeedInformation,
-}: any) {
-  const [selectedItem, setSelectedItem] = useState("");
+}: FeedSourceSelectorProps) {
 
-  //Update the URL used to fetch the feed
-  const handleFeedClick = async (newUrl: any, slug: string) => {
+  const [selectedItem, setSelectedItem] = useState("");
+  const [error, setError] = useState<string | null>(null);
+
+  const handleFeedClick = async (newUrl: string, slug: string) => {
     try {
       const response = await fetch("/api/getXML", {
         method: "PUT",
@@ -27,74 +30,36 @@ export default function FeedSourceSelector({
       }
     } catch (error) {
       console.error("Error:", error);
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError("An unknown error occurred");
+      }
     }
   };
 
+  const feedDataArray = [
+    { title: "News Feeds", data: newsFeedData },
+    { title: "Youtube Feeds", data: youtubeFeedData },
+    { title: "Podcast Feeds", data: podcastFeedData },
+  ];
+
   return (
     <>
-      {/* News Feed */}
-      <div className="border-b-2 border-b-white border-r-white text-center">
-        News Feeds
-      </div>
-      <div className="h-1/3 overflow-y-auto">
-        {newsFeedData.map((feed) => (
-          <div
-            className={`h-6 w-full px-1 overflow-x-auto cursor-pointer ${
-              feed.slug === selectedItem ? "bg-blue-600" : "hover:bg-blue-600"
-            }`}
-            key={feed.slug}
-            onClick={() => {
-              handleFeedClick(feed.url, feed.slug);
-              console.log(feed.title, "feed.title");
-              setCurrentFeedInformation({ title: feed.title });
-            }}
-          >
+      {error && <div className="error">{error}</div>}
+      {feedDataArray.map((feed) => (
+        <div key={feed.title}>
+          <div className="border-b-2 border-b-white border-r-white text-center">
             {feed.title}
           </div>
-        ))}
-      </div>
-
-      {/* Youtube Feed */}
-      <div className="border-y-2 border-y-white border-r-white text-center">
-        Youtube Feeds
-      </div>
-      <div className="h-1/3 overflow-y-auto">
-        {youtubeFeedData.map((feed) => (
-          <div
-            className={`h-6 w-full px-1 overflow-x-auto cursor-pointer ${
-              feed.slug === selectedItem ? "bg-blue-600" : "hover:bg-blue-600"
-            }`}
-            key={feed.slug}
-            onClick={() => {
-              handleFeedClick(feed.url, feed.slug);
-              setCurrentFeedInformation({ title: feed.title });
-            }}
-          >
-            {feed.title}
-          </div>
-        ))}
-      </div>
-
-      {/* Youtube Feed */}
-      <div className="border-y-2 border-b-white border-r-white text-center">
-        Podcast Feeds
-      </div>
-      <div className="h-1/3 overflow-y-auto">
-        {podcastFeedData.map((feed) => (
-          <div
-            className={`h-6 w-full px-1 overflow-x-auto cursor-pointer ${
-              feed.slug === selectedItem ? "bg-blue-600" : "hover:bg-blue-600"
-            }`}
-            key={feed.slug}
-            onClick={() => {
-              handleFeedClick(feed.url, feed.slug);
-              setCurrentFeedInformation({ title: feed.title });
-            }}
-          >
-            {feed.title}
-          </div>
-        ))}
-      </div>
+          <FeedList
+            feedData={feed.data}
+            handleFeedClick={handleFeedClick}
+            selectedItem={selectedItem}
+            setCurrentFeedInformation={setCurrentFeedInformation}
+          />
+        </div>
+      ))}
     </>
   );
 }
