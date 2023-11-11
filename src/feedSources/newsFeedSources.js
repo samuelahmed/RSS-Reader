@@ -71,7 +71,7 @@ const newsFeedData = [
   },
 
 
-//tech
+//blog
   {
     slug: "asymco",
     title: "Asymco - Apple News",
@@ -80,17 +80,19 @@ const newsFeedData = [
 
 
 
-  
-  // {
-  //   slug: "proPublica",
-  //   title: "ProPublica",
-  //   url: "https://www.propublica.org/feeds/propublica/main",
-  // },
-  // {
-  //   slug: "proPublica",
-  //   title: "ProPublica",
-  //   url: "https://www.propublica.org/feeds/propublica/main",
-  // },
+//blog
+  {
+    slug: "Jean-Louis Gassée",
+    title: "Jean-Louis Gassée",
+    url: "http://www.mondaynote.com/feed/",
+  },
+
+
+  {
+    slug: "SETH",
+    title: "SETH",
+    url: "https://seths.blog/feed/atom/",
+  },
   // {
   //   slug: "proPublica",
   //   title: "ProPublica",

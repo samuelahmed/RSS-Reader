@@ -13,13 +13,21 @@
             <!-- <outline type="rss" text="The Baseline Scenario" title="The Baseline Scenario" xmlUrl="http://baselinescenario.com/feed/" htmlUrl="https://baselinescenario.com"/> -->
         <!-- </outline> -->
 
+            <!-- <outline type="rss" text="Monday Note" title="Monday Note" xmlUrl="http://www.mondaynote.com/feed/" htmlUrl="https://mondaynote.com?source=rssc537d80ed0a4"/>  -->
 
 
         <!-- <outline text="various" title="various"> -->
             <!-- <outline type="rss" text="Scripting News" title="Scripting News" xmlUrl="http://www.scripting.com/rss.xml" htmlUrl="http://scripting.com/"/> -->
-            <outline type="rss" text="asymco" title="asymco" xmlUrl="http://www.asymco.com/feed/" htmlUrl="https://www.asymco.com"/>
-            <outline type="rss" text="Monday Note" title="Monday Note" xmlUrl="http://www.mondaynote.com/feed/" htmlUrl="https://mondaynote.com?source=rss----c537d80ed0a---4"/>
-            <outline type="rss" text="Nerdblog.com" title="Nerdblog.com" xmlUrl="http://www.nerdblog.com/feeds/posts/default" htmlUrl="http://www.nerdblog.com/"/>
+            <!-- <outline type="rss" text="asymco" title="asymco" xmlUrl="http://www.asymco.com/feed/" htmlUrl="https://www.asymco.com"/> -->
+
+
+
+
+
+
+
+
+            <!-- <outline type="rss" text="Nerdblog.com" title="Nerdblog.com" xmlUrl="http://www.nerdblog.com/feeds/posts/default" htmlUrl="http://www.nerdblog.com/"/> -->
             <outline type="rss" text="Seth's Blog" title="Seth's Blog" xmlUrl="http://sethgodin.typepad.com/seths_blog/atom.xml" htmlUrl="https://seths.blog"/>
             <outline type="rss" text="xkcd" title="xkcd" xmlUrl="http://xkcd.com/atom.xml" htmlUrl="https://xkcd.com/"/>
             <outline type="rss" text="| The Drive" title="| The Drive" xmlUrl="http://www.thedrive.com/rss/all" htmlUrl="https://www.thedrive.com/"/>

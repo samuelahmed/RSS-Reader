@@ -2,16 +2,19 @@ export type { FeedItem, ServerData, FeedListProps, FeedSourceSelectorProps };
 
 //for components/Feed.tsx
 interface FeedItem {
-  title: string;
+  title: {
+    _: string;
+    type: string;
+  };
   link: {
     href: string;
   };
-  description: string;
+  description: string | { _: string; type?: string };
   url: string;
   pubDate: string;
   pubished: string;
   items: any;
-  content: string;
+  content: string | { _: string; type?: string };
   readStatus: boolean;
   origcaption: string;
   image: Image;

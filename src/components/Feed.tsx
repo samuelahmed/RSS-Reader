@@ -137,14 +137,16 @@ export default function Feed({ feedURL, setCurrentFeedInformation }: any) {
     return imageUrls.some((url) => htmlContent.includes(url));
   }
 
+  console.log("server data", selectedItem);
+
   return (
     <>
       <div className="h-screen flex-grow text-gray-200 px-1 overflow-auto">
-        {/* Entry as feed */}
+        {/* Entry as ATOM feed */}
         {serverData?.feed?.entry
           ? serverData.feed.entry.map((item: FeedItem, counter: number) => (
               <div
-                key={item.title}
+                key={item.index}
                 onMouseEnter={() => setHoveredItem(item)}
                 onMouseLeave={() => setHoveredItem(null)}
                 onClick={() => {
@@ -157,7 +159,7 @@ export default function Feed({ feedURL, setCurrentFeedInformation }: any) {
                   <span className="hidden md:inline">
                     {formatDate(item)} &nbsp;&nbsp;&nbsp;&nbsp;
                   </span>
-                  {item.title}
+                  {typeof item.title === "string" ? item.title : item.title._}{" "}
                 </p>
               </div>
             ))
@@ -169,7 +171,7 @@ export default function Feed({ feedURL, setCurrentFeedInformation }: any) {
             ? serverData.rss.channel.item.map(
                 (item: FeedItem, counter: number) => (
                   <div
-                    key={item.title}
+                    key={item.index}
                     onMouseEnter={() => setHoveredItem(item)}
                     onMouseLeave={() => setHoveredItem(null)}
                     onClick={() => {
@@ -182,7 +184,9 @@ export default function Feed({ feedURL, setCurrentFeedInformation }: any) {
                       <span className="hidden md:inline">
                         {formatDate(item)} &nbsp;&nbsp;&nbsp;&nbsp;
                       </span>
-                      {item.title}
+                      {item && item.title && typeof item.title === "string"
+                        ? item.title
+                        : item?.title?._}{" "}
                     </p>
                   </div>
                 )
@@ -191,7 +195,7 @@ export default function Feed({ feedURL, setCurrentFeedInformation }: any) {
               [serverData.rss.channel.item].map(
                 (item: FeedItem, counter: number) => (
                   <div
-                    key={item.title}
+                    key={item.index}
                     onMouseEnter={() => setHoveredItem(item)}
                     onMouseLeave={() => setHoveredItem(null)}
                     onClick={() => {
@@ -204,7 +208,10 @@ export default function Feed({ feedURL, setCurrentFeedInformation }: any) {
                       <span className="hidden md:inline">
                         {formatDate(item)} &nbsp;&nbsp;&nbsp;&nbsp;
                       </span>
-                      {item.title}
+                      {item && item.title && typeof item.title === "string"
+                        ? item.title
+                        : item?.title?._}{" "}
+                      {/* Change this line */}
                     </p>
                   </div>
                 )
@@ -235,8 +242,13 @@ export default function Feed({ feedURL, setCurrentFeedInformation }: any) {
                 <p>
                   {formatDate(selectedItem)} - {timeAgo(selectedItem)}
                 </p>
-                <p className="text-center">{selectedItem.title}</p>
-
+                <p className="text-center">
+                  {selectedItem &&
+                  selectedItem.title &&
+                  typeof selectedItem.title === "string"
+                    ? selectedItem.title
+                    : selectedItem?.title?._}
+                </p>
                 {/* Read more */}
                 {selectedItem?.link?.href ? (
                   <Link
@@ -272,13 +284,37 @@ export default function Feed({ feedURL, setCurrentFeedInformation }: any) {
                 <p
                   className="text-gray-200"
                   dangerouslySetInnerHTML={{
-                    __html: DOMPurify.sanitize(selectedItem?.origcaption || ""),
+                    __html: DOMPurify.sanitize(
+                      typeof selectedItem?.content === "string"
+                        ? selectedItem?.content
+                        : selectedItem?.content?._ || ""
+                    )
+                      //messy regEx to format descriptions
+                      .replace(/\n\n/g, "<br>")
+                      .replace(/\n/g, " "),
+                  }}
+                ></p>
+
+                <p
+                  className="text-gray-200"
+                  dangerouslySetInnerHTML={{
+                    __html: DOMPurify.sanitize(
+                      typeof selectedItem?.summary === "string"
+                        ? selectedItem?.summary
+                        : selectedItem?.summary?._ || ""
+                    ),
                   }}
                 ></p>
                 <p
                   className="text-gray-200"
                   dangerouslySetInnerHTML={{
-                    __html: DOMPurify.sanitize(selectedItem?.description || ""),
+                    __html: DOMPurify.sanitize(
+                      typeof selectedItem?.description === "string"
+                        ? selectedItem?.description
+                        : selectedItem?.description?._ || ""
+                    ) //regEx add spacing between paragraphs
+                      .replace(/<p>/g, "<p>")
+                      .replace(/<\/p>/g, "</p><br>"),
                   }}
                 ></p>
 
@@ -293,7 +329,11 @@ export default function Feed({ feedURL, setCurrentFeedInformation }: any) {
                         <img
                           key={url}
                           src={url}
-                          alt={selectedItem.title}
+                          alt={
+                            typeof selectedItem.title === "string"
+                              ? selectedItem.title
+                              : selectedItem.title._
+                          }
                           className="w-full h-auto"
                         />
                       )
@@ -319,10 +359,13 @@ export default function Feed({ feedURL, setCurrentFeedInformation }: any) {
                 {/* Content */}
                 {selectedItem?.["content:encoded"] && (
                   <div
-                    className=" text-gray-200"
+                    className="text-gray-200"
                     dangerouslySetInnerHTML={{
                       __html: DOMPurify.sanitize(
                         selectedItem["content:encoded"]
+                          //regEx add spacing between paragraphs
+                          .replace(/<p>/g, "<p>")
+                          .replace(/<\/p>/g, "</p><br>")
                       ),
                     }}
                   />
