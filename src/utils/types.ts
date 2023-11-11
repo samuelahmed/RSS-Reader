@@ -31,6 +31,9 @@ interface ServerData {
       item: FeedItem[];
     };
   };
+  rdf?: {
+    item: FeedItem[]; 
+  };
 }
 
 //for components/FeedList.tsx

@@ -12,6 +12,8 @@ export default function Feed({ feedURL, setCurrentFeedInformation }: any) {
   const [selectedItem, setSelectedItem] = useState<FeedItem | null>(null);
   const [hoveredItem, setHoveredItem] = useState<FeedItem | null>(null);
 
+
+
   //get feed data from server
   useEffect(() => {
     const fetchData = async () => {
@@ -23,6 +25,8 @@ export default function Feed({ feedURL, setCurrentFeedInformation }: any) {
         return {};
       }
       const data = await response.json();
+      console.log("Server response:", data); // Log server response
+
       if (data.feed) {
         data.feed.entry.sort(
           (
@@ -45,7 +49,24 @@ export default function Feed({ feedURL, setCurrentFeedInformation }: any) {
           );
         }
         setServerData({ rss: { channel: { item: data.rss.channel.item } } });
-      }
+        //HANDLE RDF FEEDS
+      } else if (data["rdf:RDF"]) {
+        const items = data["rdf:RDF"].item;
+        if (Array.isArray(items)) {
+          items.sort(
+            (
+              a: { published: any; pubDate: any },
+              b: { published: any; pubDate: any }
+            ) =>
+              new Date(b.published || b.pubDate).getTime() -
+              new Date(a.published || a.pubDate).getTime()
+          );
+        }
+
+        console.log('rdf:RDF items after sorting:', items); // Log items after sorting
+        setServerData({ rdf: { item: items } });
+        console.log('serverData after setting rdf:', serverData); // Log serverData
+            }
     };
     fetchData();
   }, [feedURL]);
@@ -70,6 +91,7 @@ export default function Feed({ feedURL, setCurrentFeedInformation }: any) {
     };
   }, [showModal]);
 
+  
   //pass number of items in feed to header
   useEffect(() => {
     setCurrentFeedInformation((current: any) => ({
@@ -95,7 +117,7 @@ export default function Feed({ feedURL, setCurrentFeedInformation }: any) {
 
   //format date
   function formatDate(item: FeedItem) {
-    const dateStr = item.published || item.pubDate || item.updated;
+    const dateStr = item.published || item.pubDate || item.updated || item['dc:date'];
     const date = new Date(dateStr);
     const formattedDate = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
     return formattedDate;
@@ -104,7 +126,7 @@ export default function Feed({ feedURL, setCurrentFeedInformation }: any) {
   //calculate how long ago the item was published
   function timeAgo(item: FeedItem) {
     const now = new Date();
-    const publishedDate = new Date(item.published || item.pubDate);
+    const publishedDate = new Date(item.published || item.pubDate || item.updated || item['dc:date']);
     const diffInSeconds = Math.abs(
       (now.getTime() - publishedDate.getTime()) / 1000
     );
@@ -217,6 +239,53 @@ export default function Feed({ feedURL, setCurrentFeedInformation }: any) {
                 )
               )
           : null}
+          {/* Entry as RDF feed */}
+{serverData?.rdf?.item
+  ? Array.isArray(serverData.rdf.item)
+    ? serverData.rdf.item.map((item: FeedItem, counter: number) => (
+        <div
+          key={item.index}
+          onMouseEnter={() => setHoveredItem(item)}
+          onMouseLeave={() => setHoveredItem(null)}
+          onClick={() => {
+            setSelectedItem(item);
+            setShowModal(true);
+          }}
+        >
+          <p className="h-6 overflow-hidden hover:bg-blue-600 cursor-pointer">
+            <span className="text-gray-200 mr-2">{counter + 1}.</span>
+            <span className="hidden md:inline">
+              {formatDate(item)} &nbsp;&nbsp;&nbsp;&nbsp;
+            </span>
+            {item && item.title && typeof item.title === "string"
+              ? item.title
+              : item?.title?._}{" "}
+          </p>
+        </div>
+      ))
+    : /* Entry as RDF object */
+      [serverData.rdf.item].map((item: FeedItem, counter: number) => (
+        <div
+          key={item.index}
+          onMouseEnter={() => setHoveredItem(item)}
+          onMouseLeave={() => setHoveredItem(null)}
+          onClick={() => {
+            setSelectedItem(item);
+            setShowModal(true);
+          }}
+        >
+          <p className="h-6 overflow-hidden hover:bg-blue-600 cursor-pointer">
+            <span className="text-gray-200 mr-2">{counter + 1}.</span>
+            <span className="hidden md:inline">
+              {formatDate(item)} &nbsp;&nbsp;&nbsp;&nbsp;
+            </span>
+            {item && item.title && typeof item.title === "string"
+              ? item.title
+              : item?.title?._}{" "}
+          </p>
+        </div>
+      ))
+  : null}
       </div>
       {showModal && selectedItem ? (
         <>

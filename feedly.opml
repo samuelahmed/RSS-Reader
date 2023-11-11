@@ -28,23 +28,45 @@
 
 
             <!-- <outline type="rss" text="Nerdblog.com" title="Nerdblog.com" xmlUrl="http://www.nerdblog.com/feeds/posts/default" htmlUrl="http://www.nerdblog.com/"/> -->
-            <outline type="rss" text="Seth's Blog" title="Seth's Blog" xmlUrl="http://sethgodin.typepad.com/seths_blog/atom.xml" htmlUrl="https://seths.blog"/>
-            <outline type="rss" text="xkcd" title="xkcd" xmlUrl="http://xkcd.com/atom.xml" htmlUrl="https://xkcd.com/"/>
-            <outline type="rss" text="| The Drive" title="| The Drive" xmlUrl="http://www.thedrive.com/rss/all" htmlUrl="https://www.thedrive.com/"/>
-            <outline type="rss" text="craigslist emerald hills" title="craigslist emerald hills" xmlUrl="https://sfbay.craigslist.org/search/pen/apa?format=rss&amp;query=emerald%20hills&amp;search_distance_type=mi" htmlUrl="https://sfbay.craigslist.org/search/pen/apa?query=emerald%20hills"/>
-        </outline>
+            <!-- <outline type="rss" text="Seth's Blog" title="Seth's Blog" xmlUrl="http://sethgodin.typepad.com/seths_blog/atom.xml" htmlUrl="https://seths.blog"/> -->
+            <!-- <outline type="rss" text="xkcd" title="xkcd" xmlUrl="http://xkcd.com/atom.xml" htmlUrl="https://xkcd.com/"/> -->
+            <!-- <outline type="rss" text="| The Drive" title="| The Drive" xmlUrl="http://www.thedrive.com/rss/all" htmlUrl="https://www.thedrive.com/"/> -->
+            <!-- <outline type="rss" text="craigslist emerald hills" title="craigslist emerald hills" xmlUrl="https://sfbay.craigslist.org/search/pen/apa?format=rss&amp;query=emerald%20hills&amp;search_distance_type=mi" htmlUrl="https://sfbay.craigslist.org/search/pen/apa?query=emerald%20hills"/> -->
+        <!-- </outline> -->
 
 
 
         
         <outline text="Development" title="Development">
-            <outline type="rss" text="Scott Hanselman" title="Scott Hanselman" xmlUrl="http://feeds.feedburner.com/ScottHanselman" htmlUrl="https://www.hanselman.com/blog/"/>
-            <outline type="rss" text="Mashups via Programmable Web" title="Mashups via Programmable Web" xmlUrl="http://feeds.feedburner.com/programmableweb/mashup" htmlUrl="https://feeds.feedburner.com/programmableweb"/>
-            <outline type="rss" text="Platform Wars" title="Platform Wars" xmlUrl="http://platformwars.blogspot.com/feeds/posts/default" htmlUrl="http://platformwars.blogspot.com/"/>
-            <outline type="rss" text="V8" title="V8" xmlUrl="https://v8.dev/blog.atom" htmlUrl="https://v8.dev/"/>
-            <outline type="rss" text="graphicallyspeaking" title="graphicallyspeaking" xmlUrl="http://sree.kotay.com/atom.xml" htmlUrl="http://sree.kotay.com/"/>
-            <outline type="rss" text="Coding Horror" title="Coding Horror" xmlUrl="http://feeds.feedburner.com/codinghorror/" htmlUrl="https://blog.codinghorror.com/"/>
-            <outline type="rss" text="V8 JavaScript Engine" title="V8 JavaScript Engine" xmlUrl="http://v8project.blogspot.com/feeds/posts/default" htmlUrl="https://v8project.blogspot.com/"/>
+            <!-- <outline type="rss" text="Scott Hanselman" title="Scott Hanselman" xmlUrl="http://feeds.feedburner.com/ScottHanselman" htmlUrl="https://www.hanselman.com/blog/"/> -->
+
+
+
+
+            <!-- <outline type="rss" text="Mashups via Programmable Web" title="Mashups via Programmable Web" xmlUrl="http://feeds.feedburner.com/programmableweb/mashup" htmlUrl="https://feeds.feedburner.com/programmableweb"/> -->
+
+
+
+            <!-- <outline type="rss" text="Platform Wars" title="Platform Wars" xmlUrl="http://platformwars.blogspot.com/feeds/posts/default" htmlUrl="http://platformwars.blogspot.com/"/> -->
+
+
+
+            <!-- <outline type="rss" text="V8" title="V8" xmlUrl="https://v8.dev/blog.atom" htmlUrl="https://v8.dev/"/> -->
+
+
+
+            <!-- <outline type="rss" text="graphicallyspeaking" title="graphicallyspeaking" xmlUrl="http://sree.kotay.com/atom.xml" htmlUrl="http://sree.kotay.com/"/> -->
+
+
+
+            <!-- <outline type="rss" text="Coding Horror" title="Coding Horror" xmlUrl="http://feeds.feedburner.com/codinghorror/" htmlUrl="https://blog.codinghorror.com/"/> -->
+
+
+
+            <!-- <outline type="rss" text="V8 JavaScript Engine" title="V8 JavaScript Engine" xmlUrl="http://v8project.blogspot.com/feeds/posts/default" htmlUrl="https://v8project.blogspot.com/"/> -->
+
+
+            
             <outline type="rss" text="Slashdot: News for nerds, stuff that matters" title="Slashdot: News for nerds, stuff that matters" xmlUrl="http://rss.slashdot.org/Slashdot/slashdot" htmlUrl="https://slashdot.org/"/>
             <outline type="rss" text="Hacker News" title="Hacker News" xmlUrl="http://news.ycombinator.com/rss" htmlUrl="https://news.ycombinator.com/"/>
             <outline type="rss" text="A VC" title="A VC" xmlUrl="http://feeds.feedburner.com/AVc" htmlUrl="https://avc.com/"/>

@@ -95,19 +95,22 @@ const newsFeedData = [
 
 
 
-//blod
+//blog
   {
     slug: "Scott-Hanselman",
     title: "Scott Hanselman",
     url: "http://feeds.feedburner.com/ScottHanselman",
   },
 
+//blog -dev
 
   {
     slug: "v8-dev-blog",
     title: "V8 Dev Blog",
     url: "https://v8.dev/blog.atom",
   },
+
+  //blog - dev
 
   {
     slug: "chrome-dev-blo",
@@ -119,19 +122,19 @@ const newsFeedData = [
 
 
 
-  // {
-  //   slug: "Scott-Hanselman",
-  //   title: "Scott Hanselman",
-  //   url: "http://feeds.feedburner.com/ScottHanselman",
-  // },
+  {
+    slug: "coding-horror",
+    title: "Coding Horror",
+    url: "http://feeds.feedburner.com/codinghorror/",
+  },
 
 
 
-  // {
-  //   slug: "Scott-Hanselman",
-  //   title: "Scott Hanselman",
-  //   url: "http://feeds.feedburner.com/ScottHanselman",
-  // },
+  {
+    slug: "slashdot",
+    title: "Slashdot",
+    url: "https://rss.slashdot.org/Slashdot/slashdot",
+  },
 
 
   // {
