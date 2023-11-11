@@ -64,6 +64,11 @@ const newsFeedData = [
     title: "Hacker News Firehose",
     url: "https://hnrss.org/newest",
   },
+  {
+    slug: "proPublica",
+    title: "ProPublica",
+    url: "https://www.propublica.org/feeds/propublica/main",
+  }
 ];
 
 export default newsFeedData;

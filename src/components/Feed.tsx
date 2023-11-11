@@ -125,12 +125,6 @@ export default function Feed({ feedURL, setCurrentFeedInformation }: any) {
     return "just now";
   }
 
-  //get img url when imbeded in content
-  const imgTag = selectedItem?.description?.match(
-    /<img[^>]+src=(["']?)(.*?)\1/
-  );
-  const imgUrl = imgTag ? imgTag[2] : "";
-
   //create set of possible image urls so the image is not rendered twice by image loader
   const imgLoaderSet = new Set([
     selectedItem?.enclosure?.url,
