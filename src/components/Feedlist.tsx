@@ -9,7 +9,7 @@ export default function FeedList({
 }: FeedListProps): ReactNode {
   
   return (
-    <div className="h-1/3 overflow-y-auto">
+    <div className="max-h-72 overflow-y-auto">
       {feedData.map((feed) => (
         <div
           className={`h-6 w-full px-1 overflow-x-auto cursor-pointer ${

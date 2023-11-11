@@ -68,7 +68,35 @@ const newsFeedData = [
     slug: "proPublica",
     title: "ProPublica",
     url: "https://www.propublica.org/feeds/propublica/main",
-  }
+  },
+
+
+//tech
+  {
+    slug: "asymco",
+    title: "Asymco - Apple News",
+    url: "http://www.asymco.com/feed/",
+  },
+
+
+
+  
+  // {
+  //   slug: "proPublica",
+  //   title: "ProPublica",
+  //   url: "https://www.propublica.org/feeds/propublica/main",
+  // },
+  // {
+  //   slug: "proPublica",
+  //   title: "ProPublica",
+  //   url: "https://www.propublica.org/feeds/propublica/main",
+  // },
+  // {
+  //   slug: "proPublica",
+  //   title: "ProPublica",
+  //   url: "https://www.propublica.org/feeds/propublica/main",
+  // }
+
 ];
 
 export default newsFeedData;
