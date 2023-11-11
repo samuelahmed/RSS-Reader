@@ -9,3 +9,10 @@ body {
   background: rgb(var(--background-rgb));
 }
 
+code {
+  background-color: #222222; 
+  font-family: monospace;
+  padding: 2px 4px;
+  border: 1px solid #111111;
+  border-radius: 0; 
+}

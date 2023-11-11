@@ -86,18 +86,68 @@ const newsFeedData = [
     title: "Jean-Louis Gassée",
     url: "http://www.mondaynote.com/feed/",
   },
+//blog
+  {
+    slug: "seth's blog",
+    title: "Seth's Blog",
+    url: "https://seths.blog/feed/atom/",
+  },
+
+
+
+//blod
+  {
+    slug: "Scott-Hanselman",
+    title: "Scott Hanselman",
+    url: "http://feeds.feedburner.com/ScottHanselman",
+  },
 
 
   {
-    slug: "SETH",
-    title: "SETH",
-    url: "https://seths.blog/feed/atom/",
+    slug: "v8-dev-blog",
+    title: "V8 Dev Blog",
+    url: "https://v8.dev/blog.atom",
   },
+
+  {
+    slug: "chrome-dev-blo",
+    title: "Chrome Dev Blog",
+    url: "https://developer.chrome.com/feeds/blog.xml", 
+  },
+
+
+
+
+
   // {
-  //   slug: "proPublica",
-  //   title: "ProPublica",
-  //   url: "https://www.propublica.org/feeds/propublica/main",
-  // }
+  //   slug: "Scott-Hanselman",
+  //   title: "Scott Hanselman",
+  //   url: "http://feeds.feedburner.com/ScottHanselman",
+  // },
+
+
+
+  // {
+  //   slug: "Scott-Hanselman",
+  //   title: "Scott Hanselman",
+  //   url: "http://feeds.feedburner.com/ScottHanselman",
+  // },
+
+
+  // {
+  //   slug: "Scott-Hanselman",
+  //   title: "Scott Hanselman",
+  //   url: "http://feeds.feedburner.com/ScottHanselman",
+  // },
+
+
+
+
+
+
+
+
+
 
 ];
 

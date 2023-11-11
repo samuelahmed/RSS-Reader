@@ -95,7 +95,7 @@ export default function Feed({ feedURL, setCurrentFeedInformation }: any) {
 
   //format date
   function formatDate(item: FeedItem) {
-    const dateStr = item.published || item.pubDate;
+    const dateStr = item.published || item.pubDate || item.updated;
     const date = new Date(dateStr);
     const formattedDate = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
     return formattedDate;
