@@ -65,7 +65,8 @@ export async function GET(request) {
         jsonData.rss.channel.item = jsonData.rss.channel.item.slice(0, 100);
       }
     }
-    console.log(jsonData);
+
+    // console.log(jsonData);
 
     return new Response(JSON.stringify(jsonData));
   } catch (error) {

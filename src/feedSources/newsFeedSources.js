@@ -30,11 +30,6 @@ const newsFeedData = [
     url: "https://www.nasa.gov/feeds/iotd-feed",
   },
   {
-    slug: "dave-winer",
-    title: "Scripting News",
-    url: "http://scripting.com/rss.xml",
-  },
-  {
     slug: "new-york-times-world",
     title: "NYT World",
     url: "https://rss.nytimes.com/services/xml/rss/nyt/World.xml",
@@ -120,6 +115,7 @@ const newsFeedData = [
 
 
 
+  //blog - dev
 
 
   {
@@ -128,7 +124,7 @@ const newsFeedData = [
     url: "http://feeds.feedburner.com/codinghorror/",
   },
 
-
+//newsite - dev
 
   {
     slug: "slashdot",
@@ -137,13 +133,31 @@ const newsFeedData = [
   },
 
 
-  // {
-  //   slug: "Scott-Hanselman",
-  //   title: "Scott Hanselman",
-  //   url: "http://feeds.feedburner.com/ScottHanselman",
-  // },
 
 
+  // blog - vc
+  {
+    slug: "avc-fred-wilson",
+    title: "AVC - Fred Wilson",
+    url: "http://feeds.feedburner.com/AVc",
+  },
+
+
+
+
+//blog - dev
+  {
+    slug: "Lambda the Ultimate - Programming Languages Weblog",
+    title: "Lambda the Ultimate - Programming Languages Weblog",
+    url: "http://lambda-the-ultimate.org/rss.xml",
+  },
+
+  //blog - dev
+  {
+    slug: "Joel Spolsky",
+    title: "Joel Spolsky",
+    url: "https://www.joelonsoftware.com/feed/",
+  },
 
 
 

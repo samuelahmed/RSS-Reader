@@ -2,6 +2,7 @@ import { useState } from "react";
 import newsFeedData from "../feedSources/newsFeedSources";
 import youtubeFeedData from "../feedSources/youtubeFeedSources";
 import podcastFeedData from "../feedSources/podcastFeedSources";
+import devFeedData from "../feedSources/devFeedSources";
 import FeedList from "../components/Feedlist";
 import { FeedSourceSelectorProps } from "../utils/types";
 
@@ -18,6 +19,7 @@ export default function FeedSourceSelector({
 
   const feedDataArray = [
     { title: "News Feeds", data: newsFeedData },
+    { title: "Dev Feeds", data: devFeedData },
     { title: "Youtube Feeds", data: youtubeFeedData },
     { title: "Podcast Feeds", data: podcastFeedData },
   ];
