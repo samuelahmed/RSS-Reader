@@ -7,6 +7,8 @@ import FeedSourceSelector from "../src/components/FeedSourceSelector";
 import newsFeedData from "../src/feedSources/newsFeedSources";
 import youtubeFeedData from "../src/feedSources/youtubeFeedSources";
 import podcastFeedData from "../src/feedSources/podcastFeedSources";
+import techFeedData from "@/feedSources/techFeedSources";
+import devFeedData from "@/feedSources/devFeedSources";
 import fetchMock from "jest-fetch-mock";
 import { act } from "react-dom/test-utils";
 
@@ -23,7 +25,7 @@ describe("FeedSourceSelector", () => {
         setCurrentFeedInformation={dummySetCurrentFeedInformation}
       />
     );
-    expect(getByText("News Feeds")).toBeInTheDocument();
+    expect(getByText("News")).toBeInTheDocument();
   });
 
   it("renders the Youtube feed", () => {
@@ -33,7 +35,7 @@ describe("FeedSourceSelector", () => {
         setCurrentFeedInformation={dummySetCurrentFeedInformation}
       />
     );
-    expect(getByText("Youtube Feeds")).toBeInTheDocument();
+    expect(getByText("Youtube")).toBeInTheDocument();
   });
 
   it("renders the Podcast feed", () => {
@@ -43,7 +45,7 @@ describe("FeedSourceSelector", () => {
         setCurrentFeedInformation={dummySetCurrentFeedInformation}
       />
     );
-    expect(getByText("Podcast Feeds")).toBeInTheDocument();
+    expect(getByText("Podcast")).toBeInTheDocument();
   });
 
   it("renders the correct number of feed items", () => {
@@ -55,7 +57,7 @@ describe("FeedSourceSelector", () => {
     );
     const feedItems = container.querySelectorAll("div.cursor-pointer");
     expect(feedItems).toHaveLength(
-      newsFeedData.length + youtubeFeedData.length + podcastFeedData.length
+      newsFeedData.length + youtubeFeedData.length + podcastFeedData.length + techFeedData.length + devFeedData.length
     );
   });
 
