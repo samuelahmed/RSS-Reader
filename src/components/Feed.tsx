@@ -11,6 +11,7 @@ import useUpdateHeaderFeedInfo from "../hooks/useUpdateHeaderFeedInfo";
 import formatDate from "@/utils/formatDate";
 import timeAgo from "@/utils/timeSincePublished";
 import { createImageLoaderSet, checkIfContainsImage } from "@/utils/imageTools";
+import FeedItemComponent from "@/components/FeedItem";
 
 export default function Feed({ feedURL, setHeaderFeedInformation }: any) {
   const [selectedItem, setSelectedItem] = useState<FeedItem | null>(null);
@@ -43,75 +44,42 @@ export default function Feed({ feedURL, setHeaderFeedInformation }: any) {
         {/* Entry as ATOM feed */}
         {serverData?.feed?.entry
           ? serverData.feed.entry.map((item: FeedItem, counter: number) => (
-              <div
+              <FeedItemComponent
                 key={item.index}
-                onMouseEnter={() => setHoveredItem(item)}
-                onMouseLeave={() => setHoveredItem(null)}
-                onClick={() => {
-                  setSelectedItem(item);
-                  setShowModal(true);
-                }}
-              >
-                <p className="h-6 overflow-hidden hover:bg-blue-600 cursor-pointer">
-                  <span className="text-gray-200 mr-2">{counter + 1}.</span>
-                  <span className="hidden md:inline">
-                    {formatDate(item)} &nbsp;&nbsp;&nbsp;&nbsp;
-                  </span>
-                  {typeof item.title === "string" ? item.title : item.title._}{" "}
-                </p>
-              </div>
+                item={item}
+                counter={counter}
+                setSelectedItem={setSelectedItem}
+                setShowModal={setShowModal}
+                setHoveredItem={setHoveredItem}
+              />
             ))
           : null}
-
         {/* Entry as rss array */}
         {serverData?.rss?.channel?.item
           ? Array.isArray(serverData.rss.channel.item)
             ? serverData.rss.channel.item.map(
                 (item: FeedItem, counter: number) => (
-                  <div
+                  <FeedItemComponent
                     key={item.index}
-                    onMouseEnter={() => setHoveredItem(item)}
-                    onMouseLeave={() => setHoveredItem(null)}
-                    onClick={() => {
-                      setSelectedItem(item);
-                      setShowModal(true);
-                    }}
-                  >
-                    <p className="h-6 overflow-hidden hover:bg-blue-600 cursor-pointer">
-                      <span className="text-gray-200 mr-2">{counter + 1}.</span>
-                      <span className="hidden md:inline">
-                        {formatDate(item)} &nbsp;&nbsp;&nbsp;&nbsp;
-                      </span>
-                      {item && item.title && typeof item.title === "string"
-                        ? item.title
-                        : item?.title?._}{" "}
-                    </p>
-                  </div>
+                    item={item}
+                    counter={counter}
+                    setSelectedItem={setSelectedItem}
+                    setShowModal={setShowModal}
+                    setHoveredItem={setHoveredItem}
+                  />
                 )
               )
             : /* Entry as rss object */
               [serverData.rss.channel.item].map(
                 (item: FeedItem, counter: number) => (
-                  <div
+                  <FeedItemComponent
                     key={item.index}
-                    onMouseEnter={() => setHoveredItem(item)}
-                    onMouseLeave={() => setHoveredItem(null)}
-                    onClick={() => {
-                      setSelectedItem(item);
-                      setShowModal(true);
-                    }}
-                  >
-                    <p className="h-6 overflow-hidden hover:bg-blue-600 cursor-pointer">
-                      <span className="text-gray-200 mr-2">{counter + 1}.</span>
-                      <span className="hidden md:inline">
-                        {formatDate(item)} &nbsp;&nbsp;&nbsp;&nbsp;
-                      </span>
-                      {item && item.title && typeof item.title === "string"
-                        ? item.title
-                        : item?.title?._}{" "}
-                      {/* Change this line */}
-                    </p>
-                  </div>
+                    item={item}
+                    counter={counter}
+                    setSelectedItem={setSelectedItem}
+                    setShowModal={setShowModal}
+                    setHoveredItem={setHoveredItem}
+                  />
                 )
               )
           : null}
@@ -119,50 +87,29 @@ export default function Feed({ feedURL, setHeaderFeedInformation }: any) {
         {serverData?.rdf?.item
           ? Array.isArray(serverData.rdf.item)
             ? serverData.rdf.item.map((item: FeedItem, counter: number) => (
-                <div
+                <FeedItemComponent
                   key={item.index}
-                  onMouseEnter={() => setHoveredItem(item)}
-                  onMouseLeave={() => setHoveredItem(null)}
-                  onClick={() => {
-                    setSelectedItem(item);
-                    setShowModal(true);
-                  }}
-                >
-                  <p className="h-6 overflow-hidden hover:bg-blue-600 cursor-pointer">
-                    <span className="text-gray-200 mr-2">{counter + 1}.</span>
-                    <span className="hidden md:inline">
-                      {formatDate(item)} &nbsp;&nbsp;&nbsp;&nbsp;
-                    </span>
-                    {item && item.title && typeof item.title === "string"
-                      ? item.title
-                      : item?.title?._}{" "}
-                  </p>
-                </div>
+                  item={item}
+                  counter={counter}
+                  setSelectedItem={setSelectedItem}
+                  setShowModal={setShowModal}
+                  setHoveredItem={setHoveredItem}
+                />
               ))
             : /* Entry as RDF object */
               [serverData.rdf.item].map((item: FeedItem, counter: number) => (
-                <div
+                <FeedItemComponent
                   key={item.index}
-                  onMouseEnter={() => setHoveredItem(item)}
-                  onMouseLeave={() => setHoveredItem(null)}
-                  onClick={() => {
-                    setSelectedItem(item);
-                    setShowModal(true);
-                  }}
-                >
-                  <p className="h-6 overflow-hidden hover:bg-blue-600 cursor-pointer">
-                    <span className="text-gray-200 mr-2">{counter + 1}.</span>
-                    <span className="hidden md:inline">
-                      {formatDate(item)} &nbsp;&nbsp;&nbsp;&nbsp;
-                    </span>
-                    {item && item.title && typeof item.title === "string"
-                      ? item.title
-                      : item?.title?._}{" "}
-                  </p>
-                </div>
+                  item={item}
+                  counter={counter}
+                  setSelectedItem={setSelectedItem}
+                  setShowModal={setShowModal}
+                  setHoveredItem={setHoveredItem}
+                />
               ))
           : null}
       </div>
+
       {showModal && selectedItem ? (
         <>
           <div
