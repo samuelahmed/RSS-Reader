@@ -44,9 +44,8 @@ describe("Feed component", () => {
         setCurrentFeedInformation={dummySetCurrentFeedInformation}
       />
     );
-    // Check if fetch was called with the correct URL
     expect(fetch).toHaveBeenCalledWith("/api/getXML?feedUrl=testURL");
-    // Check if the fetched data is rendered
+
     const itemElement = await findByText("Test Title");
     expect(itemElement).toBeInTheDocument();
   });
@@ -72,10 +71,9 @@ describe("Feed component", () => {
         setCurrentFeedInformation={dummySetCurrentFeedInformation}
       />
     );
-    // Find a feed item and click it
     const itemElement = await findByText("Test Title");
+    
     fireEvent.click(itemElement);
-    // Check if setCurrentFeedInformation was called
     expect(dummySetCurrentFeedInformation).toHaveBeenCalled();
   });
 });

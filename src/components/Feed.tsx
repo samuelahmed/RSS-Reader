@@ -6,36 +6,17 @@ import ReactPlayer from "react-player";
 import Link from "next/link";
 import DOMPurify from "dompurify";
 import useFeedData from "../hooks/feedData";
+import useShowModal from "../hooks/useShowModal";
 
 export default function Feed({ feedURL, setCurrentFeedInformation }: any) {
 
-  const [showModal, setShowModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState<FeedItem | null>(null);
   const [hoveredItem, setHoveredItem] = useState<FeedItem | null>(null);
 
+  
   const serverData = useFeedData(feedURL);
+  const [showModal, setShowModal] = useShowModal(false);
 
-  // console.log("serverData:", serverData);
-
-  //manage modal
-  useEffect(() => {
-    const closeOnOutsideClick = (event: MouseEvent) => {
-      if (showModal && event.target === document.getElementById("modal")) {
-        setShowModal(false);
-      }
-    };
-    const closeOnEscape = (event: KeyboardEvent) => {
-      if (showModal && event.key === "Escape") {
-        setShowModal(false);
-      }
-    };
-    document.addEventListener("click", closeOnOutsideClick);
-    document.addEventListener("keydown", closeOnEscape);
-    return () => {
-      document.removeEventListener("click", closeOnOutsideClick);
-      document.removeEventListener("keydown", closeOnEscape);
-    };
-  }, [showModal]);
 
   //pass number of items in feed to header
   useEffect(() => {
