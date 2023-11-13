@@ -18,17 +18,17 @@ export default function FeedSourceSelector({
   };
 
   const feedDataArray = [
-    { title: "News Feeds", data: newsFeedData },
-    { title: "Dev Feeds", data: devFeedData },
-    { title: "Youtube Feeds", data: youtubeFeedData },
-    { title: "Podcast Feeds", data: podcastFeedData },
+    { title: "News", data: newsFeedData },
+    { title: "Dev", data: devFeedData },
+    { title: "Youtube", data: youtubeFeedData },
+    { title: "Podcast", data: podcastFeedData },
   ];
 
   return (
     <>
-      {feedDataArray.map((feed) => (
-        <div key={feed.title}>
-          <div className="border-y-2 border-b-white border-r-white text-center">
+      {feedDataArray.map((feed, index) => (
+        <div className="" key={feed.title}>
+          <div className={`text-center ${index === 0 ? 'border-b-2 border-b-white' : 'border-y-2 border-b-white border-r-white'}`}>
             {feed.title}
           </div>
           <FeedList

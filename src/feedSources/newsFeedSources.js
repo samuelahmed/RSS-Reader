@@ -30,19 +30,14 @@ const newsFeedData = [
     url: "https://www.nasa.gov/feeds/iotd-feed",
   },
   {
-    slug: "new-york-times-world",
-    title: "NYT World",
-    url: "https://rss.nytimes.com/services/xml/rss/nyt/World.xml",
-  },
-  {
-    slug: "NYT-Business",
-    title: "NYT Business",
-    url: "https://rss.nytimes.com/services/xml/rss/nyt/Business.xml",
-  },
-  {
     slug: "bbc-news",
     title: "BBC News",
     url: "https://feeds.bbci.co.uk/news/rss.xml",
+  },
+  {
+    slug: "proPublica",
+    title: "ProPublica",
+    url: "https://www.propublica.org/feeds/propublica/main",
   },
   {
     slug: "hn-best",
@@ -60,112 +55,15 @@ const newsFeedData = [
     url: "https://hnrss.org/newest",
   },
   {
-    slug: "proPublica",
-    title: "ProPublica",
-    url: "https://www.propublica.org/feeds/propublica/main",
+    slug: "new-york-times-world",
+    title: "NYT World",
+    url: "https://rss.nytimes.com/services/xml/rss/nyt/World.xml",
   },
-
-
-//blog
   {
-    slug: "asymco",
-    title: "Asymco - Apple News",
-    url: "http://www.asymco.com/feed/",
+    slug: "NYT-Business",
+    title: "NYT Business",
+    url: "https://rss.nytimes.com/services/xml/rss/nyt/Business.xml",
   },
-
-
-
-//blog
-  {
-    slug: "Jean-Louis Gassée",
-    title: "Jean-Louis Gassée",
-    url: "http://www.mondaynote.com/feed/",
-  },
-//blog
-  {
-    slug: "seth's blog",
-    title: "Seth's Blog",
-    url: "https://seths.blog/feed/atom/",
-  },
-
-
-
-//blog
-  {
-    slug: "Scott-Hanselman",
-    title: "Scott Hanselman",
-    url: "http://feeds.feedburner.com/ScottHanselman",
-  },
-
-//blog -dev
-
-  {
-    slug: "v8-dev-blog",
-    title: "V8 Dev Blog",
-    url: "https://v8.dev/blog.atom",
-  },
-
-  //blog - dev
-
-  {
-    slug: "chrome-dev-blo",
-    title: "Chrome Dev Blog",
-    url: "https://developer.chrome.com/feeds/blog.xml", 
-  },
-
-
-
-  //blog - dev
-
-
-  {
-    slug: "coding-horror",
-    title: "Coding Horror",
-    url: "http://feeds.feedburner.com/codinghorror/",
-  },
-
-//newsite - dev
-
-  {
-    slug: "slashdot",
-    title: "Slashdot",
-    url: "https://rss.slashdot.org/Slashdot/slashdot",
-  },
-
-
-
-
-  // blog - vc
-  {
-    slug: "avc-fred-wilson",
-    title: "AVC - Fred Wilson",
-    url: "http://feeds.feedburner.com/AVc",
-  },
-
-
-
-
-//blog - dev
-  {
-    slug: "Lambda the Ultimate - Programming Languages Weblog",
-    title: "Lambda the Ultimate - Programming Languages Weblog",
-    url: "http://lambda-the-ultimate.org/rss.xml",
-  },
-
-  //blog - dev
-  {
-    slug: "Joel Spolsky",
-    title: "Joel Spolsky",
-    url: "https://www.joelonsoftware.com/feed/",
-  },
-
-
-
-
-
-
-
-
 ];
 
 export default newsFeedData;
