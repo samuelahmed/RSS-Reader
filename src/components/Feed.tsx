@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 
-import { FeedItem, ServerData } from "../utils/types";
+import { FeedItem } from "../utils/types";
 import { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
 import Link from "next/link";
@@ -10,15 +10,20 @@ import useShowModal from "../hooks/useShowModal";
 import useUpdateHeaderFeedInfo from "../hooks/useUpdateHeaderFeedInfo";
 import formatDate from "@/utils/formatDate";
 import timeAgo from "@/utils/timeSincePublished";
+import { createImageLoaderSet, checkIfContainsImage } from "@/utils/imageTools";
 
 export default function Feed({ feedURL, setHeaderFeedInformation }: any) {
-  
   const [selectedItem, setSelectedItem] = useState<FeedItem | null>(null);
   const [hoveredItem, setHoveredItem] = useState<FeedItem | null>(null);
 
   const serverData = useFeedData(feedURL);
   const [showModal, setShowModal] = useShowModal(false);
   useUpdateHeaderFeedInfo(serverData, setHeaderFeedInformation);
+  const imgLoaderSet = createImageLoaderSet(selectedItem);
+  const containsImage = checkIfContainsImage(
+    selectedItem?.["content:encoded"] || "",
+    Array.from(imgLoaderSet)
+  );
 
   //Keyboard nav - press enter to open modal
   useEffect(() => {
@@ -31,18 +36,6 @@ export default function Feed({ feedURL, setHeaderFeedInformation }: any) {
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [hoveredItem]);
-
-  //create set of possible image urls so the image is not rendered twice by image loader
-  const imgLoaderSet = new Set([
-    selectedItem?.enclosure?.url,
-    selectedItem?.["media:content"]?.url,
-    selectedItem?.image?.url,
-  ]);
-
-  //check if html content contains any of the image urls already in the image loader set to avoid duplicates with image loader and content loader
-  function containsImage(htmlContent: string, imageUrls: string[]): boolean {
-    return imageUrls.some((url) => htmlContent.includes(url));
-  }
 
   return (
     <>
@@ -271,10 +264,7 @@ export default function Feed({ feedURL, setHeaderFeedInformation }: any) {
                 ></p>
 
                 {/* Image */}
-                {!containsImage(
-                  selectedItem?.["content:encoded"] || "",
-                  Array.from(imgLoaderSet)
-                ) &&
+                {!containsImage &&
                   Array.from(imgLoaderSet).map(
                     (url) =>
                       url && (
