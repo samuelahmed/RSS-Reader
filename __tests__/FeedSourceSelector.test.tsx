@@ -16,13 +16,13 @@ fetchMock.enableMocks();
 
 describe("FeedSourceSelector", () => {
   const dummySetFeedURL = jest.fn();
-  const dummySetCurrentFeedInformation = jest.fn();
+  const dummysetHeaderFeedInformation = jest.fn();
 
   it("renders the News feed", () => {
     const { getByText } = render(
       <FeedSourceSelector
         setFeedURL={dummySetFeedURL}
-        setCurrentFeedInformation={dummySetCurrentFeedInformation}
+        setHeaderFeedInformation={dummysetHeaderFeedInformation}
       />
     );
     expect(getByText("News")).toBeInTheDocument();
@@ -32,7 +32,7 @@ describe("FeedSourceSelector", () => {
     const { getByText } = render(
       <FeedSourceSelector
         setFeedURL={dummySetFeedURL}
-        setCurrentFeedInformation={dummySetCurrentFeedInformation}
+        setHeaderFeedInformation={dummysetHeaderFeedInformation}
       />
     );
     expect(getByText("Youtube")).toBeInTheDocument();
@@ -42,7 +42,7 @@ describe("FeedSourceSelector", () => {
     const { getByText } = render(
       <FeedSourceSelector
         setFeedURL={dummySetFeedURL}
-        setCurrentFeedInformation={dummySetCurrentFeedInformation}
+        setHeaderFeedInformation={dummysetHeaderFeedInformation}
       />
     );
     expect(getByText("Podcast")).toBeInTheDocument();
@@ -52,7 +52,7 @@ describe("FeedSourceSelector", () => {
     const { container } = render(
       <FeedSourceSelector
         setFeedURL={dummySetFeedURL}
-        setCurrentFeedInformation={dummySetCurrentFeedInformation}
+        setHeaderFeedInformation={dummysetHeaderFeedInformation}
       />
     );
     const feedItems = container.querySelectorAll("div.cursor-pointer");
@@ -65,14 +65,14 @@ describe("FeedSourceSelector", () => {
     const { getByText } = render(
       <FeedSourceSelector
         setFeedURL={dummySetFeedURL}
-        setCurrentFeedInformation={dummySetCurrentFeedInformation}
+        setHeaderFeedInformation={dummysetHeaderFeedInformation}
       />
     );
     await act(async () => {
       fireEvent.click(getByText(newsFeedData[0].title));
     });
     expect(dummySetFeedURL).toHaveBeenCalledWith(newsFeedData[0].url);
-    expect(dummySetCurrentFeedInformation).toHaveBeenCalledWith({
+    expect(dummysetHeaderFeedInformation).toHaveBeenCalledWith({
       title: newsFeedData[0].title,
     });
   });

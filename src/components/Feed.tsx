@@ -8,6 +8,7 @@ import DOMPurify from "dompurify";
 import useFeedData from "../hooks/useFeedData";
 import useShowModal from "../hooks/useShowModal";
 import useUpdateHeaderFeedInfo from "../hooks/useUpdateHeaderFeedInfo";
+import formatDate from "@/utils/formatDate";
 
 export default function Feed({
   feedURL,
@@ -32,14 +33,7 @@ export default function Feed({
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [hoveredItem]);
 
-  //format date
-  function formatDate(item: FeedItem) {
-    const dateStr =
-      item.published || item.pubDate || item.updated || item["dc:date"];
-    const date = new Date(dateStr);
-    const formattedDate = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
-    return formattedDate;
-  }
+
 
   //calculate how long ago the item was published
   function timeAgo(item: FeedItem) {

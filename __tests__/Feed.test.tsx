@@ -11,14 +11,14 @@ fetchMock.enableMocks();
 
 describe("Feed component", () => {
     
-  const dummySetCurrentFeedInformation = jest.fn();
+  const dummysetHeaderFeedInformation = jest.fn();
 
   it("renders without crashing", () => {
     fetchMock.mockResponseOnce(JSON.stringify({ data: "12345" }));
     render(
       <Feed
         feedURL="testURL"
-        setCurrentFeedInformation={dummySetCurrentFeedInformation}
+        setHeaderFeedInformation={dummysetHeaderFeedInformation}
       />
     );
   });
@@ -41,7 +41,7 @@ describe("Feed component", () => {
     const { findByText } = render(
       <Feed
         feedURL="testURL"
-        setCurrentFeedInformation={dummySetCurrentFeedInformation}
+        setHeaderFeedInformation={dummysetHeaderFeedInformation}
       />
     );
     expect(fetch).toHaveBeenCalledWith("/api/getXML?feedUrl=testURL");
@@ -50,7 +50,7 @@ describe("Feed component", () => {
     expect(itemElement).toBeInTheDocument();
   });
 
-  it("calls setCurrentFeedInformation when a feed item is clicked", async () => {
+  it("calls setHeaderFeedInformation when a feed item is clicked", async () => {
     const dummyData = {
       rss: {
         channel: {
@@ -68,12 +68,12 @@ describe("Feed component", () => {
     const { findByText } = render(
       <Feed
         feedURL="testURL"
-        setCurrentFeedInformation={dummySetCurrentFeedInformation}
+        setHeaderFeedInformation={dummysetHeaderFeedInformation}
       />
     );
     const itemElement = await findByText("Test Title");
     
     fireEvent.click(itemElement);
-    expect(dummySetCurrentFeedInformation).toHaveBeenCalled();
+    expect(dummysetHeaderFeedInformation).toHaveBeenCalled();
   });
 });
