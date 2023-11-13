@@ -8,21 +8,21 @@ import { useState } from "react";
 export default function MainPageLayout() {
   
   const [feedURL, setFeedURL] = useState("");
-  const [currentFeedInformation, setCurrentFeedInformation] = useState({
+  const [headerFeedInformation, setHeaderFeedInformation] = useState({
     title: "No feed selected",
-    numberOfItems: "",
+    numberOfItems: 0,
   });
 
   return (
     <main className="min-h-screen flex overscroll-none overflow-hidden text-gray-200">
       <Sidebar
-        setCurrentFeedInformation={setCurrentFeedInformation}
+        setHeaderFeedInformation={setHeaderFeedInformation}
         setFeedURL={setFeedURL}
       />
       <div className="flex flex-col w-full">
-        <Header currentFeedInformation={currentFeedInformation} />
+        <Header headerFeedInformation={headerFeedInformation} />
         <Feed
-          setCurrentFeedInformation={setCurrentFeedInformation}
+          setHeaderFeedInformation={setHeaderFeedInformation}
           feedURL={feedURL}
         />
       </div>

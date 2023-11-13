@@ -9,7 +9,7 @@ import { FeedSourceSelectorProps } from "../utils/types";
 
 export default function FeedSourceSelector({
   setFeedURL,
-  setCurrentFeedInformation,
+  setHeaderFeedInformation,
 }: FeedSourceSelectorProps) {
   const [selectedItem, setSelectedItem] = useState("");
 
@@ -43,7 +43,7 @@ export default function FeedSourceSelector({
             feedData={feed.data}
             handleFeedClick={handleFeedClick}
             selectedItem={selectedItem}
-            setCurrentFeedInformation={setCurrentFeedInformation}
+            setHeaderFeedInformation={setHeaderFeedInformation}
           />
         </div>
       ))}

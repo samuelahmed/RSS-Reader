@@ -5,9 +5,8 @@ export default function FeedList({
   feedData,
   handleFeedClick,
   selectedItem,
-  setCurrentFeedInformation,
+  setHeaderFeedInformation,
 }: FeedListProps): ReactNode {
-  
   return (
     <div className="max-h-52 overflow-auto">
       {feedData.map((feed) => (
@@ -18,7 +17,7 @@ export default function FeedList({
           key={feed.slug}
           onClick={() => {
             handleFeedClick(feed.url, feed.slug);
-            setCurrentFeedInformation({ title: feed.title });
+            setHeaderFeedInformation({ title: feed.title });
           }}
         >
           {feed.title}

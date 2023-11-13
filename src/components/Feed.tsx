@@ -5,29 +5,20 @@ import { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
 import Link from "next/link";
 import DOMPurify from "dompurify";
-import useFeedData from "../hooks/feedData";
+import useFeedData from "../hooks/useFeedData";
 import useShowModal from "../hooks/useShowModal";
+import useUpdateHeaderFeedInfo from "../hooks/useUpdateHeaderFeedInfo";
 
-export default function Feed({ feedURL, setCurrentFeedInformation }: any) {
-
+export default function Feed({
+  feedURL,
+  setHeaderFeedInformation,
+}: any) {
   const [selectedItem, setSelectedItem] = useState<FeedItem | null>(null);
   const [hoveredItem, setHoveredItem] = useState<FeedItem | null>(null);
 
-  
   const serverData = useFeedData(feedURL);
   const [showModal, setShowModal] = useShowModal(false);
-
-
-  //pass number of items in feed to header
-  useEffect(() => {
-    setCurrentFeedInformation((current: any) => ({
-      ...current,
-      numberOfItems: Math.max(
-        serverData?.rss?.channel?.item?.length || 0,
-        serverData?.feed?.entry?.length || 0
-      ),
-    }));
-  }, [serverData]);
+  useUpdateHeaderFeedInfo(serverData, setHeaderFeedInformation);
 
   //Keyboard nav - press enter to open modal
   useEffect(() => {
@@ -86,8 +77,6 @@ export default function Feed({ feedURL, setCurrentFeedInformation }: any) {
   function containsImage(htmlContent: string, imageUrls: string[]): boolean {
     return imageUrls.some((url) => htmlContent.includes(url));
   }
-
-
 
   return (
     <>

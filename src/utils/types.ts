@@ -32,7 +32,7 @@ interface ServerData {
     };
   };
   rdf?: {
-    item: FeedItem[]; 
+    item: FeedItem[];
   };
 }
 
@@ -41,16 +41,14 @@ interface FeedListProps {
   feedData: Feed[];
   handleFeedClick: (newUrl: string, slug: string) => Promise<void>;
   selectedItem: string;
-  setCurrentFeedInformation: (info: { title: string }) => void;
+  setHeaderFeedInformation: (info: { title: string }) => void;
 }
 
 //for components/FeedSourceSelector.tsx
 interface FeedSourceSelectorProps {
   setFeedURL: (newUrl: string) => void;
-  setCurrentFeedInformation: (info: { title: string }) => void;
+  setHeaderFeedInformation: (info: { title: string }) => void;
 }
-
-
 
 //not exported
 interface Image {
