@@ -6,6 +6,9 @@ export function createImageLoaderSet(selectedItem: any) {
   ]);
 }
 
-export function checkIfContainsImage(htmlContent: string, imageUrls: string[]): boolean {
+export function checkIfContainsImage(
+  htmlContent: string,
+  imageUrls: string[]
+): boolean {
   return imageUrls.some((url) => htmlContent.includes(url));
 }

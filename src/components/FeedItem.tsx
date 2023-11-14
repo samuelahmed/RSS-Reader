@@ -1,5 +1,3 @@
-// import { FeedListProps } from "../utils/types";
-// import { ReactNode } from "react";
 import { FeedItem } from "../utils/types";
 import formatDate from "../utils/formatDate";
 

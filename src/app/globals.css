@@ -17,10 +17,6 @@ code {
   border-radius: 0; 
 }
 
-
-
-
-
 /* Customize website's scrollbar like Mac OS
 From: https://gist.github.com/spemer/a0e218bbb45433bd611e68446523a00b
 Not supports in Firefox and IE */
@@ -52,7 +48,6 @@ Not supports in Firefox and IE */
 .scrollbar::-webkit-scrollbar-button {
   display:none;
 }
-
 
 /* scrollbar when element is hovered */
 .scrollbar:hover::-webkit-scrollbar-thumb {
