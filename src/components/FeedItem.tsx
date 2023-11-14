@@ -29,7 +29,7 @@ export default function FeedItemComponent({
         <span className="hidden md:inline">
           {formatDate(item)} &nbsp;&nbsp;&nbsp;&nbsp;
         </span>
-        {typeof item.title === "string" ? item.title : item.title._}{" "}
+        {typeof item.title === "string" ? item.title : item.title?._}{" "}
       </p>
     </div>
   );
