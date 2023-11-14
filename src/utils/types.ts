@@ -1,4 +1,10 @@
-export type { FeedItem, ServerData, FeedListProps, FeedSourceSelectorProps, ModalProps };
+export type {
+  FeedItem,
+  ServerData,
+  FeedListProps,
+  FeedSourceSelectorProps,
+  ModalProps,
+};
 
 //for components/Feed.tsx
 interface FeedItem {
@@ -56,7 +62,6 @@ interface ModalProps {
   setShowModal: (show: boolean) => void;
   selectedItem: FeedItem | null;
 }
-
 
 //not exported
 interface Image {
