@@ -15,6 +15,16 @@ const youtubeFeedData = [
     url: "https://www.youtube.com/feeds/videos.xml?channel_id=UCvGwM5woTl13I-qThI4YMCg",
   },
   {
+    slug: "Stranger",
+    title: "Stranger",
+    url: "https://www.youtube.com/feeds/videos.xml?channel_id=UC3ewEwPUnReNd_mgwxOn9aQ",
+  },
+  {
+    slug: "Tsoding",
+    title: "Tsoding",
+    url: "https://www.youtube.com/feeds/videos.xml?channel_id=UCrqM0Ym_NbK1fqeQG2VIohg",
+  },
+  {
     slug: "web-dev-simplified",
     title: "Web Dev Simplified",
     url: "https://www.youtube.com/feeds/videos.xml?channel_id=UCFbNIlppjAuEX4znoulh0Cw",
