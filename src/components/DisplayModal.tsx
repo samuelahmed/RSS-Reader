@@ -29,7 +29,7 @@ export default function DisplayModal({
           >
             <div
               onClick={(e) => e.stopPropagation()}
-              className="shadow-lg relative flex flex-col w-full h-full bg-[rgb(26,26,26)] border-white border-2 text-gray-200 outline-none focus:outline-none overflow-auto p-2"
+              className="shadow-lg relative flex flex-col w-full h-full bg-[rgb(26,26,26)] border-white border-2 text-gray-200 outline-none focus:outline-none overflow-auto scrollbar p-2"
             >
               {/* modal content */}
               <div className="space-y-2">

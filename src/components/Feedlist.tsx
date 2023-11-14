@@ -8,10 +8,10 @@ export default function FeedList({
   setHeaderFeedInformation,
 }: FeedListProps): ReactNode {
   return (
-    <div className="max-h-52 overflow-auto">
+    <div className="max-h-52 overflow-auto scrollbar">
       {feedData.map((feed) => (
         <div
-          className={`h-6 w-full px-1 overflow-x-auto cursor-pointer ${
+          className={`h-6 w-full px-1 overflow-x-auto scrollbar cursor-pointer ${
             feed.slug === selectedItem ? "bg-blue-600" : "hover:bg-blue-600"
           }`}
           key={feed.slug}

@@ -27,7 +27,7 @@ export default function Feed({ feedURL, setHeaderFeedInformation }: any) {
 
   return (
     <>
-      <div className="h-screen flex-grow text-gray-200 px-1 overflow-auto">
+      <div className="h-screen flex-grow text-gray-200 px-1 overflow-auto scrollbar">
         {/* Entry as ATOM feed */}
         {serverData?.feed?.entry
           ? serverData.feed.entry.map((item: FeedItem, counter: number) => (
