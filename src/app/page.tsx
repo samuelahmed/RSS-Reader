@@ -3,7 +3,7 @@
 import Sidebar from "@/layouts/Sidebar";
 import Header from "@/layouts/Header";
 import Feed from "@/components/Feed";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function MainPageLayout() {
   
@@ -12,18 +12,31 @@ export default function MainPageLayout() {
     title: "No feed selected",
     numberOfItems: 0,
   });
+  const [isMainFeedFocused, setIsMainFeedFocused] = useState(true);
+
+  const [focusedComponent, setFocusedComponent] = useState('sidebar'); // new state variable
+
+  
+console.log(focusedComponent)
 
   return (
     <main className="min-h-screen flex overscroll-none overflow-hidden text-gray-200">
       <Sidebar
         setHeaderFeedInformation={setHeaderFeedInformation}
         setFeedURL={setFeedURL}
+        setIsMainFeedFocused={setIsMainFeedFocused}
+        isMainFeedFocused={isMainFeedFocused}
+        focusedComponent={focusedComponent}
+        setFocusedComponent={setFocusedComponent}
+      
       />
       <div className="flex flex-col w-full">
         <Header headerFeedInformation={headerFeedInformation} />
         <Feed
           setHeaderFeedInformation={setHeaderFeedInformation}
           feedURL={feedURL}
+          setIsMainFeedFocused={setIsMainFeedFocused}
+          isMainFeedFocused={isMainFeedFocused}
         />
       </div>
     </main>

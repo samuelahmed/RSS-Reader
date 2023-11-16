@@ -48,12 +48,17 @@ interface FeedListProps {
   handleFeedClick: (newUrl: string, slug: string) => Promise<void>;
   selectedItem: string;
   setHeaderFeedInformation: (info: { title: string }) => void;
+  focusedSourceIndex: number; // Add this line
+  index: number; // Add this line
 }
 
 //for components/FeedSourceSelector.tsx
 interface FeedSourceSelectorProps {
   setFeedURL: (newUrl: string) => void;
   setHeaderFeedInformation: (info: { title: string }) => void;
+  setIsMainFeedFocused: (isFocused: boolean) => void;
+  isMainFeedFocused: boolean;
+
 }
 
 //for components/DisplayModal.tsx
