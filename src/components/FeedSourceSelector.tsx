@@ -12,7 +12,7 @@ export default function FeedSourceSelector({
   setFeedURL,
   setHeaderFeedInformation,
   setIsMainFeedFocused,
-  isMainFeedFocused,
+  isMainFeedFocused
 }: FeedSourceSelectorProps) {
   
   const [selectedItem, setSelectedItem] = useState("");
@@ -29,24 +29,19 @@ export default function FeedSourceSelector({
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Tab") {
-        event.preventDefault();
-        if (event.shiftKey) {
-          setFocusedSourceIndex((prevIndex) => Math.max(prevIndex - 1, 0));
+        event.preventDefault(); // prevent focus from moving to the next focusable element
+        if (event.shiftKey) { // if Shift is also pressed
+          setFocusedSourceIndex((prevIndex) => Math.max(prevIndex - 1, 0)); // move to the previous feed
         } else {
-          if (focusedSourceIndex === feedDataArray.length - 1) {
-            setIsMainFeedFocused(true); // move focus to the main feed
-          } else {
-            setFocusedSourceIndex((prevIndex) => prevIndex + 1);
-          }
+          setFocusedSourceIndex((prevIndex) => Math.min(prevIndex + 1, feedDataArray.length - 1)); // move to the next feed
         }
       }
     };
-  
-    if (!isMainFeedFocused) { // only add the event listener when the sidebar is focused
-      window.addEventListener("keydown", handleKeyDown);
-    }
+    window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [feedDataArray.length, focusedSourceIndex, isMainFeedFocused]);
+  }, [feedDataArray.length]);
+
+
 
   const handleFeedClick = async (newUrl: string, slug: string) => {
     setFeedURL(newUrl);
