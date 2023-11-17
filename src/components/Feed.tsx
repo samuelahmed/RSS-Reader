@@ -11,29 +11,42 @@ export default function Feed({ feedURL, setHeaderFeedInformation, setIsMainFeedF
   const [hoveredItem, setHoveredItem] = useState<FeedItem | null>(null);
   const [focusedItem, setFocusedItem] = useState<FeedItem | null>(null);
 
-  const serverData = useFeedData(feedURL);
+  // const serverData = useFeedData(feedURL);
   const [showModal, setShowModal] = useShowModal(false);
+
+
+
+
+
+  const [focusedItemIndex, setFocusedItemIndex] = useState<number>(0);
+  const serverDataFromHook = useFeedData(feedURL);
+  const [serverData, setServerData] = useState(serverDataFromHook);
+
   useUpdateHeaderFeedInfo(serverData, setHeaderFeedInformation);
 
 
-  
-  const [focusedItemIndex, setFocusedItemIndex] = useState<number>(0);
-
-
-
-
+  useEffect(() => {
+    setServerData(serverDataFromHook);
+  }, [serverDataFromHook]);
 
   //Keyboard nav - press enter to open modal, up/down to navigate
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Enter" && focusedItem) {
+      if ((event.key === "Enter" || event.key === "ArrowRight") && focusedItem) {
         setSelectedItem(focusedItem);
         setShowModal(true);
+
+
       } else if (event.key === "ArrowUp") {
         setFocusedItemIndex((prevIndex) => Math.max(prevIndex - 1, 0));
       } else if (event.key === "ArrowDown") {
         setFocusedItemIndex((prevIndex) => prevIndex + 1);
+
+      } else if ((event.key === "ArrowLeft") && !showModal) {
+        setServerData(null);
       }
+      
+      
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
@@ -53,7 +66,7 @@ export default function Feed({ feedURL, setHeaderFeedInformation, setIsMainFeedF
   }, [serverData]);
 
   
-
+console.log(serverDataFromHook, 'serverDataFromHook')
 
   return (
     <>

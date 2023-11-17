@@ -12,11 +12,10 @@ export default function FeedSourceSelector({
   setFeedURL,
   setHeaderFeedInformation,
   setIsMainFeedFocused,
-  isMainFeedFocused
 }: FeedSourceSelectorProps) {
-  
-  const [selectedItem, setSelectedItem] = useState("");
+  const [selectedSourceItem, setSelectedSourceItem] = useState("");
   const [focusedSourceIndex, setFocusedSourceIndex] = useState(0); // Add this line
+
   const feedDataArray = [
     { title: "News", data: newsFeedData },
     { title: "Tech", data: techFeedData },
@@ -25,46 +24,53 @@ export default function FeedSourceSelector({
     { title: "Podcast", data: podcastFeedData },
   ];
 
-
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Tab") {
         event.preventDefault(); // prevent focus from moving to the next focusable element
-        if (event.shiftKey) { // if Shift is also pressed
+        if (event.shiftKey) {
+          // if Shift is also pressed
           setFocusedSourceIndex((prevIndex) => Math.max(prevIndex - 1, 0)); // move to the previous feed
         } else {
-          setFocusedSourceIndex((prevIndex) => Math.min(prevIndex + 1, feedDataArray.length - 1)); // move to the next feed
+          setFocusedSourceIndex((prevIndex) =>
+            Math.min(prevIndex + 1, feedDataArray.length - 1)
+          ); // move to the next feed
         }
+      }  if (event.key === "ArrowLeft") {
+
+
+        setSelectedSourceItem("");
       }
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [feedDataArray.length]);
 
-
-
   const handleFeedClick = async (newUrl: string, slug: string) => {
     setFeedURL(newUrl);
-    setSelectedItem(slug);
+    setSelectedSourceItem(slug);
   };
 
+  const handleFeedSelect = (newUrl: string, slug: string) => {
+    setFeedURL(newUrl);
+    setSelectedSourceItem(slug);
+  };
+
+  console.log(selectedSourceItem, "selectedSourceItem");
+  // console.log(focusedSourceIndex)
 
   return (
     <>
       {feedDataArray.map((feed, index) => (
-        <div 
-        tabIndex={0}
-        onFocus={() => {
-          setIsMainFeedFocused(false);
-          setFocusedSourceIndex(index); // set focusedSourceIndex when this feed is focused
-        }}
-
-
-
-        // className={index === focusedSou  rceIndex ? 'focused bg-blue-300' : ''} 
-        key={feed.title}
+        <div
+          tabIndex={0}
+          onFocus={() => {
+            setIsMainFeedFocused(false);
+            setFocusedSourceIndex(index); // set focusedSourceIndex when this feed is focused
+          }}
+          // className={index === focusedSou  rceIndex ? 'focused bg-blue-300' : ''}
+          key={feed.title}
         >
-
           <div
             className={`text-center ${
               index === 0
@@ -77,10 +83,11 @@ export default function FeedSourceSelector({
           <FeedList
             feedData={feed.data}
             handleFeedClick={handleFeedClick}
-            selectedItem={selectedItem}
+            selectedSourceItem={selectedSourceItem}
             setHeaderFeedInformation={setHeaderFeedInformation}
             focusedSourceIndex={focusedSourceIndex} // pass focusedSourceIndex
             index={index} // pass index
+            handleFeedSelect={handleFeedSelect} // pass handleFeedSelect
           />
         </div>
       ))}

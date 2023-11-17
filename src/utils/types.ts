@@ -46,10 +46,11 @@ interface ServerData {
 interface FeedListProps {
   feedData: Feed[];
   handleFeedClick: (newUrl: string, slug: string) => Promise<void>;
-  selectedItem: string;
+  selectedSourceItem: string;
   setHeaderFeedInformation: (info: { title: string }) => void;
   focusedSourceIndex: number; // Add this line
   index: number; // Add this line
+  handleFeedSelect: (newUrl: string, slug: string) => void; // Add this line
 }
 
 //for components/FeedSourceSelector.tsx
@@ -58,7 +59,6 @@ interface FeedSourceSelectorProps {
   setHeaderFeedInformation: (info: { title: string }) => void;
   setIsMainFeedFocused: (isFocused: boolean) => void;
   isMainFeedFocused: boolean;
-
 }
 
 //for components/DisplayModal.tsx

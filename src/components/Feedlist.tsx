@@ -4,9 +4,11 @@ import { ReactNode, useRef, useEffect, useState } from "react";
 export default function FeedList({
   feedData,
   handleFeedClick,
-  selectedItem,
+  selectedSourceItem,
   setHeaderFeedInformation,
   focusedSourceIndex,
+  handleFeedSelect, // add this
+
   index,
 }: FeedListProps): ReactNode {
   const [focusedItemIndex, setFocusedItemIndex] = useState(-1);
@@ -14,26 +16,45 @@ export default function FeedList({
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
+      if (selectedSourceItem !== "") {
+        return;
+      }
       if (focusedSourceIndex === index) {
         if (event.key === "ArrowUp") {
           event.preventDefault();
           setFocusedItemIndex((prevIndex) => Math.max(prevIndex - 1, 0));
         } else if (event.key === "ArrowDown") {
           event.preventDefault();
-          setFocusedItemIndex((prevIndex) => {
+          setFocusedItemIndex((prevIndex) => { 
             let nextIndex = Math.min(prevIndex + 1, feedData.length - 1);
             if (nextIndex > feedData.length - 1) {
-              // corrected condition
               nextIndex = 0; // reset to the start
             }
             return nextIndex;
           });
+        } else if (event.key === "Enter" || event.key === "ArrowRight") {
+          event.preventDefault();
+          const currentFeed = feedData[focusedItemIndex];
+          if (currentFeed) {
+            console.log('currentFeed.url:', currentFeed.url); // log the URL
+            handleFeedClick(currentFeed.url, currentFeed.slug);
+            handleFeedSelect(currentFeed.url , currentFeed.slug); // call handleFeedSelect with currentFeed.url
+            setHeaderFeedInformation({ title: currentFeed.title });
+          }
         }
       }
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [feedData.length, focusedSourceIndex, index]);
+  }, [feedData, focusedSourceIndex, index, handleFeedClick, handleFeedSelect, setHeaderFeedInformation, focusedItemIndex]);
+  
+  useEffect(() => {
+    console.log('focusedItemIndex:', focusedItemIndex); // log the focusedItemIndex
+    console.log('focusedSourceIndex:', focusedSourceIndex); // log the focusedSourceIndex
+  }, [focusedItemIndex]);
+
+
+
 
   useEffect(() => {
     if (focusedSourceIndex === index) {
@@ -53,6 +74,8 @@ export default function FeedList({
     }
   }, [focusedItemIndex]);
 
+
+
   return (
     <div className="max-h-52 overflow-auto scrollbar">
       {feedData.map((feed, index) => (
@@ -65,7 +88,7 @@ export default function FeedList({
           className={`h-6 w-full px-1 overflow-x-auto scrollbar cursor-pointer ${
             index === focusedItemIndex
               ? "bg-blue-600"
-              : feed.slug === selectedItem
+              : feed.slug === selectedSourceItem
               ? "bg-blue-600"
               : "hover:bg-blue-600"
           }`}
