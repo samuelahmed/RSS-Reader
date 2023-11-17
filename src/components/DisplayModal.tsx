@@ -11,6 +11,7 @@ export default function DisplayModal({
   setShowModal,
   selectedItem,
 }: ModalProps) {
+  
   const imgLoaderSet = createImageLoaderSet(selectedItem);
 
   const containsImage = checkIfContainsImage(
@@ -32,7 +33,14 @@ export default function DisplayModal({
               className="shadow-lg relative flex flex-col w-full h-full bg-[rgb(26,26,26)] border-white border-2 text-gray-200 outline-none focus:outline-none overflow-auto scrollbar p-2"
             >
               {/* modal content */}
+
               <div className="space-y-2">
+                {/* invisible button to focus on modal */}
+                <button
+                  style={{ opacity: 0, position: "absolute" }}
+                  autoFocus
+                />
+
                 <button
                   onClick={() => setShowModal(false)}
                   className="absolute right-0 px-2"
@@ -181,6 +189,7 @@ export default function DisplayModal({
           </div>
         </>
       ) : null}
+      {/* </div> */}
     </>
   );
 }

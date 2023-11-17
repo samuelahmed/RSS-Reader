@@ -16,7 +16,8 @@ export default function MainPageLayout() {
 
   const [focusedComponent, setFocusedComponent] = useState('sidebar'); // new state variable
 
-  
+  const [showModal, setShowModal] = useState(false); // Add this line
+
 console.log(focusedComponent)
 
   return (
@@ -28,7 +29,8 @@ console.log(focusedComponent)
         isMainFeedFocused={isMainFeedFocused}
         focusedComponent={focusedComponent}
         setFocusedComponent={setFocusedComponent}
-      
+        showModal={showModal} // Pass showModal and setShowModal to Sidebar
+
       />
       <div className="flex flex-col w-full">
         <Header headerFeedInformation={headerFeedInformation} />
@@ -37,6 +39,8 @@ console.log(focusedComponent)
           feedURL={feedURL}
           setIsMainFeedFocused={setIsMainFeedFocused}
           isMainFeedFocused={isMainFeedFocused}
+          showModal={showModal} // Pass showModal and setShowModal to Feed
+          setShowModal={setShowModal}
         />
       </div>
     </main>

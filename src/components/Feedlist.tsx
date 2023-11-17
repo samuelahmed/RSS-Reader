@@ -19,7 +19,9 @@ export default function FeedList({
       if (selectedSourceItem !== "") {
         return;
       }
+
       if (focusedSourceIndex === index) {
+        
         if (event.key === "ArrowUp") {
           event.preventDefault();
           setFocusedItemIndex((prevIndex) => Math.max(prevIndex - 1, 0));
@@ -32,7 +34,7 @@ export default function FeedList({
             }
             return nextIndex;
           });
-        } else if (event.key === "Enter" || event.key === "ArrowRight") {
+        } else if (event.key === "Enter") {
           event.preventDefault();
           const currentFeed = feedData[focusedItemIndex];
           if (currentFeed) {

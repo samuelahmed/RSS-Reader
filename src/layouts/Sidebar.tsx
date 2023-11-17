@@ -1,7 +1,7 @@
 import FeedSourceSelector from "@/components/FeedSourceSelector";
 import { useEffect } from "react";
 
-export default function Sidebar({ setHeaderFeedInformation, setFeedURL, setIsMainFeedFocused, isMainFeedFocused, focusedComponent, setFocusedComponent }: any) {
+export default function Sidebar({ setHeaderFeedInformation, setFeedURL, setIsMainFeedFocused, isMainFeedFocused, focusedComponent, setFocusedComponent, showModal }: any) {
 
   // useEffect(() => {
   //   const handleKeyDown = (event: KeyboardEvent) => {
@@ -23,8 +23,11 @@ export default function Sidebar({ setHeaderFeedInformation, setFeedURL, setIsMai
         setIsMainFeedFocused={setIsMainFeedFocused}
         isMainFeedFocused={isMainFeedFocused}
 
+
           setHeaderFeedInformation={setHeaderFeedInformation}
           setFeedURL={setFeedURL}
+
+          showModal={showModal} //
           // focusedComponent={focusedComponent}
           // setFocusedComponent={setFocusedComponent}
         

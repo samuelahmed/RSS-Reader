@@ -12,7 +12,9 @@ export default function FeedSourceSelector({
   setFeedURL,
   setHeaderFeedInformation,
   setIsMainFeedFocused,
-}: FeedSourceSelectorProps) {
+  showModal, 
+
+}: FeedSourceSelectorProps & { showModal: boolean }) {
   const [selectedSourceItem, setSelectedSourceItem] = useState("");
   const [focusedSourceIndex, setFocusedSourceIndex] = useState(0); // Add this line
 
@@ -26,6 +28,10 @@ export default function FeedSourceSelector({
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
+      if (showModal) {
+        return;
+      }
+
       if (event.key === "Tab") {
         event.preventDefault(); // prevent focus from moving to the next focusable element
         if (event.shiftKey) {
@@ -36,15 +42,14 @@ export default function FeedSourceSelector({
             Math.min(prevIndex + 1, feedDataArray.length - 1)
           ); // move to the next feed
         }
-      }  if (event.key === "ArrowLeft") {
-
-
+      }
+      if (event.key === "ArrowLeft") {
         setSelectedSourceItem("");
       }
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [feedDataArray.length]);
+  }, [feedDataArray.length, showModal]);
 
   const handleFeedClick = async (newUrl: string, slug: string) => {
     setFeedURL(newUrl);
@@ -57,13 +62,13 @@ export default function FeedSourceSelector({
   };
 
   console.log(selectedSourceItem, "selectedSourceItem");
-  // console.log(focusedSourceIndex)
+  console.log(focusedSourceIndex);
 
   return (
     <>
       {feedDataArray.map((feed, index) => (
         <div
-          tabIndex={0}
+          // tabIndex={0}
           onFocus={() => {
             setIsMainFeedFocused(false);
             setFocusedSourceIndex(index); // set focusedSourceIndex when this feed is focused

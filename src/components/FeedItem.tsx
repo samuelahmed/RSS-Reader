@@ -7,7 +7,7 @@ export default function FeedItemComponent({
   setSelectedItem,
   setShowModal,
   setHoveredItem,
-  focusedItem
+  focusedItem,
 }: {
   item: FeedItem;
   counter: number;
@@ -15,14 +15,14 @@ export default function FeedItemComponent({
   setShowModal: Function;
   setHoveredItem: Function;
   focusedItem: FeedItem | null;
-
 }) {
-
   const isFocused = item === focusedItem;
 
   return (
     <div
       key={item.index}
+      id={`item-${counter}`} // Assign a unique id to each item
+
       // onMouseEnter={() => setHoveredItem(item)}
       // onMouseLeave={() => setHoveredItem(null)}
       onClick={() => {
@@ -30,13 +30,11 @@ export default function FeedItemComponent({
         setShowModal(true);
       }}
     >
-            {/* hover:bg-blue-600 cursor-pointer */}
+      {/* hover:bg-blue-600 cursor-pointer */}
 
       {/* <p className="h-6 overflow-hidden 
       "> */}
-            <p  className={isFocused ? 'focused bg-pink-700' : ''}
-            >
-
+      <p className={isFocused ? "focused bg-pink-700" : ""}>
         <span className="text-gray-200 mr-2">{counter + 1}.</span>
         <span className="hidden md:inline">
           {formatDate(item)} &nbsp;&nbsp;&nbsp;&nbsp;
