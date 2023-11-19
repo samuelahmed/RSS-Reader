@@ -17,6 +17,7 @@ export default function FeedSourceSelector({
 }: FeedSourceSelectorProps & { showModal: boolean }) {
   const [selectedSourceItem, setSelectedSourceItem] = useState("");
   const [focusedSourceIndex, setFocusedSourceIndex] = useState(0); // Add this line
+  const [lastSelectedSourceIndex, setLastSelectedSourceIndex] = useState(0); // Add this line
 
   const feedDataArray = [
     { title: "News", data: newsFeedData },
@@ -25,6 +26,10 @@ export default function FeedSourceSelector({
     { title: "Youtube", data: youtubeFeedData },
     { title: "Podcast", data: podcastFeedData },
   ];
+
+  /*clear the selectedSourceItem when the modal is closed */
+
+  // clear the selectedSourceItem when the modal is closed
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -52,17 +57,29 @@ export default function FeedSourceSelector({
   }, [feedDataArray.length, showModal]);
 
   const handleFeedClick = async (newUrl: string, slug: string) => {
+    // setSelectedSourceItem("");
+    // setFocusedSourceIndex(0);
+
     setFeedURL(newUrl);
     setSelectedSourceItem(slug);
+    setLastSelectedSourceIndex(focusedSourceIndex); // Add this line
+
   };
 
   const handleFeedSelect = (newUrl: string, slug: string) => {
+    // clear the selectedSourceItem when a feed is selected
+    // setSelectedSourceItem("");
+    // setFocusedSourceIndex(0);
+
     setFeedURL(newUrl);
     setSelectedSourceItem(slug);
+    setLastSelectedSourceIndex(focusedSourceIndex); // Add this line
+
   };
 
   console.log(selectedSourceItem, "selectedSourceItem");
   console.log(focusedSourceIndex);
+
 
   return (
     <>
@@ -73,7 +90,7 @@ export default function FeedSourceSelector({
             setIsMainFeedFocused(false);
             setFocusedSourceIndex(index); // set focusedSourceIndex when this feed is focused
           }}
-          // className={index === focusedSou  rceIndex ? 'focused bg-blue-300' : ''}
+          // className={index === focusedSourceIndex ? 'focused bg-blue-300' : ''}
           key={feed.title}
         >
           <div
@@ -93,6 +110,11 @@ export default function FeedSourceSelector({
             focusedSourceIndex={focusedSourceIndex} // pass focusedSourceIndex
             index={index} // pass index
             handleFeedSelect={handleFeedSelect} // pass handleFeedSelect
+            lastSelectedSourceIndex={lastSelectedSourceIndex} // Pass this prop
+            setLastSelectedSourceIndex={setLastSelectedSourceIndex}
+
+            // focusedItemIndex={focusedItemIndex}
+            // setFocusedItemIndex={setFocusedItemIndex}
           />
         </div>
       ))}

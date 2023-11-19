@@ -30,11 +30,11 @@ export default function FeedItemComponent({
         setShowModal(true);
       }}
     >
-      {/* hover:bg-blue-600 cursor-pointer */}
+      
 
       {/* <p className="h-6 overflow-hidden 
       "> */}
-      <p className={isFocused ? "focused bg-pink-700" : ""}>
+      <p className={isFocused ? "focused bg-blue-600" : "hover:bg-blue-600 cursor-pointer"}>
         <span className="text-gray-200 mr-2">{counter + 1}.</span>
         <span className="hidden md:inline">
           {formatDate(item)} &nbsp;&nbsp;&nbsp;&nbsp;
