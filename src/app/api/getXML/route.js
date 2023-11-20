@@ -4,6 +4,11 @@ function isYouTubeChannelURL(url) {
   return url.includes("youtube.com");
 }
 
+const headers = {
+  'Cache-Control': 'no-cache'
+};
+
+
 export async function GET(request) {
   try {
     let url = new URL(request.url).searchParams.get("feedUrl");
@@ -16,11 +21,13 @@ export async function GET(request) {
     }
 
     // Add a nocache query parameter if the URL is not a YouTube channel URL
-    if (!isYouTubeChannelURL(url)) {
-      url = `${url}?nocache=${Date.now()}`;
-    }
+    // if (!isYouTubeChannelURL(url)) {
+    //   url = `${url}?nocache=${Date.now()}`;
+    // }
 
-    const response = await fetch(url);
+    // console.log(`Fetching URL: ${url}`);
+
+    const response = await fetch(url, { headers });
 
     // Check the status of the response
     if (!response.ok) {
