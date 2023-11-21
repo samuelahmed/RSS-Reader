@@ -5,7 +5,7 @@ import useShowModal from "../hooks/useShowModal";
 import useUpdateHeaderFeedInfo from "../hooks/useUpdateHeaderFeedInfo";
 import FeedItemComponent from "@/components/FeedItem";
 import DisplayModal from "./DisplayModal";
-import useKeyboardNav from "@/hooks/useKeyboardNav";
+import useFeedKeyboardNav from "@/hooks/useFeedKeyboardNav";
 
 export default function Feed({
   feedURL,
@@ -22,7 +22,7 @@ export default function Feed({
 
   useUpdateHeaderFeedInfo(serverData, setHeaderFeedInformation);
   useShowModal(showModal, setShowModal);
-  useKeyboardNav({
+  useFeedKeyboardNav({
     showModal,
     focusedItem,
     serverData,

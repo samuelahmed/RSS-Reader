@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 
-export default function useKeyboardNav({showModal, focusedItem, serverData, setSelectedItem, setShowModal, setFocusedItemIndex, setServerData, serverDataFromHook}: any) {
+export default function useFeedKeyboardNav({showModal, focusedItem, serverData, setSelectedItem, setShowModal, setFocusedItemIndex, setServerData, serverDataFromHook}: any) {
 
 
   //Keyboard nav - press enter to open modal, up/down to navigate
