@@ -17,63 +17,90 @@ fetchMock.enableMocks();
 describe("FeedSourceSelector", () => {
   const dummySetFeedURL = jest.fn();
   const dummysetHeaderFeedInformation = jest.fn();
+  const dummySetIsMainFeedFocused = jest.fn();
 
-  it("renders the News feed", () => {
-    const { getByText } = render(
-      <FeedSourceSelector
-        setFeedURL={dummySetFeedURL}
-        setHeaderFeedInformation={dummysetHeaderFeedInformation}
-      />
-    );
-    expect(getByText("News")).toBeInTheDocument();
+  beforeEach(() => {
+    // Mock scrollIntoView method
+    window.HTMLElement.prototype.scrollIntoView = function () {};
   });
 
-  it("renders the Youtube feed", () => {
-    const { getByText } = render(
-      <FeedSourceSelector
-        setFeedURL={dummySetFeedURL}
-        setHeaderFeedInformation={dummysetHeaderFeedInformation}
-      />
-    );
-    expect(getByText("Youtube")).toBeInTheDocument();
-  });
-
-  it("renders the Podcast feed", () => {
-    const { getByText } = render(
-      <FeedSourceSelector
-        setFeedURL={dummySetFeedURL}
-        setHeaderFeedInformation={dummysetHeaderFeedInformation}
-      />
-    );
-    expect(getByText("Podcast")).toBeInTheDocument();
-  });
-
-  it("renders the correct number of feed items", () => {
-    const { container } = render(
-      <FeedSourceSelector
-        setFeedURL={dummySetFeedURL}
-        setHeaderFeedInformation={dummysetHeaderFeedInformation}
-      />
-    );
-    const feedItems = container.querySelectorAll("div.cursor-pointer");
-    expect(feedItems).toHaveLength(
-      newsFeedData.length + youtubeFeedData.length + podcastFeedData.length + techFeedData.length + devFeedData.length
-    );
-  });
-
-  it("calls setFeedURL and setCurrentFeedInformation with correct arguments when a feed item is clicked", async () => {
-    const { getByText } = render(
-      <FeedSourceSelector
-        setFeedURL={dummySetFeedURL}
-        setHeaderFeedInformation={dummysetHeaderFeedInformation}
-      />
-    );
-    await act(async () => {
-      fireEvent.click(getByText(newsFeedData[0].title));
+  describe("FeedSourceSelector", () => {
+    it("renders the News feed", () => {
+      const { getByText } = render(
+        <FeedSourceSelector
+          setFeedURL={dummySetFeedURL}
+          setHeaderFeedInformation={dummysetHeaderFeedInformation}
+          setIsMainFeedFocused={dummySetIsMainFeedFocused}
+          isMainFeedFocused={false}
+          showModal={false}
+        />
+      );
+      expect(getByText("News")).toBeInTheDocument();
     });
-    expect(dummySetFeedURL).toHaveBeenCalledWith(newsFeedData[0].url);
-    expect(dummysetHeaderFeedInformation).toHaveBeenCalledWith({
-      title: newsFeedData[0].title,
+
+    it("renders the Youtube feed", () => {
+      const { getByText } = render(
+        <FeedSourceSelector
+          setFeedURL={dummySetFeedURL}
+          setHeaderFeedInformation={dummysetHeaderFeedInformation}
+          setIsMainFeedFocused={dummySetIsMainFeedFocused}
+          isMainFeedFocused={false}
+          showModal={false}
+        />
+      );
+      expect(getByText("Youtube")).toBeInTheDocument();
+    });
+
+    it("renders the Podcast feed", () => {
+      const { getByText } = render(
+        <FeedSourceSelector
+          setFeedURL={dummySetFeedURL}
+          setHeaderFeedInformation={dummysetHeaderFeedInformation}
+          setIsMainFeedFocused={dummySetIsMainFeedFocused}
+          isMainFeedFocused={false}
+          showModal={false}
+        />
+      );
+      expect(getByText("Podcast")).toBeInTheDocument();
+    });
+
+    it("renders the correct number of feed items", () => {
+      const { container } = render(
+        <FeedSourceSelector
+          setFeedURL={dummySetFeedURL}
+          setHeaderFeedInformation={dummysetHeaderFeedInformation}
+          setIsMainFeedFocused={dummySetIsMainFeedFocused}
+          isMainFeedFocused={false}
+          showModal={false}
+        />
+      );
+      const feedItems = container.querySelectorAll("div.cursor-pointer");
+      expect(feedItems).toHaveLength(
+        newsFeedData.length +
+          youtubeFeedData.length +
+          podcastFeedData.length +
+          techFeedData.length +
+          devFeedData.length
+      );
+    });
+
+    it("calls setFeedURL and setCurrentFeedInformation with correct arguments when a feed item is clicked", async () => {
+      const { getByText } = render(
+        <FeedSourceSelector
+          setFeedURL={dummySetFeedURL}
+          setHeaderFeedInformation={dummysetHeaderFeedInformation}
+          setIsMainFeedFocused={dummySetIsMainFeedFocused}
+          isMainFeedFocused={false}
+          showModal={false}
+        />
+      );
+      await act(async () => {
+        fireEvent.click(getByText(newsFeedData[0].title));
+      });
+      expect(dummySetFeedURL).toHaveBeenCalledWith(newsFeedData[0].url);
+      expect(dummysetHeaderFeedInformation).toHaveBeenCalledWith({
+        title: newsFeedData[0].title,
+      });
     });
   });
 });

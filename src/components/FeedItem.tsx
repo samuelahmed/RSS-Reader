@@ -6,35 +6,33 @@ export default function FeedItemComponent({
   counter,
   setSelectedItem,
   setShowModal,
-  setHoveredItem,
   focusedItem,
 }: {
   item: FeedItem;
   counter: number;
   setSelectedItem: Function;
   setShowModal: Function;
-  setHoveredItem: Function;
   focusedItem: FeedItem | null;
 }) {
+  
   const isFocused = item === focusedItem;
 
   return (
     <div
       key={item.index}
-      id={`item-${counter}`} // Assign a unique id to each item
-
-      // onMouseEnter={() => setHoveredItem(item)}
-      // onMouseLeave={() => setHoveredItem(null)}
+      id={`item-${counter}`}
       onClick={() => {
         setSelectedItem(item);
         setShowModal(true);
       }}
     >
-      
-
-      {/* <p className="h-6 overflow-hidden 
-      "> */}
-      <p className={isFocused ? "focused bg-blue-600" : "hover:bg-blue-600 cursor-pointer"}>
+      <p
+        className={
+          isFocused
+            ? "focused bg-blue-600 overflow-hidden h-6"
+            : "hover:bg-blue-600 cursor-pointer overflow-hidden h-6"
+        }
+      >
         <span className="text-gray-200 mr-2">{counter + 1}.</span>
         <span className="hidden md:inline">
           {formatDate(item)} &nbsp;&nbsp;&nbsp;&nbsp;

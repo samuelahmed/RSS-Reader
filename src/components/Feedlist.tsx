@@ -11,9 +11,6 @@ export default function FeedList({
   index,
   lastSelectedSourceIndex,
   setLastSelectedSourceIndex, // add this
-
-
-
 }: FeedListProps): ReactNode {
   const [focusedItemIndex, setFocusedItemIndex] = useState(-1);
   const itemRefs = useRef(new Map<number, HTMLElement>());
@@ -41,7 +38,7 @@ export default function FeedList({
           event.preventDefault();
           const currentFeed = feedData[focusedItemIndex];
           if (currentFeed) {
-            console.log("currentFeed.url:", currentFeed.url); // log the URL
+            // console.log("currentFeed.url:", currentFeed.url); // log the URL
             handleFeedClick(currentFeed.url, currentFeed.slug);
             handleFeedSelect(currentFeed.url, currentFeed.slug); // call handleFeedSelect with currentFeed.url
             setHeaderFeedInformation({ title: currentFeed.title });
@@ -51,6 +48,7 @@ export default function FeedList({
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     feedData,
     focusedSourceIndex,
@@ -61,10 +59,10 @@ export default function FeedList({
     focusedItemIndex,
   ]);
 
-  useEffect(() => {
-    console.log("focusedItemIndex:", focusedItemIndex); // log the focusedItemIndex
-    console.log("focusedSourceIndex:", focusedSourceIndex); // log the focusedSourceIndex
-  }, [focusedItemIndex]);
+  // useEffect(() => {
+  //   console.log("focusedItemIndex:", focusedItemIndex); // log the focusedItemIndex
+  //   console.log("focusedSourceIndex:", focusedSourceIndex); // log the focusedSourceIndex
+  // }, [focusedItemIndex]);
 
   useEffect(() => {
     if (focusedSourceIndex === index) {

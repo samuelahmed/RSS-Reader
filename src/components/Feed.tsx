@@ -11,34 +11,31 @@ export default function Feed({
   setHeaderFeedInformation,
   setIsMainFeedFocused,
   showModal,
-  setShowModal
+  setShowModal,
 }: any) {
   const [selectedItem, setSelectedItem] = useState<FeedItem | null>(null);
-  const [hoveredItem, setHoveredItem] = useState<FeedItem | null>(null);
   const [focusedItem, setFocusedItem] = useState<FeedItem | null>(null);
-
-  // const serverData = useFeedData(feedURL);
-  // const [showModal, setShowModal] = useShowModal(false);
-
   const [focusedItemIndex, setFocusedItemIndex] = useState<number>(0);
   const serverDataFromHook = useFeedData(feedURL);
   const [serverData, setServerData] = useState(serverDataFromHook);
 
   useUpdateHeaderFeedInfo(serverData, setHeaderFeedInformation);
-
   useShowModal(showModal, setShowModal);
 
+  // Update serverData when serverDataFromHook changes
   useEffect(() => {
     setServerData(serverDataFromHook);
   }, [serverDataFromHook]);
 
   //Keyboard nav - press enter to open modal, up/down to navigate
   useEffect(() => {
+    //don't allow keyboard nav if modal is open because the modal has its own keyboard nav and it will be annoying to return and have the selector in a different place
     const handleKeyDown = (event: KeyboardEvent) => {
       if (showModal) {
         return;
       }
 
+      //make sure the keyboard nav doesn't continue beyond the number of items
       const allItems =
         serverData?.feed?.entry ||
         serverData?.rss?.channel?.item ||
@@ -50,7 +47,6 @@ export default function Feed({
         return;
       }
 
-
       if (event.key === "Enter" && focusedItem) {
         setSelectedItem(focusedItem);
         setShowModal(true);
@@ -59,17 +55,24 @@ export default function Feed({
       } else if (event.key === "ArrowDown") {
         setFocusedItemIndex((prevIndex) => {
           let nextIndex = Math.min(prevIndex + 1, allItems.length - 1);
-          if (nextIndex > allItems.length - 1) {
-            nextIndex = 0; // reset to the start
-          }
+
+          //not sure what this was doing test a bit more before deleting
+          // if (nextIndex > allItems.length - 1) {
+          //   nextIndex = 0; // reset to the start
+          // }
+
           return nextIndex;
         });
+
+        //close current feed and go back to feedSelector with keyboard nav
       } else if (event.key === "ArrowLeft" && showModal === false) {
         setServerData(null);
       }
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [focusedItem, serverData, showModal]);
 
   // Update focused item when focusedItemIndex changes
@@ -93,16 +96,13 @@ export default function Feed({
     setFocusedItemIndex(0);
   }, [serverData]);
 
+  // Scroll to item selected with keyboard nav
   useEffect(() => {
     if (focusedItemIndex >= 5) {
-
-    const itemElement = document.getElementById(`item-${focusedItemIndex}`);
-    itemElement?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      const itemElement = document.getElementById(`item-${focusedItemIndex}`);
+      itemElement?.scrollIntoView({ behavior: "smooth", block: "nearest" });
     }
   }, [focusedItemIndex]);
-
-
-  console.log(serverDataFromHook, "serverDataFromHook");
 
   return (
     <>
@@ -120,7 +120,6 @@ export default function Feed({
                 counter={counter}
                 setSelectedItem={setSelectedItem}
                 setShowModal={setShowModal}
-                setHoveredItem={setHoveredItem}
                 focusedItem={focusedItem}
               />
             ))
@@ -136,7 +135,6 @@ export default function Feed({
                     counter={counter}
                     setSelectedItem={setSelectedItem}
                     setShowModal={setShowModal}
-                    setHoveredItem={setHoveredItem}
                     focusedItem={focusedItem}
                   />
                 )
@@ -150,7 +148,6 @@ export default function Feed({
                     counter={counter}
                     setSelectedItem={setSelectedItem}
                     setShowModal={setShowModal}
-                    setHoveredItem={setHoveredItem}
                     focusedItem={focusedItem}
                   />
                 )
@@ -166,7 +163,6 @@ export default function Feed({
                   counter={counter}
                   setSelectedItem={setSelectedItem}
                   setShowModal={setShowModal}
-                  setHoveredItem={setHoveredItem}
                   focusedItem={focusedItem}
                 />
               ))
@@ -178,7 +174,6 @@ export default function Feed({
                   counter={counter}
                   setSelectedItem={setSelectedItem}
                   setShowModal={setShowModal}
-                  setHoveredItem={setHoveredItem}
                   focusedItem={focusedItem}
                 />
               ))

@@ -9,8 +9,8 @@ import fetchMock from "jest-fetch-mock";
 fetchMock.enableMocks();
 
 describe("Feed component", () => {
-    
   const dummysetHeaderFeedInformation = jest.fn();
+  const dummySetShowModal = jest.fn();
 
   it("renders without crashing", () => {
     fetchMock.mockResponseOnce(JSON.stringify({ data: "12345" }));
@@ -18,6 +18,7 @@ describe("Feed component", () => {
       <Feed
         feedURL="testURL"
         setHeaderFeedInformation={dummysetHeaderFeedInformation}
+        setShowModal={dummySetShowModal}
       />
     );
   });
@@ -68,10 +69,11 @@ describe("Feed component", () => {
       <Feed
         feedURL="testURL"
         setHeaderFeedInformation={dummysetHeaderFeedInformation}
+        setShowModal={dummySetShowModal}
       />
     );
     const itemElement = await findByText("Test Title");
-    
+
     fireEvent.click(itemElement);
     expect(dummysetHeaderFeedInformation).toHaveBeenCalled();
   });

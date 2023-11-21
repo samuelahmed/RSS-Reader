@@ -77,8 +77,8 @@ export default function FeedSourceSelector({
 
   };
 
-  console.log(selectedSourceItem, "selectedSourceItem");
-  console.log(focusedSourceIndex);
+  // console.log(selectedSourceItem, "selectedSourceItem");
+  // console.log(focusedSourceIndex);
 
 
   return (

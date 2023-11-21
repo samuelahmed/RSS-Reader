@@ -20,12 +20,14 @@ export async function GET(request) {
       });
     }
 
-    // Add a nocache query parameter if the URL is not a YouTube channel URL
-    // if (!isYouTubeChannelURL(url)) {
-    //   url = `${url}?nocache=${Date.now()}`;
-    // }
+      // Fallback if cache-control header is not working
+      // Which seems to be decently often
+      if (!isYouTubeChannelURL(url)) {
+        url = `${url}?nocache=${Date.now()}`;
+      }
 
-    // console.log(`Fetching URL: ${url}`);
+
+
 
     const response = await fetch(url, { headers });
 
