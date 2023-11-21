@@ -3,7 +3,8 @@
 import Sidebar from "@/layouts/Sidebar";
 import Header from "@/layouts/Header";
 import Feed from "@/components/Feed";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import useMainKeyboardNavigation from "@/hooks/useMainKeyboardNav";
 
 export default function MainPageLayout() {
   const [headerFeedInformation, setHeaderFeedInformation] = useState({
@@ -14,24 +15,9 @@ export default function MainPageLayout() {
   const [isMainFeedFocused, setIsMainFeedFocused] = useState(true);
   const [focusedComponent, setFocusedComponent] = useState("sidebar");
   const [showModal, setShowModal] = useState(false);
-  const [isKeyboardNav, setIsKeyboardNav] = useState(false);
+  
+  const isKeyboardNav = useMainKeyboardNavigation();
 
-  const handleKeyDown = () => {
-    setIsKeyboardNav(true);
-  };
-
-  const handleMouseMove = () => {
-    setIsKeyboardNav(false);
-  };
-
-  useEffect(() => {
-    window.addEventListener("keydown", handleKeyDown);
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-      window.removeEventListener("mousemove", handleMouseMove);
-    };
-  }, []);
 
   return (
     <main
