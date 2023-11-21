@@ -12,6 +12,7 @@ export default function FeedList({
   lastSelectedSourceIndex,
   setLastSelectedSourceIndex,
 }: FeedListProps): ReactNode {
+
   const [focusedItemIndex, setFocusedItemIndex] = useState(-1);
   const itemRefs = useRef(new Map<number, HTMLElement>());
 
@@ -45,15 +46,7 @@ export default function FeedList({
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    feedData,
-    focusedSourceIndex,
-    index,
-    handleFeedSelect,
-    setHeaderFeedInformation,
-    focusedItemIndex,
-  ]);
+  }, [feedData, focusedSourceIndex, index, handleFeedSelect, setHeaderFeedInformation, focusedItemIndex, selectedSourceItem, handleFeedClick]);
 
 
   useEffect(() => {
@@ -69,7 +62,7 @@ export default function FeedList({
     if (index !== lastSelectedSourceIndex) {
       setFocusedItemIndex(-1); 
     }
-  }, [lastSelectedSourceIndex]);
+  }, [index, lastSelectedSourceIndex]);
 
 
     //scroll with tab without moving the entire page

@@ -15,9 +15,11 @@ export default function FeedSourceSelector({
   showModal,
 }: FeedSourceSelectorProps & { showModal: boolean }) {
   const [selectedSourceItem, setSelectedSourceItem] = useState("");
-  const [focusedSourceIndex, setFocusedSourceIndex] = useState(0);
-  const [lastSelectedSourceIndex, setLastSelectedSourceIndex] = useState(0);
+  const [focusedSourceIndex, setFocusedSourceIndex] = useState(0); 
+  const [lastSelectedSourceIndex, setLastSelectedSourceIndex] = useState(0); 
 
+  // console.log(selectedSourceItem, "selectedSourceItem")
+  
   const feedDataArray = [
     { title: "News", data: newsFeedData },
     { title: "Tech", data: techFeedData },
@@ -53,7 +55,7 @@ export default function FeedSourceSelector({
   const handleFeedClick = async (newUrl: string, slug: string) => {
     setFeedURL(newUrl);
     setSelectedSourceItem(slug);
-    setLastSelectedSourceIndex(focusedSourceIndex);
+    setLastSelectedSourceIndex(focusedSourceIndex); 
   };
 
   const handleFeedSelect = (newUrl: string, slug: string) => {
@@ -62,13 +64,19 @@ export default function FeedSourceSelector({
     setLastSelectedSourceIndex(focusedSourceIndex);
   };
 
+  useEffect(() => {
+    if (selectedSourceItem) {
+      setFeedURL(selectedSourceItem);
+    }
+  }, [selectedSourceItem]);
+
   return (
     <>
       {feedDataArray.map((feed, index) => (
         <div
           onFocus={() => {
             setIsMainFeedFocused(false);
-            setFocusedSourceIndex(index);
+            setFocusedSourceIndex(index); 
           }}
           key={feed.title}
         >
@@ -86,10 +94,10 @@ export default function FeedSourceSelector({
             handleFeedClick={handleFeedClick}
             selectedSourceItem={selectedSourceItem}
             setHeaderFeedInformation={setHeaderFeedInformation}
-            focusedSourceIndex={focusedSourceIndex}
+            focusedSourceIndex={focusedSourceIndex} 
             index={index}
             handleFeedSelect={handleFeedSelect}
-            lastSelectedSourceIndex={lastSelectedSourceIndex}
+            lastSelectedSourceIndex={lastSelectedSourceIndex} 
             setLastSelectedSourceIndex={setLastSelectedSourceIndex}
           />
         </div>
