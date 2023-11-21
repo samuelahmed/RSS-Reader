@@ -30,6 +30,8 @@ describe("GET", () => {
     expect(fetchMock.mock.calls[0][0]).toContain("nocache");
   });
 
+
+  
   it("returns an error response when the fetch request fails", async () => {
     fetchMock.mockRejectOnce(new Error("Fetch error"));
     const response = await GET({

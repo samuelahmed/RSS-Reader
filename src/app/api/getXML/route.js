@@ -5,11 +5,11 @@ function isYouTubeChannelURL(url) {
 }
 
 const headers = {
-  'Cache-Control': 'no-cache'
+  "Cache-Control": "no-cache",
 };
 
-
 export async function GET(request) {
+  
   try {
     let url = new URL(request.url).searchParams.get("feedUrl");
 
@@ -20,14 +20,11 @@ export async function GET(request) {
       });
     }
 
-      // Fallback if cache-control header is not working
-      // Which seems to be decently often
-      if (!isYouTubeChannelURL(url)) {
-        url = `${url}?nocache=${Date.now()}`;
-      }
-
-
-
+    // Fallback if cache-control header is not working
+    // Which seems to be decently often
+    if (!isYouTubeChannelURL(url)) {
+      url = `${url}?nocache=${Date.now()}`;
+    }
 
     const response = await fetch(url, { headers });
 
@@ -55,16 +52,19 @@ export async function GET(request) {
 
     // If the feed is RDF, handle the RDF structure
     if (isRdf) {
-      // Handle the actual structure of the parsed RDF data
-      if (jsonData['rdf:RDF']?.channel?.items?.['rdf:li'] && jsonData['rdf:RDF'].channel.items['rdf:li'].length > 100) {
-        jsonData['rdf:RDF'].channel.items['rdf:li'] = jsonData['rdf:RDF'].channel.items['rdf:li'].slice(0, 100);
+      if (
+        jsonData["rdf:RDF"]?.channel?.items?.["rdf:li"] &&
+        jsonData["rdf:RDF"].channel.items["rdf:li"].length > 100
+      ) {
+        jsonData["rdf:RDF"].channel.items["rdf:li"] = jsonData[
+          "rdf:RDF"
+        ].channel.items["rdf:li"].slice(0, 100);
       }
-      if (jsonData['rdf:RDF']?.item && jsonData['rdf:RDF'].item.length > 100) {
-        jsonData['rdf:RDF'].item = jsonData['rdf:RDF'].item.slice(0, 100);
+      if (jsonData["rdf:RDF"]?.item && jsonData["rdf:RDF"].item.length > 100) {
+        jsonData["rdf:RDF"].item = jsonData["rdf:RDF"].item.slice(0, 100);
       }
     } else {
       // Handle RSS/Atom structure
-
       if (jsonData.feed?.entry && jsonData.feed.entry.length > 100) {
         jsonData.feed.entry = jsonData.feed.entry.slice(0, 100);
       } else if (
@@ -75,13 +75,9 @@ export async function GET(request) {
       }
     }
 
-    // console.log(jsonData);
-
     return new Response(JSON.stringify(jsonData));
   } catch (error) {
-    // Log the entire error object
     console.error(error);
-    // Return a response with the error message
     return new Response(JSON.stringify({ error: error.message }), {
       status: 500,
     });
