@@ -1,9 +1,17 @@
-
-
 import { useEffect } from "react";
+import useAllItems from "./useAllItems";
 
-export default function useFeedKeyboardNav({showModal, focusedItem, serverData, setSelectedItem, setShowModal, setFocusedItemIndex, setServerData, serverDataFromHook}: any) {
-
+export default function useFeedKeyboardNav({
+  showModal,
+  focusedItem,
+  serverData,
+  setSelectedItem,
+  setShowModal,
+  setFocusedItemIndex,
+  setServerData,
+  serverDataFromHook,
+}: any) {
+  const allItems = useAllItems(serverData);
 
   //Keyboard nav - press enter to open modal, up/down to navigate
   useEffect(() => {
@@ -12,13 +20,6 @@ export default function useFeedKeyboardNav({showModal, focusedItem, serverData, 
       if (showModal) {
         return;
       }
-
-      //make sure the keyboard nav doesn't continue beyond the number of items
-      const allItems =
-        serverData?.feed?.entry ||
-        serverData?.rss?.channel?.item ||
-        serverData?.rdf?.item ||
-        [];
 
       //Do nothing if no feed is selected
       if (serverDataFromHook === null) {
@@ -34,11 +35,6 @@ export default function useFeedKeyboardNav({showModal, focusedItem, serverData, 
         setFocusedItemIndex((prevIndex: number) => {
           let nextIndex = Math.min(prevIndex + 1, allItems.length - 1);
 
-          //not sure what this was doing test a bit more before deleting
-          // if (nextIndex > allItems.length - 1) {
-          //   nextIndex = 0; // reset to the start
-          // }
-
           return nextIndex;
         });
 
@@ -49,8 +45,15 @@ export default function useFeedKeyboardNav({showModal, focusedItem, serverData, 
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [focusedItem, serverData, showModal]);
-
+  }, [
+    allItems.length,
+    focusedItem,
+    serverData,
+    serverDataFromHook,
+    setFocusedItemIndex,
+    setSelectedItem,
+    setServerData,
+    setShowModal,
+    showModal,
+  ]);
 }
