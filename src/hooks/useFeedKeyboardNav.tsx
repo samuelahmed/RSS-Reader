@@ -29,14 +29,15 @@ export default function useFeedKeyboardNav({
       if (event.key === "Enter" && focusedItem) {
         setSelectedItem(focusedItem);
         setShowModal(true);
+
       } else if (event.key === "ArrowUp") {
+        event.preventDefault();
         setFocusedItemIndex((prevIndex: number) => Math.max(prevIndex - 1, 0));
+
       } else if (event.key === "ArrowDown") {
-          event.preventDefault();
-
         setFocusedItemIndex((prevIndex: number) => {
+          event.preventDefault();
           let nextIndex = Math.min(prevIndex + 1, allItems.length - 1);
-
           return nextIndex;
         });
 
