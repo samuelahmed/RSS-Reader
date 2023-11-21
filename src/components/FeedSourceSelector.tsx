@@ -12,12 +12,11 @@ export default function FeedSourceSelector({
   setFeedURL,
   setHeaderFeedInformation,
   setIsMainFeedFocused,
-  showModal, 
-
+  showModal,
 }: FeedSourceSelectorProps & { showModal: boolean }) {
   const [selectedSourceItem, setSelectedSourceItem] = useState("");
-  const [focusedSourceIndex, setFocusedSourceIndex] = useState(0); // Add this line
-  const [lastSelectedSourceIndex, setLastSelectedSourceIndex] = useState(0); // Add this line
+  const [focusedSourceIndex, setFocusedSourceIndex] = useState(0);
+  const [lastSelectedSourceIndex, setLastSelectedSourceIndex] = useState(0);
 
   const feedDataArray = [
     { title: "News", data: newsFeedData },
@@ -27,10 +26,6 @@ export default function FeedSourceSelector({
     { title: "Podcast", data: podcastFeedData },
   ];
 
-  /*clear the selectedSourceItem when the modal is closed */
-
-  // clear the selectedSourceItem when the modal is closed
-
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (showModal) {
@@ -38,14 +33,13 @@ export default function FeedSourceSelector({
       }
 
       if (event.key === "Tab") {
-        event.preventDefault(); // prevent focus from moving to the next focusable element
+        event.preventDefault();
         if (event.shiftKey) {
-          // if Shift is also pressed
-          setFocusedSourceIndex((prevIndex) => Math.max(prevIndex - 1, 0)); // move to the previous feed
+          setFocusedSourceIndex((prevIndex) => Math.max(prevIndex - 1, 0));
         } else {
           setFocusedSourceIndex((prevIndex) =>
             Math.min(prevIndex + 1, feedDataArray.length - 1)
-          ); // move to the next feed
+          );
         }
       }
       if (event.key === "ArrowLeft") {
@@ -57,40 +51,25 @@ export default function FeedSourceSelector({
   }, [feedDataArray.length, showModal]);
 
   const handleFeedClick = async (newUrl: string, slug: string) => {
-    // setSelectedSourceItem("");
-    // setFocusedSourceIndex(0);
-
     setFeedURL(newUrl);
     setSelectedSourceItem(slug);
-    setLastSelectedSourceIndex(focusedSourceIndex); // Add this line
-
+    setLastSelectedSourceIndex(focusedSourceIndex);
   };
 
   const handleFeedSelect = (newUrl: string, slug: string) => {
-    // clear the selectedSourceItem when a feed is selected
-    // setSelectedSourceItem("");
-    // setFocusedSourceIndex(0);
-
     setFeedURL(newUrl);
     setSelectedSourceItem(slug);
-    setLastSelectedSourceIndex(focusedSourceIndex); // Add this line
-
+    setLastSelectedSourceIndex(focusedSourceIndex);
   };
-
-  // console.log(selectedSourceItem, "selectedSourceItem");
-  // console.log(focusedSourceIndex);
-
 
   return (
     <>
       {feedDataArray.map((feed, index) => (
         <div
-          // tabIndex={0}
           onFocus={() => {
             setIsMainFeedFocused(false);
-            setFocusedSourceIndex(index); // set focusedSourceIndex when this feed is focused
+            setFocusedSourceIndex(index);
           }}
-          // className={index === focusedSourceIndex ? 'focused bg-blue-300' : ''}
           key={feed.title}
         >
           <div
@@ -107,14 +86,11 @@ export default function FeedSourceSelector({
             handleFeedClick={handleFeedClick}
             selectedSourceItem={selectedSourceItem}
             setHeaderFeedInformation={setHeaderFeedInformation}
-            focusedSourceIndex={focusedSourceIndex} // pass focusedSourceIndex
-            index={index} // pass index
-            handleFeedSelect={handleFeedSelect} // pass handleFeedSelect
-            lastSelectedSourceIndex={lastSelectedSourceIndex} // Pass this prop
+            focusedSourceIndex={focusedSourceIndex}
+            index={index}
+            handleFeedSelect={handleFeedSelect}
+            lastSelectedSourceIndex={lastSelectedSourceIndex}
             setLastSelectedSourceIndex={setLastSelectedSourceIndex}
-
-            // focusedItemIndex={focusedItemIndex}
-            // setFocusedItemIndex={setFocusedItemIndex}
           />
         </div>
       ))}

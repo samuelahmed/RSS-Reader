@@ -7,10 +7,10 @@ export default function FeedList({
   selectedSourceItem,
   setHeaderFeedInformation,
   focusedSourceIndex,
-  handleFeedSelect, // add this
+  handleFeedSelect,
   index,
   lastSelectedSourceIndex,
-  setLastSelectedSourceIndex, // add this
+  setLastSelectedSourceIndex,
 }: FeedListProps): ReactNode {
   const [focusedItemIndex, setFocusedItemIndex] = useState(-1);
   const itemRefs = useRef(new Map<number, HTMLElement>());
@@ -29,18 +29,20 @@ export default function FeedList({
           event.preventDefault();
           setFocusedItemIndex((prevIndex) => {
             let nextIndex = Math.min(prevIndex + 1, feedData.length - 1);
-            if (nextIndex > feedData.length - 1) {
-              nextIndex = 0; // reset to the start
-            }
+
+            //also seems to not do anything - test a bit more before deleting
+            // if (nextIndex > feedData.length - 1) {
+            //   nextIndex = 0;
+            // }
+
             return nextIndex;
           });
         } else if (event.key === "Enter") {
           event.preventDefault();
           const currentFeed = feedData[focusedItemIndex];
           if (currentFeed) {
-            // console.log("currentFeed.url:", currentFeed.url); // log the URL
             handleFeedClick(currentFeed.url, currentFeed.slug);
-            handleFeedSelect(currentFeed.url, currentFeed.slug); // call handleFeedSelect with currentFeed.url
+            handleFeedSelect(currentFeed.url, currentFeed.slug);
             setHeaderFeedInformation({ title: currentFeed.title });
           }
         }
@@ -53,16 +55,11 @@ export default function FeedList({
     feedData,
     focusedSourceIndex,
     index,
-    // handleFeedClick,
     handleFeedSelect,
     setHeaderFeedInformation,
     focusedItemIndex,
   ]);
 
-  // useEffect(() => {
-  //   console.log("focusedItemIndex:", focusedItemIndex); // log the focusedItemIndex
-  //   console.log("focusedSourceIndex:", focusedSourceIndex); // log the focusedSourceIndex
-  // }, [focusedItemIndex]);
 
   useEffect(() => {
     if (focusedSourceIndex === index) {
@@ -75,7 +72,7 @@ export default function FeedList({
 
   useEffect(() => {
     if (index !== lastSelectedSourceIndex) {
-      setFocusedItemIndex(-1); // Reset focusedItemIndex if the current feed list is not the last selected one
+      setFocusedItemIndex(-1); 
     }
   }, [lastSelectedSourceIndex]);
 
@@ -112,8 +109,8 @@ export default function FeedList({
           onClick={() => {
             handleFeedClick(feed.url, feed.slug);
             setHeaderFeedInformation({ title: feed.title });
-            setFocusedItemIndex(-1); // Reset focusedItemIndex when a mouse click occurs
-            setLastSelectedSourceIndex(index); // Update lastSelectedSourceIndex when a mouse click occurs
+            setFocusedItemIndex(-1); 
+            setLastSelectedSourceIndex(index);
 
           }}
         >
