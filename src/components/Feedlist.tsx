@@ -29,12 +29,7 @@ export default function FeedList({
           event.preventDefault();
           setFocusedItemIndex((prevIndex) => {
             let nextIndex = Math.min(prevIndex + 1, feedData.length - 1);
-
-            //also seems to not do anything - test a bit more before deleting
-            // if (nextIndex > feedData.length - 1) {
-            //   nextIndex = 0;
-            // }
-
+            
             return nextIndex;
           });
         } else if (event.key === "Enter") {
@@ -76,15 +71,22 @@ export default function FeedList({
     }
   }, [lastSelectedSourceIndex]);
 
-  useEffect(() => {
-    const item = itemRefs.current.get(focusedItemIndex);
-    if (item) {
-      item.scrollIntoView({
-        behavior: "smooth",
-        block: "nearest",
-      });
-    }
-  }, [focusedItemIndex]);
+
+    //scroll with tab without moving the entire page
+    useEffect(() => {
+      const item = itemRefs.current.get(focusedItemIndex);
+      if (item) {
+        const scrollbar = document.querySelector('.scrollbar') as HTMLElement;
+        const itemTop = item.getBoundingClientRect().top;
+        const scrollbarTop = scrollbar?.getBoundingClientRect().top
+    
+        if (itemTop < scrollbarTop || itemTop > scrollbarTop + scrollbar?.offsetHeight) {
+          scrollbar.scrollTop = item.offsetTop - scrollbar.offsetTop;
+        }
+      }
+    }, [focusedItemIndex]);
+
+  
 
   return (
     <div className="max-h-52 overflow-auto scrollbar">
