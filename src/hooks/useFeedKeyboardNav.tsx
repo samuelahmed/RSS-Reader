@@ -32,6 +32,8 @@ export default function useFeedKeyboardNav({
       } else if (event.key === "ArrowUp") {
         setFocusedItemIndex((prevIndex: number) => Math.max(prevIndex - 1, 0));
       } else if (event.key === "ArrowDown") {
+          event.preventDefault();
+
         setFocusedItemIndex((prevIndex: number) => {
           let nextIndex = Math.min(prevIndex + 1, allItems.length - 1);
 

@@ -1,5 +1,5 @@
 import { FeedItem } from "../utils/types";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import useFeedData from "../hooks/useFeedData";
 import useShowModal from "../hooks/useShowModal";
 import useUpdateHeaderFeedInfo from "../hooks/useUpdateHeaderFeedInfo";
@@ -21,6 +21,8 @@ export default function Feed({
   const serverDataFromHook = useFeedData(feedURL);
   const [serverData, setServerData] = useState(serverDataFromHook);
   const allItems = useAllItems(serverData);
+  const itemRef = useRef<HTMLDivElement | null>(null);
+
 
   useUpdateHeaderFeedInfo(serverData, setHeaderFeedInformation);
   useShowModal(showModal, setShowModal);
@@ -51,10 +53,10 @@ export default function Feed({
     setFocusedItemIndex(0);
   }, [serverData]);
 
+
   // Scroll to item selected with keyboard nav
   useEffect(() => {
-    const itemElement = document.getElementById(`item-${focusedItemIndex}`);
-    itemElement?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    itemRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
   }, [focusedItemIndex]);
 
   return (
@@ -74,6 +76,8 @@ export default function Feed({
                 setSelectedItem={setSelectedItem}
                 setShowModal={setShowModal}
                 focusedItem={focusedItem}
+                ref={counter === focusedItemIndex ? itemRef : null}
+
               />
             ))
           : null}
@@ -89,6 +93,8 @@ export default function Feed({
                     setSelectedItem={setSelectedItem}
                     setShowModal={setShowModal}
                     focusedItem={focusedItem}
+                    ref={counter === focusedItemIndex ? itemRef : null}
+
                   />
                 )
               )
@@ -102,6 +108,8 @@ export default function Feed({
                     setSelectedItem={setSelectedItem}
                     setShowModal={setShowModal}
                     focusedItem={focusedItem}
+                    ref={counter === focusedItemIndex ? itemRef : null}
+
                   />
                 )
               )
@@ -117,6 +125,8 @@ export default function Feed({
                   setSelectedItem={setSelectedItem}
                   setShowModal={setShowModal}
                   focusedItem={focusedItem}
+                  ref={counter === focusedItemIndex ? itemRef : null}
+
                 />
               ))
             : /* Entry as RDF object */
@@ -128,6 +138,8 @@ export default function Feed({
                   setSelectedItem={setSelectedItem}
                   setShowModal={setShowModal}
                   focusedItem={focusedItem}
+                  ref={counter === focusedItemIndex ? itemRef : null}
+
                 />
               ))
           : null}
