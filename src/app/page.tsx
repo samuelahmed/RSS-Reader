@@ -3,22 +3,18 @@
 import Sidebar from "@/layouts/Sidebar";
 import Header from "@/layouts/Header";
 import Feed from "@/components/Feed";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export default function MainPageLayout() {
-  
-  const [feedURL, setFeedURL] = useState("");
+
   const [headerFeedInformation, setHeaderFeedInformation] = useState({
     title: "No feed selected",
     numberOfItems: 0,
   });
+  const [feedURL, setFeedURL] = useState("");
   const [isMainFeedFocused, setIsMainFeedFocused] = useState(true);
-
-  const [focusedComponent, setFocusedComponent] = useState('sidebar'); // new state variable
-
-  const [showModal, setShowModal] = useState(false); // Add this line
-
-console.log(focusedComponent)
+  const [focusedComponent, setFocusedComponent] = useState("sidebar"); 
+  const [showModal, setShowModal] = useState(false); 
 
   return (
     <main className="min-h-screen flex overscroll-none overflow-hidden text-gray-200">
@@ -29,8 +25,7 @@ console.log(focusedComponent)
         isMainFeedFocused={isMainFeedFocused}
         focusedComponent={focusedComponent}
         setFocusedComponent={setFocusedComponent}
-        showModal={showModal} // Pass showModal and setShowModal to Sidebar
-
+        showModal={showModal} 
       />
       <div className="flex flex-col w-full">
         <Header headerFeedInformation={headerFeedInformation} />
@@ -39,7 +34,7 @@ console.log(focusedComponent)
           feedURL={feedURL}
           setIsMainFeedFocused={setIsMainFeedFocused}
           isMainFeedFocused={isMainFeedFocused}
-          showModal={showModal} // Pass showModal and setShowModal to Feed
+          showModal={showModal}
           setShowModal={setShowModal}
         />
       </div>
