@@ -3,21 +3,42 @@
 import Sidebar from "@/layouts/Sidebar";
 import Header from "@/layouts/Header";
 import Feed from "@/components/Feed";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function MainPageLayout() {
-
   const [headerFeedInformation, setHeaderFeedInformation] = useState({
     title: "No feed selected",
     numberOfItems: 0,
   });
   const [feedURL, setFeedURL] = useState("");
   const [isMainFeedFocused, setIsMainFeedFocused] = useState(true);
-  const [focusedComponent, setFocusedComponent] = useState("sidebar"); 
-  const [showModal, setShowModal] = useState(false); 
+  const [focusedComponent, setFocusedComponent] = useState("sidebar");
+  const [showModal, setShowModal] = useState(false);
+  const [isKeyboardNav, setIsKeyboardNav] = useState(false);
+
+  const handleKeyDown = () => {
+    setIsKeyboardNav(true);
+  };
+
+  const handleMouseMove = () => {
+    setIsKeyboardNav(false);
+  };
+
+  useEffect(() => {
+    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, []);
 
   return (
-    <main className="min-h-screen flex overscroll-none overflow-hidden text-gray-200">
+    <main
+      className={`min-h-screen flex overscroll-none overflow-hidden text-gray-200 ${
+        isKeyboardNav ? "keyboard-nav" : ""
+      }`}
+    >
       <Sidebar
         setHeaderFeedInformation={setHeaderFeedInformation}
         setFeedURL={setFeedURL}
@@ -25,7 +46,7 @@ export default function MainPageLayout() {
         isMainFeedFocused={isMainFeedFocused}
         focusedComponent={focusedComponent}
         setFocusedComponent={setFocusedComponent}
-        showModal={showModal} 
+        showModal={showModal}
       />
       <div className="flex flex-col w-full">
         <Header headerFeedInformation={headerFeedInformation} />
