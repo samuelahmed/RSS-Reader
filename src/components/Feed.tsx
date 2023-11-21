@@ -5,6 +5,7 @@ import useShowModal from "../hooks/useShowModal";
 import useUpdateHeaderFeedInfo from "../hooks/useUpdateHeaderFeedInfo";
 import FeedItemComponent from "@/components/FeedItem";
 import DisplayModal from "./DisplayModal";
+import useKeyboardNav from "@/hooks/useKeyboardNav";
 
 export default function Feed({
   feedURL,
@@ -21,59 +22,69 @@ export default function Feed({
 
   useUpdateHeaderFeedInfo(serverData, setHeaderFeedInformation);
   useShowModal(showModal, setShowModal);
+  useKeyboardNav({
+    showModal,
+    focusedItem,
+    serverData,
+    setSelectedItem,
+    setShowModal,
+    setFocusedItemIndex,
+    setServerData,
+    serverDataFromHook
+});
 
   // Update serverData when serverDataFromHook changes
   useEffect(() => {
     setServerData(serverDataFromHook);
   }, [serverDataFromHook]);
 
-  //Keyboard nav - press enter to open modal, up/down to navigate
-  useEffect(() => {
-    //don't allow keyboard nav if modal is open because the modal has its own keyboard nav and it will be annoying to return and have the selector in a different place
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (showModal) {
-        return;
-      }
+  // //Keyboard nav - press enter to open modal, up/down to navigate
+  // useEffect(() => {
+  //   //don't allow keyboard nav if modal is open because the modal has its own keyboard nav and it will be annoying to return and have the selector in a different place
+  //   const handleKeyDown = (event: KeyboardEvent) => {
+  //     if (showModal) {
+  //       return;
+  //     }
 
-      //make sure the keyboard nav doesn't continue beyond the number of items
-      const allItems =
-        serverData?.feed?.entry ||
-        serverData?.rss?.channel?.item ||
-        serverData?.rdf?.item ||
-        [];
+  //     //make sure the keyboard nav doesn't continue beyond the number of items
+  //     const allItems =
+  //       serverData?.feed?.entry ||
+  //       serverData?.rss?.channel?.item ||
+  //       serverData?.rdf?.item ||
+  //       [];
 
-      //Do nothing if no feed is selected
-      if (serverDataFromHook === null) {
-        return;
-      }
+  //     //Do nothing if no feed is selected
+  //     if (serverDataFromHook === null) {
+  //       return;
+  //     }
 
-      if (event.key === "Enter" && focusedItem) {
-        setSelectedItem(focusedItem);
-        setShowModal(true);
-      } else if (event.key === "ArrowUp") {
-        setFocusedItemIndex((prevIndex) => Math.max(prevIndex - 1, 0));
-      } else if (event.key === "ArrowDown") {
-        setFocusedItemIndex((prevIndex) => {
-          let nextIndex = Math.min(prevIndex + 1, allItems.length - 1);
+  //     if (event.key === "Enter" && focusedItem) {
+  //       setSelectedItem(focusedItem);
+  //       setShowModal(true);
+  //     } else if (event.key === "ArrowUp") {
+  //       setFocusedItemIndex((prevIndex) => Math.max(prevIndex - 1, 0));
+  //     } else if (event.key === "ArrowDown") {
+  //       setFocusedItemIndex((prevIndex) => {
+  //         let nextIndex = Math.min(prevIndex + 1, allItems.length - 1);
 
-          //not sure what this was doing test a bit more before deleting
-          // if (nextIndex > allItems.length - 1) {
-          //   nextIndex = 0; // reset to the start
-          // }
+  //         //not sure what this was doing test a bit more before deleting
+  //         // if (nextIndex > allItems.length - 1) {
+  //         //   nextIndex = 0; // reset to the start
+  //         // }
 
-          return nextIndex;
-        });
+  //         return nextIndex;
+  //       });
 
-        //close current feed and go back to feedSelector with keyboard nav
-      } else if (event.key === "ArrowLeft" && showModal === false) {
-        setServerData(null);
-      }
-    };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
+  //       //close current feed and go back to feedSelector with keyboard nav
+  //     } else if (event.key === "ArrowLeft" && showModal === false) {
+  //       setServerData(null);
+  //     }
+  //   };
+  //   window.addEventListener("keydown", handleKeyDown);
+  //   return () => window.removeEventListener("keydown", handleKeyDown);
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [focusedItem, serverData, showModal]);
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [focusedItem, serverData, showModal]);
 
   // Update focused item when focusedItemIndex changes
   useEffect(() => {
