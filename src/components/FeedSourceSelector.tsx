@@ -46,11 +46,14 @@ export default function FeedSourceSelector({
     setLastSelectedSourceIndex(focusedSourceIndex);
   };
 
+  // Set feedURL to selectedSourceItem when selectedSourceItem changes
+  // This is useful when closing a feed and reopening it without changing the feed source
+  // Without it the same-feel-source would be selected but the feed would not be displayed
   useEffect(() => {
     if (selectedSourceItem) {
       setFeedURL(selectedSourceItem);
     }
-  }, [selectedSourceItem]);
+  }, [selectedSourceItem, setFeedURL]);
 
   return (
     <>
