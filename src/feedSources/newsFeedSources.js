@@ -4,7 +4,6 @@ const newsFeedData = [
     title: "Politico",
     url: "https://www.politico.com/rss/politicopicks.xml",
   },
-
   {
     slug: "new-york-times-homepage",
     title: "NYT Home Page",
