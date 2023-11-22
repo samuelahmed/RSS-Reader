@@ -55,6 +55,7 @@ export default function Feed({
 
 
   // Scroll to item selected with keyboard nav
+  // Bug: will get stuck under header if scrolling beyond screen and need fix with page refresh
   useEffect(() => {
     itemRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
   }, [focusedItemIndex]);
