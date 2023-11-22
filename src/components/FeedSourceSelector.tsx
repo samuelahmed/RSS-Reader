@@ -7,6 +7,7 @@ import techFeedData from "../feedSources/techFeedSources";
 import FeedList from "../components/Feedlist";
 import { FeedSourceSelectorProps } from "../utils/types";
 import { useEffect } from "react";
+import useFeedSourceSelectorKeyboardNav from "@/hooks/useFeedSourceSelectorKeyboardNav";
 
 export default function FeedSourceSelector({
   setFeedURL,
@@ -15,11 +16,9 @@ export default function FeedSourceSelector({
   showModal,
 }: FeedSourceSelectorProps & { showModal: boolean }) {
   const [selectedSourceItem, setSelectedSourceItem] = useState("");
-  const [focusedSourceIndex, setFocusedSourceIndex] = useState(0); 
-  const [lastSelectedSourceIndex, setLastSelectedSourceIndex] = useState(0); 
+  const [focusedSourceIndex, setFocusedSourceIndex] = useState(0);
+  const [lastSelectedSourceIndex, setLastSelectedSourceIndex] = useState(0);
 
-  // console.log(selectedSourceItem, "selectedSourceItem")
-  
   const feedDataArray = [
     { title: "News", data: newsFeedData },
     { title: "Tech", data: techFeedData },
@@ -28,34 +27,17 @@ export default function FeedSourceSelector({
     { title: "Podcast", data: podcastFeedData },
   ];
 
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (showModal) {
-        return;
-      }
-
-      if (event.key === "Tab") {
-        event.preventDefault();
-        if (event.shiftKey) {
-          setFocusedSourceIndex((prevIndex) => Math.max(prevIndex - 1, 0));
-        } else {
-          setFocusedSourceIndex((prevIndex) =>
-            Math.min(prevIndex + 1, feedDataArray.length - 1)
-          );
-        }
-      }
-      if (event.key === "ArrowLeft") {
-        setSelectedSourceItem("");
-      }
-    };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [feedDataArray.length, showModal]);
+  useFeedSourceSelectorKeyboardNav({
+    setFocusedSourceIndex,
+    feedDataArray,
+    showModal,
+    setSelectedSourceItem,
+  });
 
   const handleFeedClick = async (newUrl: string, slug: string) => {
     setFeedURL(newUrl);
     setSelectedSourceItem(slug);
-    setLastSelectedSourceIndex(focusedSourceIndex); 
+    setLastSelectedSourceIndex(focusedSourceIndex);
   };
 
   const handleFeedSelect = (newUrl: string, slug: string) => {
@@ -76,7 +58,7 @@ export default function FeedSourceSelector({
         <div
           onFocus={() => {
             setIsMainFeedFocused(false);
-            setFocusedSourceIndex(index); 
+            setFocusedSourceIndex(index);
           }}
           key={feed.title}
         >
@@ -94,10 +76,10 @@ export default function FeedSourceSelector({
             handleFeedClick={handleFeedClick}
             selectedSourceItem={selectedSourceItem}
             setHeaderFeedInformation={setHeaderFeedInformation}
-            focusedSourceIndex={focusedSourceIndex} 
+            focusedSourceIndex={focusedSourceIndex}
             index={index}
             handleFeedSelect={handleFeedSelect}
-            lastSelectedSourceIndex={lastSelectedSourceIndex} 
+            lastSelectedSourceIndex={lastSelectedSourceIndex}
             setLastSelectedSourceIndex={setLastSelectedSourceIndex}
           />
         </div>
