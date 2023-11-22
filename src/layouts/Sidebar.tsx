@@ -7,6 +7,7 @@ export default function Sidebar({
   isMainFeedFocused,
   showModal,
 }: any) {
+  
   return (
     <aside className=" border-r-white border-r-2 text-gray-200 ">
       <p className="text-center border-white border-y-2"> Feed Sources </p>

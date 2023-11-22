@@ -15,6 +15,7 @@ export default function FeedList({
   lastSelectedSourceIndex,
   setLastSelectedSourceIndex,
 }: FeedListProps): ReactNode {
+  
   const [focusedItemIndex, setFocusedItemIndex] = useState(-1);
   const itemRefs = useRef(new Map<number, HTMLElement>());
 

@@ -19,6 +19,7 @@ const FeedItemComponent = forwardRef(
     },
     ref: any
   ) => {
+    
     const isFocused = item === focusedItem;
 
     return (

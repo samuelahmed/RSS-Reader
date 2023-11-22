@@ -7,15 +7,16 @@ import { useState } from "react";
 import useMainKeyboardNavigation from "@/hooks/useMainKeyboardNav";
 
 export default function MainPageLayout() {
+  
   const [headerFeedInformation, setHeaderFeedInformation] = useState({
     title: "No feed selected",
     numberOfItems: 0,
   });
+
   const [feedURL, setFeedURL] = useState("");
   const [isMainFeedFocused, setIsMainFeedFocused] = useState(true);
   const [focusedComponent, setFocusedComponent] = useState("sidebar");
   const [showModal, setShowModal] = useState(false);
-
   const isKeyboardNav = useMainKeyboardNavigation();
 
   return (

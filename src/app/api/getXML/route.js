@@ -11,6 +11,7 @@ const headers = {
 export async function GET(request) {
   
   try {
+
     let url = new URL(request.url).searchParams.get("feedUrl");
 
     // Validate the URL
@@ -76,6 +77,7 @@ export async function GET(request) {
     }
 
     return new Response(JSON.stringify(jsonData));
+    
   } catch (error) {
     console.error(error);
     return new Response(JSON.stringify({ error: error.message }), {
