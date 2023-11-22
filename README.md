@@ -9,15 +9,15 @@ Basic RSS reader to keep up with the latest news without going to multiple websi
 
 Controls: 
 - Keyboard Controls:
-    - Select feed with [tab] (down) or [shift] + [tab] (up)
-    - Select source within feed with up and down arrow keys
-    - Select desired article with up and down arrow keys
-    - Open selected article with [enter]
-    - Close articles with [esc]
-    - Close selected feed with left arrow key
+    - Select feed using [tab] (down) or [shift] + [tab] (up)
+    - Select source within feed using up and down arrow keys
+    - Select desired article using up and down arrow keys
+    - Open selected article using [enter]
+    - Close article using [esc]
+    - Close selected source using left arrow key
 - Mouse controls:
-    - Select feed with mouse click 
-    - Open desired article with mouse click
+    - Select feed using mouse click 
+    - Open desired article using mouse click
     - Close articles click on [esc] in the top right corner
 
 
