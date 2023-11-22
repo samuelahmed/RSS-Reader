@@ -11,13 +11,13 @@ Controls:
 
 - Keyboard Controls:
 
-  - Select feed using [tab] (down) or [shift] + [tab] (up)
-  - Select source within feed using up and down arrow keys
+  - Select feed using [tab] down or [shift] + [tab] up
+  - Select source within feed using [up arrow key] and [down arrow key]
   - Load desired source using [enter]
-  - Select desired article using up and down arrow keys
+  - Select desired article using [up arrow key] and [down arrow key]
   - Open selected article using [enter]
   - Close article using [esc]
-  - Close selected source using left arrow key
+  - Close selected source using [left arrow key]
 
 - Mouse controls:
   - Select feed using mouse click
