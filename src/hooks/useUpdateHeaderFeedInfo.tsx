@@ -5,6 +5,7 @@ export default function useUpdateHeaderFeedInfo(
   serverData: ServerData | null,
   setHeaderFeedInformation: any
 ) {
+  
   useEffect(() => {
     setHeaderFeedInformation((current: any) => ({
       ...current,

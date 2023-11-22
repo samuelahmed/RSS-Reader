@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
 export default function useScrollWithTab({ focusedItemIndex, itemRefs }: any) {
-
+  
   useEffect(() => {
     const item = itemRefs.current.get(focusedItemIndex);
     if (item) {

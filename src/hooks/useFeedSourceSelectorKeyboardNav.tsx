@@ -7,11 +7,11 @@ export default function useFeedSourceSelectorKeyboardNav({
   setSelectedSourceItem,
 }: any) {
   useEffect(() => {
+
     const handleKeyDown = (event: KeyboardEvent) => {
       if (showModal) {
         return;
       }
-
       if (event.key === "Tab") {
         event.preventDefault();
         if (event.shiftKey) {
@@ -29,6 +29,7 @@ export default function useFeedSourceSelectorKeyboardNav({
       }
     };
     window.addEventListener("keydown", handleKeyDown);
+    
     return () => window.removeEventListener("keydown", handleKeyDown);
 }, [feedDataArray.length, showModal, setFocusedSourceIndex, setSelectedSourceItem]);
 }

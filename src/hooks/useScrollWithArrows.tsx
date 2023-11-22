@@ -4,6 +4,7 @@ export default function useScrollWithArrows({
   focusedItemIndex,
   itemRefs,
 }: any) {
+  
   useEffect(() => {
     const item = itemRefs.current.get(focusedItemIndex);
     if (item) {

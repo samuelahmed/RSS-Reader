@@ -11,6 +11,7 @@ export default function useFeedListKeyboardNav({
   handleFeedClick,
   setFocusedItemIndex,
 }: any) {
+  
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (selectedSourceItem !== "") {
@@ -42,6 +43,7 @@ export default function useFeedListKeyboardNav({
       }
     };
     window.addEventListener("keydown", handleKeyDown);
+
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [
     feedData,

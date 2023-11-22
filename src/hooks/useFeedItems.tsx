@@ -4,6 +4,7 @@ import useAllItems from "./useAllItems";
 import { FeedItem } from "../utils/types";
 
 export default function useFeedItems(feedURL: string) {
+  
   const [focusedItem, setFocusedItem] = useState<FeedItem | null>(null);
   const [focusedItemIndex, setFocusedItemIndex] = useState<number>(0);
   const serverDataFromHook = useFeedData(feedURL);

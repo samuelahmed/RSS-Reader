@@ -11,11 +11,13 @@ export default function useFeedKeyboardNav({
   setServerData,
   serverDataFromHook,
 }: any) {
+
   const allItems = useAllItems(serverData);
 
-  //Keyboard nav - press enter to open modal, up/down to navigate
   useEffect(() => {
-    //don't allow keyboard nav if modal is open because the modal has its own keyboard nav and it will be annoying to return and have the selector in a different place
+
+    // Prevent keyboard nav if modal is open because the modal has its own keyboard nav
+    // Else, it will be annoying to return and have the selector in a different place
     const handleKeyDown = (event: KeyboardEvent) => {
       if (showModal) {
         return;
@@ -47,6 +49,7 @@ export default function useFeedKeyboardNav({
       }
     };
     window.addEventListener("keydown", handleKeyDown);
+    
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [
     allItems.length,

@@ -6,7 +6,6 @@ export default function useFeedData(feedURL: string) {
     
   const [serverData, setServerData] = useState<ServerData | null>(null);
   
-
   useEffect(() => {
 
     // Fetch the XML data from the server

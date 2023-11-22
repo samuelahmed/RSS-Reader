@@ -1,4 +1,3 @@
-// useFeedRender.tsx
 import { FeedItem } from "../utils/types";
 import FeedItemComponent from "@/components/FeedItem";
 
@@ -10,6 +9,7 @@ export default function useFeedRender(
   itemRef: React.RefObject<HTMLDivElement>,
   focusedItemIndex: number
 ) {
+
   function renderFeedItems(items: FeedItem[] | FeedItem) {
     // If items is not an array, convert it to an array
     const itemsArray = Array.isArray(items) ? items : [items];
