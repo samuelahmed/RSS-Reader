@@ -48,13 +48,11 @@ interface FeedListProps {
   handleFeedClick: (newUrl: string, slug: string) => Promise<void>;
   selectedSourceItem: string;
   setHeaderFeedInformation: (info: { title: string }) => void;
-  focusedSourceIndex: number; // Add this line
-  index: number; // Add this line
-  handleFeedSelect: (newUrl: string, slug: string) => void; // Add this line
-  // focusedItemIndex: number; // Add this line
-  // setFocusedItemIndex: React.Dispatch<React.SetStateAction<number>>; // Add this line
-  lastSelectedSourceIndex: number; // Add this line
-  setLastSelectedSourceIndex: React.Dispatch<React.SetStateAction<number>>; // Add this line
+  focusedSourceIndex: number; 
+  index: number; 
+  handleFeedSelect: (newUrl: string, slug: string) => void; 
+  lastSelectedSourceIndex: number; 
+  setLastSelectedSourceIndex: React.Dispatch<React.SetStateAction<number>>; 
 }
 
 //for components/FeedSourceSelector.tsx
