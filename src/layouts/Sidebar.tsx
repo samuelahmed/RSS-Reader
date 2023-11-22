@@ -10,7 +10,7 @@ export default function Sidebar({
   
   return (
     <aside className=" border-r-white border-r-2 text-gray-200 ">
-      <p className="text-center border-white border-y-2"> Feed Sources </p>
+      <p className="text-center border-white border-b-2"> Feed Sources </p>
       <div className="max-h-screen overflow-auto scrollbar">
         <FeedSourceSelector
           setIsMainFeedFocused={setIsMainFeedFocused}
