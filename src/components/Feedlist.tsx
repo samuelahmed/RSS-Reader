@@ -1,5 +1,8 @@
 import { FeedListProps } from "../utils/types";
 import { ReactNode, useRef, useEffect, useState } from "react";
+import useFeedListKeyboardNav from "@/hooks/useFeedListKeyboardNav";
+import useScrollWithTab from "@/hooks/useScrollWithTab";
+import useScrollWithArrows from "@/hooks/useScrollWithArrows";
 
 export default function FeedList({
   feedData,
@@ -15,37 +18,8 @@ export default function FeedList({
   const [focusedItemIndex, setFocusedItemIndex] = useState(-1);
   const itemRefs = useRef(new Map<number, HTMLElement>());
 
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (selectedSourceItem !== "") {
-        return;
-      }
-
-      if (focusedSourceIndex === index) {
-        if (event.key === "ArrowUp") {
-          event.preventDefault();
-          setFocusedItemIndex((prevIndex) => Math.max(prevIndex - 1, 0));
-        } else if (event.key === "ArrowDown") {
-          event.preventDefault();
-          setFocusedItemIndex((prevIndex) => {
-            let nextIndex = Math.min(prevIndex + 1, feedData.length - 1);
-
-            return nextIndex;
-          });
-        } else if (event.key === "Enter") {
-          event.preventDefault();
-          const currentFeed = feedData[focusedItemIndex];
-          if (currentFeed) {
-            handleFeedClick(currentFeed.url, currentFeed.slug);
-            handleFeedSelect(currentFeed.url, currentFeed.slug);
-            setHeaderFeedInformation({ title: currentFeed.title });
-          }
-        }
-      }
-    };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [
+  //Navigate within each feed-source with keyboard
+  useFeedListKeyboardNav({
     feedData,
     focusedSourceIndex,
     index,
@@ -54,8 +28,18 @@ export default function FeedList({
     focusedItemIndex,
     selectedSourceItem,
     handleFeedClick,
-  ]);
+    setFocusedItemIndex,
+  });
 
+  // Scroll with tab without moving the entire page
+  // Bug: title will get stuck under "Feed Sources" if tabbing to bottom and back up - fixed with page refresh
+  useScrollWithTab({ focusedItemIndex, itemRefs });
+
+  // Scroll with arrow keys without moving the entire page
+  useScrollWithArrows({ focusedItemIndex, itemRefs });
+
+  // Set focus on first item when feed-source is focused
+  // Also reset focus when another feed-source is focused
   useEffect(() => {
     if (focusedSourceIndex === index) {
       setFocusedItemIndex(0);
@@ -64,46 +48,13 @@ export default function FeedList({
     }
   }, [focusedSourceIndex, index]);
 
+  // Reset focus when another feed-source is selected
+  // Useful when using keyboard and mouse to navigate
   useEffect(() => {
     if (index !== lastSelectedSourceIndex) {
       setFocusedItemIndex(-1);
     }
   }, [index, lastSelectedSourceIndex]);
-
-  // Scroll with tab without moving the entire page
-  // Bug: title will get stuck under "Feed Sources" if tabbing to bottom and back up - fixed with page refresh
-  useEffect(() => {
-    const item = itemRefs.current.get(focusedItemIndex);
-    if (item) {
-      const scrollbar = document.querySelector(".scrollbar") as HTMLElement;
-      const itemTop = item.getBoundingClientRect().top;
-      const scrollbarTop = scrollbar?.getBoundingClientRect().top;
-
-      if (
-        itemTop < scrollbarTop ||
-        itemTop > scrollbarTop + scrollbar?.offsetHeight
-      ) {
-        scrollbar.scrollTop = item.offsetTop - scrollbar.offsetTop;
-      }
-    }
-  }, [focusedItemIndex]);
-
-  // Scroll with arrow keys without moving the entire page
-  useEffect(() => {
-    const item = itemRefs.current.get(focusedItemIndex);
-    if (item) {
-      const sourceContainer = item.parentElement as HTMLElement;
-      const itemTop = item.getBoundingClientRect().top;
-      const sourceContainerTop = sourceContainer?.getBoundingClientRect().top;
-
-      if (
-        itemTop < sourceContainerTop ||
-        itemTop > sourceContainerTop + sourceContainer?.offsetHeight
-      ) {
-        sourceContainer.scrollTop = item.offsetTop - sourceContainer.offsetTop;
-      }
-    }
-  }, [focusedItemIndex]);
 
   return (
     <div className="max-h-52 overflow-auto scrollbar">

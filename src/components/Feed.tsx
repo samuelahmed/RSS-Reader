@@ -45,7 +45,7 @@ export default function Feed({
   // Update focused item when focusedItemIndex changes
   useEffect(() => {
     setFocusedItem(allItems[focusedItemIndex] || null);
-  }, [focusedItemIndex, serverData]);
+  }, [allItems, focusedItemIndex, serverData]);
 
   // Set the first item as the focused item when serverData changes
   useEffect(() => {
