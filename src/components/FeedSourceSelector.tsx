@@ -70,7 +70,7 @@ export default function FeedSourceSelector({
             className={`text-center ${
               index === 0
                 ? "border-b-2 border-b-white"
-                : "border-b-2 border-b-white border-r-white"
+                : "border-y-2 border-b-white border-r-white"
             }`}
           >
             {feed.title}
