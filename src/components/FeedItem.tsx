@@ -1,6 +1,6 @@
 import { FeedItem } from "../utils/types";
 import formatDate from "../utils/formatDate";
-import { forwardRef } from "react";
+import { forwardRef, useState, useEffect } from "react";
 
 const FeedItemComponent = forwardRef(
   (
@@ -20,7 +20,20 @@ const FeedItemComponent = forwardRef(
     ref: any
   ) => {
     
-    const isFocused = item === focusedItem;
+    const [keyboardNavUsed, setKeyboardNavUsed] = useState(false);
+    useEffect(() => {
+      const handleKeyDown = () => {
+        setKeyboardNavUsed(true);
+      };
+
+      window.addEventListener("keydown", handleKeyDown);
+
+      return () => {
+        window.removeEventListener("keydown", handleKeyDown);
+      };
+    }, []);
+
+    const isFocused = keyboardNavUsed && item === focusedItem;
 
     return (
       <div
