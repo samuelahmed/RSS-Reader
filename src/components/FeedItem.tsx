@@ -19,15 +19,15 @@ const FeedItemComponent = forwardRef(
     },
     ref: any
   ) => {
-    
     const [keyboardNavUsed, setKeyboardNavUsed] = useState(false);
+    
     useEffect(() => {
-      const handleKeyDown = () => {
-        setKeyboardNavUsed(true);
+      const handleKeyDown = (event: KeyboardEvent) => {
+        if (event.key === "ArrowUp" || event.key === "ArrowDown") {
+          setKeyboardNavUsed(true);
+        }
       };
-
       window.addEventListener("keydown", handleKeyDown);
-
       return () => {
         window.removeEventListener("keydown", handleKeyDown);
       };
